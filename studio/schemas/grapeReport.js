@@ -92,7 +92,7 @@ export default {
       name: 'images',
       title: 'Images',
       type: 'array',
-      to: [{ type: 'image' }],
+      of: [{ type: 'image' }],
     },
     {
       name: 'body',
