@@ -38,7 +38,7 @@ export default function Post({ post, morePosts, preview }) {
                 title={post.title}
                 coverImage={post.coverImage}
                 date={post.date}
-                author={post.author}
+                reporter={post.reporter}
               />
               <PostBody content={post.body} />
             </article>
