@@ -11,9 +11,11 @@ export default () =>
             .title('General')
             .items([
               S.document()
-                .schemaType('reporter'),
+                .schemaType('reporter')
+                .documentId('reporter'),
               S.document()
                 .schemaType('produce')
+                .documentId('produce')
             ])
         ),
       // Add a visual divider (optional)
