@@ -2,24 +2,14 @@ import S from '@sanity/desk-tool/structure-builder';
 
 export default () =>
   S.list()
-    .title('Field Reports')
+    .title('Settings')
     .items([
       S.listItem()
-        .title('Settings')
-        .child(
-          S.list()
-            .title('General')
-            .items([
-              S.listItem()
-                .S.document()
-                .schemaType('reporter')
-                .documentId('reporter'),
-              S.listItem()
-                .S.document()
-                .schemaType('produce')
-                .documentId('produce'),
-            ])
-        ),
+      .title('Reporters')
+      .schemaType('reporter'),
+      S.listItem()
+      .title('Produce')
+      .schemaType('reporter'),
       // Add a visual divider (optional)
       S.divider(),
       // List out the rest of the document types, but filter out the config type
