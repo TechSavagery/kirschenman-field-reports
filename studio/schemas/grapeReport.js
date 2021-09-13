@@ -13,7 +13,7 @@ export default {
       title: 'Slug',
       type: 'slug',
       options: {
-        source: 'title' + 'variety',
+        source: 'title',
         maxLength: 96,
       },
     },
@@ -66,7 +66,7 @@ export default {
     },
     {
       name: 'size-max',
-      title: 'MAximum Size (mm)',
+      title: 'Maximum Size (mm)',
       type: 'string',
     },
     {
