@@ -10,8 +10,6 @@ import { CMS_NAME } from '../lib/constants'
 export default function Index({ allPosts, preview }) {
   const heroPost = allPosts[0]
   const morePosts = allPosts.slice(1)
-  const heroGrapeReport = allGrapeReports[0]
-  const moreGrapeReports = allGrapeReports.slice(1)
   return (
     <>
       <Layout preview={preview}>
