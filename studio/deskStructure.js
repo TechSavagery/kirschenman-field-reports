@@ -9,7 +9,7 @@ export default () =>
       .schemaType('reporter'),
       S.listItem()
       .title('Produce')
-      .schemaType('reporter'),
+      .schemaType('produce'),
       // Add a visual divider (optional)
       S.divider(),
       // List out the rest of the document types, but filter out the config type
