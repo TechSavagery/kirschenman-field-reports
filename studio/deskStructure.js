@@ -4,10 +4,9 @@ export default () =>
   S.list()
     .title('Reports')
     .items([
-      S.listItem()
-        .title('Grape Reports')
-        .schemaType('grapeReport')
-        .documentTypeList(),
+      ...S.documentTypeListItems().filter((item) =>
+        ['grapeReport'].includes(item.getId())
+      ),
       S.divider(),
     ]);
 S.list()
