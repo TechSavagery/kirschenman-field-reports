@@ -60,12 +60,12 @@ export default {
       type: 'number',
     },
     {
-      name: 'size-min',
+      name: 'sizeMin',
       title: 'Minimum Size (mm)',
       type: 'string',
     },
     {
-      name: 'size-max',
+      name: 'sizeMax',
       title: 'Maximum Size (mm)',
       type: 'string',
     },
