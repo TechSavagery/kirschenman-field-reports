@@ -1,6 +1,6 @@
 export default {
   name: 'post',
-  title: 'Post',
+  title: 'Grape Report',
   type: 'document',
   fields: [
     {

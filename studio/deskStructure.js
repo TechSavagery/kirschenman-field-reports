@@ -2,17 +2,23 @@ import S from '@sanity/desk-tool/structure-builder';
 
 export default () =>
   S.list()
-    .title('Reports')
+    .title('Base')
     .items([
-      ...S.documentTypeListItems().filter((item) =>
-        ['grapeReport'].includes(item.getId())
-      ),
-      S.divider(),
-    ]);
-S.list()
-  .title('Settings')
-  .items([
-    ...S.documentTypeListItems().filter(
-      (item) => !['grapeReport', 'post'].includes(item.getId())
-    ),
-  ]);
+      S.listItem()
+        .title('Settings')
+        .child(
+          S.list()
+            // Sets a title for our new list
+            .title('Settings Documents')
+            // Add items to the array
+            // Each will pull one of our new singletons
+            .items([
+              ...S.documentTypeListItems().filter(
+                (item) => !['post'].includes(item.getId())
+              ),
+            ])
+        ),
+      // We also need to remove the new singletons from the main list
+      ...S.documentTypeListItems().filter(listItem => ['post'].includes(listItem.getId()))
+    ])
+
