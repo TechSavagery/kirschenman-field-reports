@@ -13,7 +13,6 @@ import comment from './comment';
 import appearance from './appearance';
 import firmness from './firmness';
 import flavor from './flavor';
-import grapeReport from './grapeReport';
 import label from './label';
 import produce from './produce';
 import stems from './stems';
@@ -38,7 +37,6 @@ export default createSchema({
     appearance,
     firmness,
     flavor,
-    grapeReport,
     label,
     produce,
     stems,

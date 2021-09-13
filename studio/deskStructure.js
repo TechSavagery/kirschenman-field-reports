@@ -2,14 +2,14 @@ import S from '@sanity/desk-tool/structure-builder';
 
 export default () =>
   S.list()
-    .title('Base')
+    .title('KEI Reports')
     .items([
       S.listItem()
         .title('Settings')
         .child(
           S.list()
             // Sets a title for our new list
-            .title('Settings Documents')
+            .title('Settings')
             // Add items to the array
             // Each will pull one of our new singletons
             .items([
