@@ -32,19 +32,13 @@ export default {
       },
     },
     {
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [{ type: 'reference', to: { type: 'category' } }],
-    },
-    {
       name: 'publishedAt',
-      title: 'Published at',
+      title: 'Inspection Date',
       type: 'datetime',
     },
     {
       name: 'body',
-      title: 'Body',
+      title: 'Notes',
       type: 'blockContent',
     },
     {
