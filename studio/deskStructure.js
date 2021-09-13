@@ -7,7 +7,7 @@ export default () =>
       S.listItem()
         .title('Grape Reports')
         .schemaType('grapeReport')
-        .documentTypeListItems(),
+        .documentTypeList(),
       S.divider(),
     ]);
 S.list()
