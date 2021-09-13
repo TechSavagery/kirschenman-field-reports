@@ -6,7 +6,7 @@ import {imageBuilder} from '../lib/sanity'
 export default function GrapeReportPreview({
   title,
   coverImage,
-  inspectionDate,
+  date,
   excerpt,
   reporter,
   slug,
@@ -22,7 +22,7 @@ export default function GrapeReportPreview({
         </Link>
       </h3>
       <div className="text-lg mb-4">
-        <Date dateString={inspectionDate} />
+        <Date dateString={date} />
       </div>
       <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
       <Avatar name={reporter?.name} picture={reporter?.picture} />

@@ -329,7 +329,6 @@ export default {
       title: 'title',
       reporter: 'reporter.name',
       media: 'mainImage',
-      inspectionDate: 'inspectionDate',
     },
     prepare(selection) {
       const { reporter } = selection;
