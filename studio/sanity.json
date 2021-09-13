@@ -6,7 +6,7 @@
   },
   "project": {
     "name": "Kirschenman Field Reports",
-    "basePath": "/dashboard"
+    "basePath": "/studio"
   },
   "plugins": [
     "@sanity/base",
