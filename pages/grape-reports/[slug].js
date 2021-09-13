@@ -65,7 +65,7 @@ export async function getStaticProps({ params, preview = false }) {
 }
 
 export async function getStaticPaths() {
-  const allGrapeReports = await getAllPostsWithSlug()
+  const allGrapeReports = await getAllGrapeReportsWithSlug()
   return {
     paths:
     allGrapeReports?.map((grapeReport) => ({
