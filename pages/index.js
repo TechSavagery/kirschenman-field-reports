@@ -26,6 +26,7 @@ export default function Index({ allPosts, preview }) {
               reporter={heroPost.reporter}
               slug={heroPost.slug}
               excerpt={heroPost.excerpt}
+              week={heroPost.week}
             />
           )}
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}
