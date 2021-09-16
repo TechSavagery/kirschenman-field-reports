@@ -9,6 +9,7 @@ export default function PostBody({
   flavor,
   firmness,
   taste,
+  appearance
 }) {
   return (
     <div className="bg-white">
