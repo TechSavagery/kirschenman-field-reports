@@ -227,68 +227,80 @@ export default {
       name: 'publishedAt',
       title: 'Inspection Date',
       type: 'datetime',
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'reporter',
-      title: 'reporter',
+      title: 'Reporter',
       type: 'reference',
+      validation: (Rule) => Rule.required(),
       to: { type: 'reporter' },
     },
     {
       name: 'label',
       title: 'Label',
       type: 'reference',
+      validation: (Rule) => Rule.required(),
       to: [{ type: 'label' }],
     },
     {
       name: 'variety',
       title: 'Variety',
       type: 'reference',
+      validation: (Rule) => Rule.required(),
       to: [{ type: 'variety' }],
     },
     {
       name: 'brix',
       title: 'Brix',
       type: 'number',
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'sizeMin',
       title: 'Minimum Size (mm)',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'sizeMax',
       title: 'Maximum Size (mm)',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'appearance',
       title: 'Appearance',
       type: 'reference',
+      validation: (Rule) => Rule.required(),
       to: [{ type: 'appearance' }],
     },
     {
       name: 'flavor',
       title: 'Flavor',
       type: 'reference',
+      validation: (Rule) => Rule.required(),
       to: [{ type: 'flavor' }],
     },
     {
       name: 'firmness',
       title: 'Firmness',
       type: 'reference',
+      validation: (Rule) => Rule.required(),
       to: [{ type: 'firmness' }],
     },
     {
       name: 'stems',
       title: 'Stems',
       type: 'reference',
+      validation: (Rule) => Rule.required(),
       to: [{ type: 'stems' }],
     },
     {
       name: 'mainImage',
       title: 'Main image',
       type: 'image',
+      validation: (Rule) => Rule.required(),
       options: {
         hotspot: true,
       },
@@ -308,6 +320,7 @@ export default {
       name: 'title',
       title: 'Title',
       type: 'string',
+      validation: (Rule) => Rule.required(),
       inputComponent: ComputedField,
       options: {
         editable: true,
@@ -325,7 +338,7 @@ export default {
           return `${resultOfQuery.label.name} - ${
             resultOfQuery.variety.name
           } - ${weekLabel.replace(
-            'EEK',
+            'EEK-',
             ''
           )}-${publishedDate.getFullYear()} Report`;
         },
