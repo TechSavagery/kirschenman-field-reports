@@ -1,3 +1,5 @@
+import ComputedField from 'sanity-plugin-computed-field';
+
 export default {
   name: 'post',
   title: 'Grape Report',
@@ -7,6 +9,21 @@ export default {
       name: 'title',
       title: 'Title',
       type: 'string',
+      inputComponent: ComputedField,
+      options: {
+        editable: true,
+        buttonText: 'Regenerate',
+        documentQuerySelection: `
+      _id,
+      label,
+      variety,
+      week
+    `,
+        reduceQueryResult: (resultOfQuery) => {
+          var year = new Date().getFullYear();
+          return `${resultOfQuery.label} - ${resultOfQuery.variety} - ${resultOfQuery.week} - ${year}`;
+        },
+      },
     },
     {
       name: 'slug',
