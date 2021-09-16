@@ -62,10 +62,6 @@ export default function PostBody({
               <dt className="font-medium text-gray-900">Firmness</dt>
               <dd className="mt-2 text-sm text-gray-500">{firmness.name}</dd>
             </div>
-            <div key={taste.name} className="border-t border-gray-200 pt-4">
-              <dt className="font-medium text-gray-900">Taste</dt>
-              <dd className="mt-2 text-sm text-gray-500">{taste.name}</dd>
-            </div>
           </dl>
         </div>
         <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
