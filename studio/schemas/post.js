@@ -320,12 +320,14 @@ export default {
       publishedAt
     `,
         reduceQueryResult: (resultOfQuery) => {
-          var year = new Date().getFullYear();
+          var publishedDate = new Date(resultOfQuery.publishedAt);
+          var weekLabel = resultOfQuery.week.toUpperCase();
           return `${resultOfQuery.label.name} - ${
             resultOfQuery.variety.name
-          } - ${resultOfQuery.week.toUpperCase()} - ${Date.parse(
-            resultOfQuery.publishedAt
-          ).getFullYear()}`;
+          } - ${weekLabel.replace(
+            'EEK',
+            ''
+          )}-${publishedDate.getFullYear()} Report`;
         },
       },
     },
