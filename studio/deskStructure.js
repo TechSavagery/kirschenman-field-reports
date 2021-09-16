@@ -14,11 +14,12 @@ export default () =>
             // Each will pull one of our new singletons
             .items([
               ...S.documentTypeListItems().filter(
-                (item) => !['post'].includes(item.getId())
+                (item) => !['post','user','account'].includes(item.getId())
               ),
             ])
         ),
       // We also need to remove the new singletons from the main list
-      ...S.documentTypeListItems().filter(listItem => ['post'].includes(listItem.getId()))
+      ...S.documentTypeListItems().filter(listItem => ['post'].includes(listItem.getId())),
+      ...S.documentTypeListItems().filter(listItem => ['user'].includes(listItem.getId()))
     ])
 

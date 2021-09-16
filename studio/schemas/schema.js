@@ -17,6 +17,8 @@ import label from './label';
 import produce from './produce';
 import stems from './stems';
 import variety from './variety';
+import user from './user';
+import account from './account';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -41,5 +43,7 @@ export default createSchema({
     produce,
     stems,
     variety,
+    user,
+    account
   ]),
 });
