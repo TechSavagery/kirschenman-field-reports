@@ -45,8 +45,9 @@ export default function Post({ post, morePosts, preview }) {
                 sizeMin={post.sizeMin}
                 flavor={post.flavor}
                 firmness={post.firmness}
-                taste={post.taste}
+                label={post.label}
                 appearance={post.appearance}
+                variety={post.variety}
               />
             </article>
 

@@ -8,8 +8,9 @@ export default function PostBody({
   sizeMax,
   flavor,
   firmness,
-  taste,
-  appearance
+  appearance,
+  label,
+  variety,
 }) {
   return (
     <div className="bg-white">
@@ -35,6 +36,15 @@ export default function PostBody({
               <dt className="font-medium text-gray-900">Size</dt>
               <dd className="mt-2 text-sm text-gray-500">
                 {sizeMin}mm - {sizeMax}mm
+              </dd>
+            </div>
+            <div
+              key={label + variety}
+              className="border-t border-gray-200 pt-4"
+            >
+              <dt className="font-medium text-gray-900">Type</dt>
+              <dd className="mt-2 text-sm text-gray-500">
+                {label.name} - {variety.name}
               </dd>
             </div>
             <div
