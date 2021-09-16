@@ -6,117 +6,6 @@ export default {
   type: 'document',
   fields: [
     {
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-      inputComponent: ComputedField,
-      options: {
-        editable: true,
-        buttonText: 'Regenerate',
-        documentQuerySelection: `
-      _id,
-      'label': label->{name},
-      'variety': variety->{name},
-      week
-    `,
-        reduceQueryResult: (resultOfQuery) => {
-          var year = new Date().getFullYear();
-          return `${resultOfQuery.label} - ${resultOfQuery.variety} - ${resultOfQuery.week} - ${year}`;
-        },
-      },
-    },
-    {
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      validation: (Rule) => Rule.required(),
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
-    },
-    {
-      name: 'reporter',
-      title: 'reporter',
-      type: 'reference',
-      to: { type: 'reporter' },
-    },
-    {
-      name: 'mainImage',
-      title: 'Main image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    },
-    {
-      name: 'publishedAt',
-      title: 'Inspection Date',
-      type: 'datetime',
-    },
-    {
-      name: 'body',
-      title: 'Notes',
-      type: 'blockContent',
-    },
-    {
-      name: 'label',
-      title: 'Label',
-      type: 'reference',
-      to: [{ type: 'label' }],
-    },
-    {
-      name: 'variety',
-      title: 'Variety',
-      type: 'reference',
-      to: [{ type: 'variety' }],
-    },
-    {
-      name: 'brix',
-      title: 'Brix',
-      type: 'number',
-    },
-    {
-      name: 'sizeMin',
-      title: 'Minimum Size (mm)',
-      type: 'string',
-    },
-    {
-      name: 'sizeMax',
-      title: 'Maximum Size (mm)',
-      type: 'string',
-    },
-    {
-      name: 'appearance',
-      title: 'Appearance',
-      type: 'reference',
-      to: [{ type: 'appearance' }],
-    },
-    {
-      name: 'flavor',
-      title: 'Flavor',
-      type: 'reference',
-      to: [{ type: 'flavor' }],
-    },
-    {
-      name: 'firmness',
-      title: 'Firmness',
-      type: 'reference',
-      to: [{ type: 'firmness' }],
-    },
-    {
-      name: 'stems',
-      title: 'Stems',
-      type: 'reference',
-      to: [{ type: 'stems' }],
-    },
-    {
-      name: 'images',
-      title: 'Images',
-      type: 'array',
-      of: [{ type: 'image' }],
-    },
-    {
       name: 'week',
       type: 'string',
       title: 'Week',
@@ -332,6 +221,122 @@ export default {
             value: 'week-52',
           },
         ],
+      },
+    },
+    {
+      name: 'publishedAt',
+      title: 'Inspection Date',
+      type: 'datetime',
+    },
+    {
+      name: 'reporter',
+      title: 'reporter',
+      type: 'reference',
+      to: { type: 'reporter' },
+    },
+    {
+      name: 'label',
+      title: 'Label',
+      type: 'reference',
+      to: [{ type: 'label' }],
+    },
+    {
+      name: 'variety',
+      title: 'Variety',
+      type: 'reference',
+      to: [{ type: 'variety' }],
+    },
+    {
+      name: 'brix',
+      title: 'Brix',
+      type: 'number',
+    },
+    {
+      name: 'sizeMin',
+      title: 'Minimum Size (mm)',
+      type: 'string',
+    },
+    {
+      name: 'sizeMax',
+      title: 'Maximum Size (mm)',
+      type: 'string',
+    },
+    {
+      name: 'appearance',
+      title: 'Appearance',
+      type: 'reference',
+      to: [{ type: 'appearance' }],
+    },
+    {
+      name: 'flavor',
+      title: 'Flavor',
+      type: 'reference',
+      to: [{ type: 'flavor' }],
+    },
+    {
+      name: 'firmness',
+      title: 'Firmness',
+      type: 'reference',
+      to: [{ type: 'firmness' }],
+    },
+    {
+      name: 'stems',
+      title: 'Stems',
+      type: 'reference',
+      to: [{ type: 'stems' }],
+    },
+    {
+      name: 'mainImage',
+      title: 'Main image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      name: 'body',
+      title: 'Notes',
+      type: 'blockContent',
+    },
+    {
+      name: 'images',
+      title: 'Images',
+      type: 'array',
+      of: [{ type: 'image' }],
+    },
+    {
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      inputComponent: ComputedField,
+      options: {
+        editable: true,
+        buttonText: 'Regenerate',
+        documentQuerySelection: `
+      _id,
+      'label': label->{name},
+      'variety': variety->{name},
+      week,
+      publishedAt
+    `,
+        reduceQueryResult: (resultOfQuery) => {
+          var year = new Date().getFullYear();
+          return `${resultOfQuery.label.name} - ${
+            resultOfQuery.variety.name
+          } - ${resultOfQuery.week.toUpperCase()} - ${Date.parse(
+            resultOfQuery.publishedAt
+          ).getFullYear()}`;
+        },
+      },
+    },
+    {
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: 'title',
+        maxLength: 96,
       },
     },
   ],
