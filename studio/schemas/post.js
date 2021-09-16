@@ -15,8 +15,8 @@ export default {
         buttonText: 'Regenerate',
         documentQuerySelection: `
       _id,
-      label,
-      variety,
+      'label': label->{name},
+      'variety': variety->{name},
       week
     `,
         reduceQueryResult: (resultOfQuery) => {
