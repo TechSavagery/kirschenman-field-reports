@@ -46,6 +46,7 @@ export default function Post({ post, morePosts, preview }) {
                 flavor={post.flavor}
                 firmness={post.firmness}
                 taste={post.taste}
+                appearance={post.appearance}
               />
             </article>
 
