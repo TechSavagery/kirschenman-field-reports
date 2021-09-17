@@ -1,5 +1,6 @@
 import markdownStyles from './markdown-styles.module.css';
 import BlockContent from '@sanity/block-content-to-react';
+import { imageBuilder } from '../lib/sanity';
 
 export default function PostBody({
   content,
@@ -78,7 +79,7 @@ export default function PostBody({
         <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
           {images.map((image) => (
             <img
-              src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-01.jpg"
+              src={imageBuilder(image).width(640).height(640).url()}
               alt={image.asset._ref}
               className="bg-gray-100 rounded-lg"
             />
