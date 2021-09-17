@@ -237,6 +237,19 @@ export default {
       to: { type: 'reporter' },
     },
     {
+      name: 'lot',
+      title: 'Lot',
+      type: 'reference',
+      validation: (Rule) => Rule.required(),
+      to: { type: 'lot' },
+    },
+    {
+      name: 'blockNumber',
+      title: 'Block #',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: 'label',
       title: 'Label',
       type: 'reference',

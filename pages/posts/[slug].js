@@ -48,6 +48,9 @@ export default function Post({ post, morePosts, preview }) {
                 label={post.label}
                 appearance={post.appearance}
                 variety={post.variety}
+                lot={post.lot}
+                blockNumber={post.blockNumber}
+                images={post.images}
               />
             </article>
 

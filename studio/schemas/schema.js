@@ -19,6 +19,7 @@ import stems from './stems';
 import variety from './variety';
 import user from './user';
 import account from './account';
+import lot from './lot'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -44,6 +45,7 @@ export default createSchema({
     stems,
     variety,
     user,
-    account
+    account,
+    lot
   ]),
 });
