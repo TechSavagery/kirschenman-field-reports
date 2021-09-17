@@ -247,7 +247,6 @@ export default {
       name: 'blockNumber',
       title: 'Block #',
       type: 'string',
-      validation: (Rule) => Rule.required(),
     },
     {
       name: 'label',
@@ -352,7 +351,7 @@ export default {
           var weekLabel = resultOfQuery.week.toUpperCase();
           return `${resultOfQuery.label.name} - ${
             resultOfQuery.variety.name
-          } - ${resultOfQuery.lot.name}-${blockNumber} - ${weekLabel.replace(
+          } - ${resultOfQuery.lot.name} - ${weekLabel.replace(
             'EEK-',
             ''
           )}-${publishedDate.getFullYear()} Report`;
