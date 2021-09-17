@@ -352,7 +352,7 @@ export default {
           var weekLabel = resultOfQuery.week.toUpperCase();
           return `${resultOfQuery.label.name} - ${
             resultOfQuery.variety.name
-          } - ${lot.name}-${blockNumber} - ${weekLabel.replace(
+          } - ${resultOfQuery.lot.name}-${blockNumber} - ${weekLabel.replace(
             'EEK-',
             ''
           )}-${publishedDate.getFullYear()} Report`;
