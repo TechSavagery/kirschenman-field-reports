@@ -342,6 +342,8 @@ export default {
       _id,
       'label': label->{name},
       'variety': variety->{name},
+      'lot': lot->{name},
+      blockNumber,
       week,
       publishedAt
     `,
@@ -350,7 +352,7 @@ export default {
           var weekLabel = resultOfQuery.week.toUpperCase();
           return `${resultOfQuery.label.name} - ${
             resultOfQuery.variety.name
-          } - ${weekLabel.replace(
+          } - ${lot}-${blockNumber} - ${weekLabel.replace(
             'EEK-',
             ''
           )}-${publishedDate.getFullYear()} Report`;
