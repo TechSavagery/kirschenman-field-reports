@@ -13,6 +13,7 @@ import PostTitle from '../../components/post-title';
 import Head from 'next/head';
 import { CMS_NAME } from '../../lib/constants';
 import Form from '../../components/form';
+import PageHeader from '../../components/page-header';
 
 export default function Post({ post, morePosts, preview }) {
   const router = useRouter();
@@ -21,8 +22,8 @@ export default function Post({ post, morePosts, preview }) {
   }
   return (
     <Layout preview={preview}>
+      <PageHeader />
       <Container>
-        <Header />
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (

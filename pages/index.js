@@ -19,8 +19,8 @@ export default function Index({ allPosts, preview }) {
         <Head>
           <title>KEI Field Reports</title>
         </Head>
+        <HeroHeader />
         <Container>
-          <HeroHeader />
           <HomeInfo />
           <HomeFooter/>
         </Container>
