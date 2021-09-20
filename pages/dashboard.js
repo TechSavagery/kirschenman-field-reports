@@ -7,6 +7,7 @@ import { getAllPostsForHome } from '../lib/api'
 import Head from 'next/head'
 import HeroHeader from '../components/hero-header'
 import { CMS_NAME } from '../lib/constants'
+import PageHeader from '../components/page-header'
 
 export default function Index({ allPosts, preview }) {
   const heroPost = allPosts[0]
@@ -19,6 +20,7 @@ export default function Index({ allPosts, preview }) {
         </Head>
         <Container>
           {/* <Intro /> */}
+          <PageHeader/>
           {heroPost && (
             <HeroPost
               title={heroPost.title}

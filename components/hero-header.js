@@ -2,7 +2,10 @@ import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 
-const navigation = [];
+const navigation = [
+  { name: 'Features', href: '#' },
+  { name: 'Get Started', href: '#' },
+];
 
 export default function HeroHeader() {
   return (
@@ -114,7 +117,7 @@ export default function HeroHeader() {
                   Kirschenman Field Reports
                 </span>{' '}
                 <span className="block text-indigo-600 xl:inline">
-                  Live Produce Data
+                  Live Produce Reports
                 </span>
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
