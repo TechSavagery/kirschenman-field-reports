@@ -50,7 +50,7 @@ function classNames(...classes) {
 
 export default function PageHeader() {
   return (
-    <Popover className="relative bg-white">
+    <Popover className="relative bg-white pb-20px">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
@@ -69,7 +69,7 @@ export default function PageHeader() {
               <MenuIcon className="h-6 w-6" aria-hidden="true" />
             </Popover.Button>
           </div>
-          <Popover.Group as="nav" className="md:flex space-x-10">
+          <Popover.Group as="nav" className="hidden md:flex space-x-10">
             <a
               href="/dashboard"
               className="text-base font-medium text-gray-500 hover:text-gray-900"

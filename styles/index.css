@@ -2,12 +2,8 @@
 @tailwind base;
 @tailwind components;
 article a {
-    color: rgb(49, 49, 182);
-    text-decoration: underline;
-}
-.container{
-    max-width: 100%
+  color: rgb(49, 49, 182);
+  text-decoration: underline;
 }
 /* purgecss end ignore */
 @tailwind utilities;
-
