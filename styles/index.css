@@ -5,6 +5,9 @@ article a {
     color: rgb(49, 49, 182);
     text-decoration: underline;
 }
+.container{
+    max-width: 100%
+}
 /* purgecss end ignore */
 @tailwind utilities;
 
