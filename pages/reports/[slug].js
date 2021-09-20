@@ -22,12 +22,12 @@ export default function Post({ post, morePosts, preview }) {
   }
   return (
     <Layout preview={preview}>
-      <PageHeader />
       <Container>
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
+          <PageHeader />
             <article>
               <Head>
                 <title>{post.title} | KEI Field Reports</title>

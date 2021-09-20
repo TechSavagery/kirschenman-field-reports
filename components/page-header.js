@@ -69,7 +69,7 @@ export default function PageHeader() {
               <MenuIcon className="h-6 w-6" aria-hidden="true" />
             </Popover.Button>
           </div>
-          <Popover.Group as="nav" className="hidden md:flex space-x-10">
+          <Popover.Group as="nav" className="md:flex space-x-10">
             <a
               href="/dashboard"
               className="text-base font-medium text-gray-500 hover:text-gray-900"

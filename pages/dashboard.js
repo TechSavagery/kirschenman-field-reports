@@ -18,8 +18,8 @@ export default function Index({ allPosts, preview }) {
         <Head>
           <title>KEI Field Reports | Dashbaord</title>
         </Head>
-        <PageHeader/>
         <Container>
+        <PageHeader />
           {/* <Intro /> */}
           
           {heroPost && (
