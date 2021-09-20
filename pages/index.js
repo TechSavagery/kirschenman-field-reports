@@ -5,6 +5,7 @@ import Intro from '../components/intro'
 import Layout from '../components/layout'
 import { getAllPostsForHome } from '../lib/api'
 import Head from 'next/head'
+import HeroHeader from '../components/hero-header'
 import { CMS_NAME } from '../lib/constants'
 
 export default function Index({ allPosts, preview }) {
@@ -17,7 +18,8 @@ export default function Index({ allPosts, preview }) {
           <title>KEI Field Reports</title>
         </Head>
         <Container>
-          <Intro />
+          {/* <Intro /> */}
+          <HeroHeader/>
           {heroPost && (
             <HeroPost
               title={heroPost.title}
