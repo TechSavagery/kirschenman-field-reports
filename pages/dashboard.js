@@ -21,18 +21,6 @@ export default function Index({ allPosts, preview }) {
         </Head>
         <Container>
           <PageHeader />
-          <DashboardSectionHeader title="Grapes" link="/reports/grapes" />
-          <DashboardSectionHeader
-            title="Stone Fruits"
-            link="/reports/stone-fruits"
-          />
-          <DashboardSectionHeader
-            title="Watermelon"
-            link="/reports/watermerlon"
-          />
-          <DashboardSectionHeader title="Potato" link="/reports/potato" />
-
-          {/* <Intro /> */}
 
           {heroPost && (
             <HeroPost
