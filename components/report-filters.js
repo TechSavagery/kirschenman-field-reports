@@ -68,9 +68,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function ReportFilters() {
+export default function ReportFilters({ reports }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  reports;
   return (
     <div className="bg-white">
       <div>
@@ -320,8 +319,7 @@ export default function ReportFilters() {
               {/* Product grid */}
               <div className="lg:col-span-3">
                 {/* Replace with your content */}
-                <GrapeReportsSection
-                reports={reports} />
+                <GrapeReportsSection reports={reports} />
                 {/* /End replace */}
               </div>
             </div>
