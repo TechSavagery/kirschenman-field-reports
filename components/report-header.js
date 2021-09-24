@@ -2,6 +2,7 @@ import { DocumentDownloadIcon, PhoneIcon } from '@heroicons/react/outline';
 import markdownStyles from './markdown-styles.module.css';
 import BlockContent from '@sanity/block-content-to-react';
 import { imageBuilder } from '../lib/sanity';
+import Avatar from './avatar';
 
 export default function ReportHeader({
   week,
