@@ -93,7 +93,7 @@ export default function ReportCard({
   slug,
 }) {
   return (
-    <a key={product.id} href={'/reports/' + slug} className="group">
+    <a key={week + label.name + variety.name + lot.name} href={'/reports/' + slug} className="group">
       <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
         <img
           src={imageBuilder(mainImage).width(280).height(320).url()}
@@ -112,4 +112,3 @@ export default function ReportCard({
   );
 }
 
-//{lot ? lot.name : "N/A"}
