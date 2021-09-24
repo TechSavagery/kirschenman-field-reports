@@ -10,7 +10,7 @@ export default function ReportCard({
 }) {
   return (
     <a
-      key={week + label.name + variety.name + lot.name}
+      key={week + Math.random(100)}
       href={'/reports/' + slug}
       className="group"
     >
@@ -23,10 +23,10 @@ export default function ReportCard({
       </div>
       <h3 className="mt-4 text-sm text-gray-700">{lot ? lot.name : 'N/A'}</h3>
       <h3 className="mt-4 text-sm text-gray-700">
-        {week} - {inspectionDate}
+        {week ? week : 'N/A'} - {inspectionDate ? inspectionDate : 'N/A'}
       </h3>
       <p className="mt-1 text-lg font-medium text-gray-900">
-      {label ? label.name : 'N/A'} - {variety.name}
+        {label ? label.name : 'N/A'} - {variety ? variety.name : 'N/A'}
       </p>
     </a>
   );
