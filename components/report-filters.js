@@ -10,6 +10,8 @@ import {
 } from '@heroicons/react/solid';
 import GrapeReportsSection from './grape-reports-section';
 
+const subCategories = [];
+
 const sortOptions = [
   { name: 'Date Desc', href: '#', current: true },
   { name: 'Date Asc', href: '#', current: false },
