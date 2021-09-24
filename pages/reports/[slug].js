@@ -15,6 +15,7 @@ import { CMS_NAME } from '../../lib/constants';
 import Form from '../../components/form';
 import PageHeader from '../../components/page-header';
 import ReportHeader from '../../components/report-header';
+import DashboardFooter from '../../components/dashboard-footer';
 
 export default function Post({ post, morePosts, preview }) {
   const router = useRouter();
