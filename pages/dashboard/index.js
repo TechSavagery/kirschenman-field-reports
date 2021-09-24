@@ -1,16 +1,16 @@
-import Container from '../components/container';
-import MoreStories from '../components/more-stories';
-import HeroPost from '../components/hero-post';
-import Layout from '../components/layout';
-import { getAllPostsForHome } from '../lib/api';
+import Container from '../../components/container';
+import MoreStories from '../../components/more-stories';
+import HeroPost from '../../components/hero-post';
+import Layout from '../../components/layout';
+import { getAllPostsForHome } from '../../lib/api';
 import Head from 'next/head';
-import PageHeader from '../components/page-header';
-import GrapeReportsSection from '../components/grape-reports-section';
-import DashboardSectionHeader from '../components/dashboard-section-header';
-import DashboardFooter from '../components/dashboard-footer';
+import PageHeader from '../../components/page-header';
+import GrapeReportsSection from '../../components/grape-reports-section';
+import DashboardSectionHeader from '../../components/dashboard-section-header';
+import DashboardFooter from '../../components/dashboard-footer';
 
 export default function Index({ allPosts, preview }) {
-  const allReports = allPosts;
+  const allReports = allPosts.slice(0,12);
   return (
     <>
       <Layout preview={preview}>
