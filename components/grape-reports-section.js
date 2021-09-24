@@ -97,7 +97,7 @@ export default function GrapeReportsSection({ reports }) {
               variety={report.variety}
               lot={report.lot}
               week={report.week}
-              inspectionDate={report.publishedAt}
+              inspectionDate={report.date}
               mainImage={report.coverImage}
               slug={report.slug}
             />
