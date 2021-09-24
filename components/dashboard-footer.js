@@ -1,4 +1,4 @@
-import { PhoneIcon } from '@heroicons/react/solid';
+import { PhoneIcon, EmailIcon } from '@heroicons/react/solid';
 export default function DashboardFooter() {
   return (
     <div className="max-w-full bg-gray-50">
