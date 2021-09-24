@@ -10,6 +10,7 @@ import { CMS_NAME } from '../lib/constants';
 import PageHeader from '../components/page-header';
 import DashboardSectionHeader from '../components/dashboard-section-header';
 import GrapeReportsSection from '../components/grape-reports-section';
+import DashboardSectionHeader from '../components/dashboard-section-header';
 
 export default function Index({ allPosts, preview }) {
   const heroPost = allPosts[0];
@@ -22,6 +23,7 @@ export default function Index({ allPosts, preview }) {
         </Head>
         <Container>
           <PageHeader />
+          <DashboardSectionHeader/>
           <GrapeReportsSection/>
 
           {heroPost && (
