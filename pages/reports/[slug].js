@@ -56,14 +56,13 @@ export default function Post({ post, morePosts, preview }) {
                 lot={post.lot}
                 blockNumber={post.blockNumber}
                 images={post.images}
+                date={post.date}
               />
             </article>
 
             <Comments comments={post.comments} />
             <Form _id={post._id} />
-
-            <SectionSeparator />
-            {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+            <DashboardFooter/>
           </>
         )}
       </Container>

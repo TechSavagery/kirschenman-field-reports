@@ -4,6 +4,8 @@ import {
 } from '@heroicons/react/outline';
 import markdownStyles from './markdown-styles.module.css';
 import BlockContent from '@sanity/block-content-to-react';
+import { imageBuilder } from '../lib/sanity';
+
 
 export default function ReportHeader({
   week,
@@ -72,10 +74,12 @@ export default function ReportHeader({
       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
         <img
           className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-          src={mainImage}
+          src={imageBuilder(mainImage).width(720).height(554).url()}
           alt=""
         />
       </div>
     </div>
   );
 }
+
+//               
