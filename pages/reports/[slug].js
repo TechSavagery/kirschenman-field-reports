@@ -14,6 +14,7 @@ import Head from 'next/head';
 import { CMS_NAME } from '../../lib/constants';
 import Form from '../../components/form';
 import PageHeader from '../../components/page-header';
+import ReportHeader from '../../components/report-header';
 
 export default function Post({ post, morePosts, preview }) {
   const router = useRouter();
@@ -27,17 +28,20 @@ export default function Post({ post, morePosts, preview }) {
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-          <PageHeader />
+            <PageHeader />
             <article>
               <Head>
                 <title>{post.title} | KEI Field Reports</title>
                 {/* <meta property="og:image" content={post.ogImage.url} /> */}
               </Head>
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-                reporter={post.reporter}
+              <ReportHeader
+                label={post.label}
+                variety={post.variety}
+                lot={post.lot}
+                inspectionDate={post.date}
+                mainImage={post.coverImage}
+                content={post.body}
+                week={post.week}
               />
               <PostBody
                 content={post.body}

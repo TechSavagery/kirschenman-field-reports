@@ -12,7 +12,7 @@ function classNames(...classes) {
 
 export default function DashboardSectionHeader() {
   return (
-    <div className="justify-center max-w-lg lg:flex lg:items-center pt-40px">
+    <div className="max-w-2xl pt-40px px-100px lg:flex lg:items-center ">
       <div className="flex-1 min-w-0">
         <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
           Grape Reports
