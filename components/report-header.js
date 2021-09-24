@@ -1,11 +1,7 @@
-import {
-  DocumentDownloadIcon,
-  PhoneIcon,
-} from '@heroicons/react/outline';
+import { DocumentDownloadIcon, PhoneIcon } from '@heroicons/react/outline';
 import markdownStyles from './markdown-styles.module.css';
 import BlockContent from '@sanity/block-content-to-react';
 import { imageBuilder } from '../lib/sanity';
-
 
 export default function ReportHeader({
   week,
@@ -15,6 +11,7 @@ export default function ReportHeader({
   inspectionDate,
   mainImage,
   content,
+  reporter,
 }) {
   return (
     <div className="max-w-full relative bg-white overflow-hidden">
@@ -41,6 +38,9 @@ export default function ReportHeader({
                   className={markdownStyles.markdown}
                 />
               </p>
+              <div className="hidden md:block md:mb-12">
+                <Avatar name={reporter?.name} picture={reporter?.picture} />
+              </div>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
                   <a
@@ -82,4 +82,4 @@ export default function ReportHeader({
   );
 }
 
-//               
+//

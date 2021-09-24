@@ -42,6 +42,7 @@ export default function Post({ post, morePosts, preview }) {
                 mainImage={post.coverImage}
                 content={post.body}
                 week={post.week}
+                reporter={post.reporter}
               />
               <PostBody
                 content={post.body}
