@@ -7,10 +7,10 @@ import Head from 'next/head';
 import PageHeader from '../components/page-header';
 import GrapeReportsSection from '../components/grape-reports-section';
 import DashboardSectionHeader from '../components/dashboard-section-header';
+import DashboardFooter from '../components/dashboard-footer';
 
 export default function Index({ allPosts, preview }) {
-  const heroPost = allPosts[0];
-  const morePosts = allPosts.slice(1);
+  const allReports = allPosts;
   return (
     <>
       <Layout preview={preview}>
@@ -19,10 +19,10 @@ export default function Index({ allPosts, preview }) {
         </Head>
         <Container>
           <PageHeader />
-          <DashboardSectionHeader/>
-          <GrapeReportsSection/>
+          <DashboardSectionHeader />
+          <GrapeReportsSection reports={allReports} />
 
-          {heroPost && (
+          {/* {heroPost && (
             <HeroPost
               title={heroPost.title}
               coverImage={heroPost.coverImage}
@@ -33,7 +33,8 @@ export default function Index({ allPosts, preview }) {
               week={heroPost.week}
             />
           )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+          {allPosts.length > 0 && <MoreStories posts={allPosts} />} */}
+          <DashboardFooter/>
         </Container>
       </Layout>
     </>
