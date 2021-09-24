@@ -116,6 +116,20 @@ export default function ReportFilters({ reports }) {
 
                 {/* Filters */}
                 <form className="mt-4 border-t border-gray-200">
+                  <h3 className="sr-only">Categories</h3>
+                  <ul
+                    role="list"
+                    className="font-medium text-gray-900 px-2 py-3"
+                  >
+                    {subCategories.map((category) => (
+                      <li key={category.name}>
+                        <a href={category.href} className="block px-2 py-3">
+                          {category.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+
                   {filters.map((section) => (
                     <Disclosure
                       as="div"
@@ -257,6 +271,18 @@ export default function ReportFilters({ reports }) {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-10">
               {/* Filters */}
               <form className="hidden lg:block">
+                <h3 className="sr-only">Categories</h3>
+                <ul
+                  role="list"
+                  className="text-sm font-medium text-gray-900 space-y-4 pb-6 border-b border-gray-200"
+                >
+                  {subCategories.map((category) => (
+                    <li key={category.name}>
+                      <a href={category.href}>{category.name}</a>
+                    </li>
+                  ))}
+                </ul>
+
                 {filters.map((section) => (
                   <Disclosure
                     as="div"
@@ -319,7 +345,9 @@ export default function ReportFilters({ reports }) {
               {/* Product grid */}
               <div className="lg:col-span-3">
                 {/* Replace with your content */}
-                <GrapeReportsSection reports={reports} />
+                <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full">
+                  <GrapeReportsSection reports={reports} />
+                </div>
                 {/* /End replace */}
               </div>
             </div>
