@@ -184,7 +184,6 @@ function classNames(...classes) {
 export default function Example({ post, morePosts, preview }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const allReports = allPosts.slice(0,12);
   return (
     <div className="bg-white">
       <div>
