@@ -32,11 +32,12 @@ import {
 import { ChevronDownIcon, PlusSmIcon } from '@heroicons/react/solid';
 import ReportCard from '../../components/report-card';
 import { getAllPostsForHome,getPostAndMorePosts,getAllPostsWithSlug } from '../../lib/api';
-import Form from './components/form';
 import Head from 'next/head'
-import PostBody from './components/post-body';
-import ReportHeader from './components/report-header';
-import DashboardFooter from './components/dashboard-footer';
+import PostBody from '../../components/post-body';
+import ReportHeader from '../../components/report-header';
+import DashboardFooter from '../../components/dashboard-footer';
+import Form from '../../components/form'
+
 
 const navigation = {
   categories: [
