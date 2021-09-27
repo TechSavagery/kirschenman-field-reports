@@ -529,7 +529,7 @@ export default function Example({ post, morePosts, preview }) {
         <main className="max-w-2xl mx-auto px-4 lg:max-w-7xl lg:px-8">
         <article>
               <Head>
-                <title>{post.title} | KEI Field Reports</title>
+                <title>{post.title ? post.title : Report} | KEI Field Reports</title>
                 {/* <meta property="og:image" content={post.ogImage.url} /> */}
               </Head>
               <ReportHeader
