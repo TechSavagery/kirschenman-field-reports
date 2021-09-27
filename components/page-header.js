@@ -58,8 +58,8 @@ export default function PageHeader() {
               <span className="sr-only">Workflow</span>
               <img
                 className="h-8 w-auto sm:h-10"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                alt=""
+                src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
+                alt="kirschenman logo"
               />
             </a>
           </div>
