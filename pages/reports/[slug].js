@@ -61,8 +61,6 @@ export default function Post({ post, morePosts, preview }) {
                 date={post.date}
               />
             </article>
-
-            <Comments comments={post.comments} />
             <Form _id={post._id} />
             <DashboardFooter/>
           </>

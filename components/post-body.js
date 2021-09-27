@@ -15,7 +15,7 @@ export default function PostBody({
   lot,
   blockNumber,
   images,
-  date
+  date,
 }) {
   return (
     <div className="bg-white">
@@ -24,16 +24,25 @@ export default function PostBody({
           <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
             Report Specifications
           </h2>
-          <div className="max-w-2xl mx-auto">
-          </div>
+          <div className="max-w-2xl mx-auto"></div>
           <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
             <div key={brix} className="border-t border-gray-200 pt-4">
               <dt className="font-medium text-gray-900">Lot</dt>
-              <dd className="mt-2 text-sm text-gray-500">{lot ? lot.name : "N/A"}</dd>
+              <dd className="mt-2 text-sm text-gray-500">
+                {lot ? lot.name : 'N/A'}
+              </dd>
             </div>
             <div key={brix} className="border-t border-gray-200 pt-4">
               <dt className="font-medium text-gray-900">Inpection Date</dt>
-              <dd className="mt-2 text-sm text-gray-500">{date ? date : "xxxxxxx"}</dd>
+              <dd className="mt-2 text-sm text-gray-500">
+                {date
+                  ? date.toLocaleDateString('fr-CA', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })
+                  : 'xxxxxxx'}
+              </dd>
             </div>
             <div key={brix} className="border-t border-gray-200 pt-4">
               <dt className="font-medium text-gray-900">Brix</dt>

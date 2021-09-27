@@ -157,7 +157,7 @@ export default function PageHeader() {
       >
         <Popover.Panel
           focus
-          className="z-10 absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+          className="z-40 absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
         >
           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
             <div className="pt-5 pb-6 px-5">
@@ -203,12 +203,6 @@ export default function PageHeader() {
                   className="w-full flex items-center justify-center px-4 py-10px border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                 >
                   Dashboard
-                </a>
-                <a
-                  href="#"
-                  className="w-full flex items-center justify-center px-4 py-10px border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                >
-                  Contact
                 </a>
               </div>
             </div>
