@@ -533,7 +533,7 @@ export default function Example({ post, morePosts, preview }) {
                 {/* <meta property="og:image" content={post.ogImage.url} /> */}
               </Head>
               <ReportHeader
-                label={post.label}
+                label={post?.label ? post.label : new {name = "label"}}
                 variety={post.variety}
                 lot={post.lot}
                 inspectionDate={post.date}
