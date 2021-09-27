@@ -13,6 +13,8 @@ import {
   XIcon,
 } from '@heroicons/react/outline';
 import { ChevronDownIcon, PlusSmIcon } from '@heroicons/react/solid';
+import { getAllPostsForHome } from '../../lib/api';
+import ReportCard from '../../components/report-card';
 
 const navigation = {
   categories: [
