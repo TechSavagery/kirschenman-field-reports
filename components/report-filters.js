@@ -347,8 +347,18 @@ export default function ReportFilters({ reports }) {
               {/* Product grid */}
               <div className="lg:col-span-3">
                 {/* Replace with your content */}
-                <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full">
-                  <GrapeReportsSection reports={reports} />
+                <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
+                  {reports.map((report) => (
+                    <ReportCard
+                      label={report.label}
+                      variety={report.variety}
+                      lot={report.lot}
+                      week={report.week}
+                      inspectionDate={report.date}
+                      mainImage={report.coverImage}
+                      slug={report.slug}
+                    />
+                  ))}
                 </div>
                 {/* /End replace */}
               </div>

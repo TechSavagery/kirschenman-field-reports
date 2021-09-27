@@ -17,7 +17,6 @@ export default function Index({ allPosts, preview }) {
         <Container>
           <PageHeader />
           <ReportFilters reports={allReports} />
-          <DashboardFooter/>
         </Container>
       </Layout>
     </>
