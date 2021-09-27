@@ -184,6 +184,8 @@ function classNames(...classes) {
 export default function Example({ post, morePosts, preview }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const defaultLabel = new Object()
+  defaultLabel.name = "no-label"
   return (
     <div className="bg-white">
       <div>
@@ -533,7 +535,7 @@ export default function Example({ post, morePosts, preview }) {
                 {/* <meta property="og:image" content={post.ogImage.url} /> */}
               </Head>
               <ReportHeader
-                label={post?.label ? post.label : new {name = "label"}}
+                label={post?.label ? post.label : defaultLabel}
                 variety={post.variety}
                 lot={post.lot}
                 inspectionDate={post.date}
@@ -549,7 +551,7 @@ export default function Example({ post, morePosts, preview }) {
                 sizeMin={post.sizeMin}
                 flavor={post.flavor}
                 firmness={post.firmness}
-                label={post.label}
+                label={post?.label ? post.label : defaultLabel}
                 appearance={post.appearance}
                 variety={post.variety}
                 lot={post.lot}
