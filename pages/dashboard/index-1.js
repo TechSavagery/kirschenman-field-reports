@@ -178,7 +178,7 @@ function classNames(...classes) {
 export default function Example(allPosts, preview) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-
+  const allReports = allPosts;
   return (
     <div className="bg-white">
       <div>
@@ -522,39 +522,44 @@ export default function Example(allPosts, preview) {
         </div>
 
         <main className="max-w-2xl mx-auto px-4 lg:max-w-7xl lg:px-8">
-          <div className="border-b border-gray-200 pt-24 pb-10">
-            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
-              Grapes
-            </h1>
-            <p className="mt-4 text-base text-gray-500">
-              Checkout out the latest field datafor any of our current produce!
-            </p>
+          <div className="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
+            <h3 className="text-lg leading-6 font-medium text-gray-900">
+              Grape Reports
+            </h3>
+            <div className="mt-3 sm:mt-0 sm:ml-4">
+              <button
+                type="button"
+                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                View All 
+              </button>
+            </div>
           </div>
-
-          <div className="pt-12 pb-24 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
-         
-            <section
-              aria-labelledby="product-heading"
-              className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3"
-            >
-              <h2 id="product-heading" className="sr-only">
-                Products
-              </h2>
-
-              <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
-              {allPosts.map((report) => (
-                    <ReportCard
-                      label={report.label}
-                      variety={report.variety}
-                      lot={report.lot}
-                      week={report.week}
-                      inspectionDate={report.date}
-                      mainImage={report.coverImage}
-                      slug={report.slug}
-                    />
-                  ))}
-              </div>
-            </section>
+          <div className="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
+            <h3 className="text-lg leading-6 font-medium text-gray-900">
+              Potato Reports
+            </h3>
+            <div className="mt-3 sm:mt-0 sm:ml-4">
+              <button
+                type="button"
+                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                View All 
+              </button>
+            </div>
+          </div>
+          <div className="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
+            <h3 className="text-lg leading-6 font-medium text-gray-900">
+              Stone Fruit Reports
+            </h3>
+            <div className="mt-3 sm:mt-0 sm:ml-4">
+              <button
+                type="button"
+                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                View All 
+              </button>
+            </div>
           </div>
         </main>
 
@@ -650,9 +655,9 @@ export default function Example(allPosts, preview) {
 }
 
 export async function getStaticProps({ preview = false }) {
-  const allPosts = await getAllPostsForHome(preview);
-  return {
-    props: { allPosts, preview },
-    revalidate: 1,
-  };
-}
+    const allPosts = await getAllPostsForHome(preview);
+    return {
+      props: { allPosts, preview },
+      revalidate: 1,
+    };
+  }

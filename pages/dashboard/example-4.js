@@ -171,14 +171,11 @@ const footerNavigation = {
   ],
 };
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
 
 export default function Example(allPosts, preview) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const reports = allPosts.slice(0, 12);
+  const allReports = allPosts;
 
   return (
     <div className="bg-white">
@@ -700,7 +697,7 @@ export default function Example(allPosts, preview) {
               </h2>
 
               <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
-                {reports.map((report) => (
+                {allReports.map((report) => (
                   <ReportCard
                     label={report.label}
                     variety={report.variety}
