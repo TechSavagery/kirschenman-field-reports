@@ -171,6 +171,10 @@ const footerNavigation = {
   ],
 };
 
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ');
+}
+
 
 export default function Example({allPosts, preview}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
