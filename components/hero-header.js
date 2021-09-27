@@ -3,8 +3,8 @@ import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 
 const navigation = [
-  { name: 'Features', href: '#' },
-  { name: 'Get Started', href: '#' },
+  { name: 'Features', href: '#features' },
+  { name: 'Get Started', href: 'mailto:info@keisales.com?cc=subject=Subscribe%20To%20KEI%20Field%20Reports&body=I%20would%20like%20access%20to%20KEI%20field%20report%20data%0d%0aName%0d%0aCompany%20Name%0d%0aEmail' },
 ];
 
 export default function HeroHeader() {
@@ -127,7 +127,7 @@ export default function HeroHeader() {
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
                   <a
-                    href="#"
+                    href="mailto:info@keisales.com?cc=subject=Subscribe%20To%20KEI%20Field%20Reports&body=I%20would%20like%20access%20to%20KEI%20field%20report%20data%0d%0aName%0d%0aCompany%20Name%0d%0aEmail"
                     className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
                   >
                     Contact

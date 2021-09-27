@@ -11,7 +11,7 @@ export default function HomeFooter() {
         <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
           <div className="inline-flex rounded-md shadow">
             <a
-              href="#"
+              href="mailto:info@keisales.com?cc=subject=Subscribe%20To%20KEI%20Field%20Reports&body=I%20would%20like%20access%20to%20KEI%20field%20report%20data%0d%0aName%0d%0aCompany%20Name%0d%0aEmail"
               className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
             >
               Get started
@@ -19,7 +19,7 @@ export default function HomeFooter() {
           </div>
           <div className="ml-3 inline-flex rounded-md shadow">
             <a
-              href="#"
+              href="/login"
               className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50"
             >
               Login

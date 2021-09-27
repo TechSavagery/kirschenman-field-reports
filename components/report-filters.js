@@ -8,7 +8,7 @@ import {
   PlusSmIcon,
   ViewGridIcon,
 } from '@heroicons/react/solid';
-import GrapeReportsSection from './grape-reports-section';
+import ReportCard from './report-card';
 
 const subCategories = [];
 
