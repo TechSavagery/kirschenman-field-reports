@@ -31,6 +31,7 @@ import {
 } from '@heroicons/react/outline';
 import { ChevronDownIcon, PlusSmIcon } from '@heroicons/react/solid';
 import ReportCard from '../../components/report-card';
+import { getAllPostsForHome } from '../../lib/api';
 
 const navigation = {
   categories: [
