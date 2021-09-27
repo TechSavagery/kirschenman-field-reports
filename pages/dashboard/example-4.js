@@ -178,7 +178,7 @@ function classNames(...classes) {
 export default function Example(allPosts, preview) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const allReports = allPosts;
+
   return (
     <div className="bg-white">
       <div>
@@ -699,7 +699,7 @@ export default function Example(allPosts, preview) {
               </h2>
 
               <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
-              {allReports.map((report) => (
+              {allPosts.map((report) => (
                     <ReportCard
                       label={report.label}
                       variety={report.variety}
