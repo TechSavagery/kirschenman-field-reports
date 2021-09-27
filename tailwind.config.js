@@ -15,7 +15,7 @@ module.exports = {
         'accent-7': '#333',
         success: '#0070f3',
         cyan: '#79FFE1',
-        lime: '#84CC16',
+        lime: colors.lime[500],
       },
       spacing: {
         28: '7rem',

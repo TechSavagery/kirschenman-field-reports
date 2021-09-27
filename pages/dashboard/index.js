@@ -345,10 +345,10 @@ export default function Example({allPosts, preview}) {
 
                 {/* Logo */}
                 <div className="ml-4 flex lg:ml-0">
-                  <a href="#">
+                  <a href="/dashboard">
                     <span className="sr-only">Workflow</span>
                     <img
-                      className="height:100px"
+                      className="h-16"
                       src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
                       alt=""
                     />
