@@ -61,10 +61,10 @@ const navigation = {
           id: 'reports',
           name: 'Reports',
           items: [
-            { name: 'Grape', href: '#' },
-            { name: 'Potato', href: '#' },
-            { name: 'Watermelon', href: '#' },
-            { name: 'Stone Fruit', href: '#' },
+            { name: 'Grapes', href: '/dashboard/grapes' },
+            { name: 'Potato', href: '/dashboard/potato' },
+            { name: 'Watermelon', href: '/dashboard/watermelon' },
+            { name: 'Stone Fruit', href: '/dashboard/stone-fruit' },
           ],
         },
       ],
@@ -155,11 +155,10 @@ const products = [
 ];
 const footerNavigation = {
   reports: [
-    { name: 'Grapes', href: '#' },
-    { name: 'Potato', href: '#' },
-    { name: 'Watermelon', href: '#' },
-    { name: 'Stone Fruite', href: '#' },
-    { name: 'Accessories', href: '#' },
+    { name: 'Grapes', href: '/dashboard/grapes' },
+    { name: 'Potato', href: '/dashboard/potato' },
+    { name: 'Watermelon', href: '/dashboard/watermelon' },
+    { name: 'Stone Fruit', href: '/dashboard/stone-fruit' },
   ],
   pages: [
     { name: 'Dashboard', href: 'dashboard' },
@@ -347,11 +346,11 @@ export default function Example({allPosts, preview}) {
 
                 {/* Logo */}
                 <div className="ml-4 flex lg:ml-0">
-                  <a href="#">
+                  <a href="/dashboard">
                     <span className="sr-only">Workflow</span>
                     <img
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                      className="h-100"
+                      src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
                       alt=""
                     />
                   </a>

@@ -178,7 +178,7 @@ function classNames(...classes) {
 export default function Example({allPosts, preview}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const allReports = allPosts;
+  const allReports = allPosts.slice(0,12);
   return (
     <div className="bg-white">
       <div>
@@ -324,7 +324,7 @@ export default function Example({allPosts, preview}) {
         </Transition.Root>
 
         <header className="relative bg-white">
-          <p className="bg-indigo-600 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
+          <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
             KEI Field Reports Now Available!
           </p>
 
@@ -348,8 +348,8 @@ export default function Example({allPosts, preview}) {
                   <a href="#">
                     <span className="sr-only">Workflow</span>
                     <img
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                      className="height:100px"
+                      src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
                       alt=""
                     />
                   </a>
@@ -528,13 +528,27 @@ export default function Example({allPosts, preview}) {
             </h3>
             <div className="mt-3 sm:mt-0 sm:ml-4">
               <button
+              href="/dashboard/grapes"
                 type="button"
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 View All 
               </button>
-            </div>
+            </div>         
           </div>
+          <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
+                {allReports.map((report) => (
+                  <ReportCard
+                    label={report.label}
+                    variety={report.variety}
+                    lot={report.lot}
+                    week={report.week}
+                    inspectionDate={report.date}
+                    mainImage={report.coverImage}
+                    slug={report.slug}
+                  />
+                ))}
+              </div>
           <div className="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               Potato Reports
