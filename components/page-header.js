@@ -57,7 +57,7 @@ export default function PageHeader() {
             <a href="#">
               <span className="sr-only">Workflow</span>
               <img
-                className="h-8 w-auto sm:h-10"
+                className="h-100 w-auto sm:h-100"
                 src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
                 alt="kirschenman logo"
               />

@@ -22,9 +22,9 @@ export default function ReportCard({
         {week ? week.toUpperCase().replace('EEK-', '') : 'N/A'} -{' '}
         {new Date(inspectionDate).getFullYear()} -{' '}
         {new Date(inspectionDate).toLocaleDateString('fr-CA', {
-          year: 'numeric',
           month: '2-digit',
           day: '2-digit',
+          year: 'numeric',
         })}
       </h3>
       <p className="mt-1 text-lg font-medium text-gray-900">

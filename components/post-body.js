@@ -37,9 +37,9 @@ export default function PostBody({
               <dd className="mt-2 text-sm text-gray-500">
                 {date
                   ? new Date(date).toLocaleDateString('fr-CA', {
-                      year: 'numeric',
                       month: '2-digit',
                       day: '2-digit',
+                      year: 'numeric',
                     })
                   : 'xxxxxxx'}
               </dd>

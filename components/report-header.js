@@ -32,9 +32,9 @@ export default function ReportHeader({
                 </span>
                 <span className="block xl:inline">
                   {new Date(inspectionDate).toLocaleDateString('fr-CA', {
-                    year: 'numeric',
                     month: '2-digit',
                     day: '2-digit',
+                    year: 'numeric',
                   })}
                 </span>
               </h1>
