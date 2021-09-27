@@ -253,7 +253,7 @@ export default function Example() {
                           key={category.name}
                           className={({ selected }) =>
                             classNames(
-                              selected ? 'text-indigo-600 border-indigo-600' : 'text-gray-900 border-transparent',
+                              selected ? 'text-lime border-lime' : 'text-gray-900 border-transparent',
                               'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
                             )
                           }
@@ -491,7 +491,7 @@ export default function Example() {
                                     <Popover.Button
                                       className={classNames(
                                         open
-                                          ? 'border-indigo-600 text-indigo-600'
+                                          ? 'border-lime text-lime'
                                           : 'border-transparent text-gray-700 hover:text-gray-800',
                                         'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
                                       )}
@@ -758,7 +758,7 @@ export default function Example() {
                                     defaultValue={option.value}
                                     type="checkbox"
                                     defaultChecked={option.checked}
-                                    className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                    className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
                                   />
                                   <label
                                     htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
@@ -887,7 +887,7 @@ export default function Example() {
                                       defaultValue={option.value}
                                       type="checkbox"
                                       defaultChecked={option.checked}
-                                      className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                      className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
                                     />
                                     <label
                                       htmlFor={`filter-${section.id}-${optionIdx}`}
@@ -1041,12 +1041,12 @@ export default function Example() {
                       type="text"
                       autoComplete="email"
                       required
-                      className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                      className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-lime focus:ring-1 focus:ring-lime"
                     />
                     <div className="ml-4 flex-shrink-0">
                       <button
                         type="submit"
-                        className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        className="w-full bg-lime border border-transparent rounded-md shadow-sm py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime"
                       >
                         Sign up
                       </button>

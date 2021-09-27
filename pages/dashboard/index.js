@@ -232,7 +232,7 @@ export default function Example({allPosts, preview}) {
                           className={({ selected }) =>
                             classNames(
                               selected
-                                ? 'text-indigo-600 border-indigo-600'
+                                ? 'text-lime border-lime'
                                 : 'text-gray-900 border-transparent',
                               'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
                             )
@@ -366,7 +366,7 @@ export default function Example({allPosts, preview}) {
                               <Popover.Button
                                 className={classNames(
                                   open
-                                    ? 'border-indigo-600 text-indigo-600'
+                                    ? 'border-lime text-lime'
                                     : 'border-transparent text-gray-700 hover:text-gray-800',
                                   'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
                                 )}
@@ -522,7 +522,7 @@ export default function Example({allPosts, preview}) {
         </div>
 
         <main className="max-w-2xl mx-auto px-4 lg:max-w-7xl lg:px-8">
-          <div className="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
+          <div className="py-[20px] border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               Grape Reports
             </h3>
@@ -530,7 +530,7 @@ export default function Example({allPosts, preview}) {
               <button
               href="/dashboard/grapes"
                 type="button"
-                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime"
               >
                 View All 
               </button>
@@ -549,27 +549,27 @@ export default function Example({allPosts, preview}) {
                   />
                 ))}
               </div>
-          <div className="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
+          <div className="py-[20px] border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               Potato Reports
             </h3>
             <div className="mt-3 sm:mt-0 sm:ml-4">
               <button
                 type="button"
-                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime"
               >
                 View All 
               </button>
             </div>
           </div>
-          <div className="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
+          <div className="py-[20px] border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               Stone Fruit Reports
             </h3>
             <div className="mt-3 sm:mt-0 sm:ml-4">
               <button
                 type="button"
-                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime"
               >
                 View All 
               </button>
@@ -589,11 +589,14 @@ export default function Example({allPosts, preview}) {
               <div className="grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-8 md:gap-y-16 md:auto-rows-min">
                 {/* Image section */}
                 <div className="col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1">
-                  <img
-                    src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                    alt=""
-                    className="h-8 w-auto"
-                  />
+                <a href="/dashboard">
+                    <span className="sr-only">Workflow</span>
+                    <img
+                      className="h-[100px]"
+                      src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
+                      alt=""
+                    />
+                  </a>
                 </div>
 
                 {/* Sitemap sections */}

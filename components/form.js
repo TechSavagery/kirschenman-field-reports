@@ -79,7 +79,7 @@ export default function Form ({_id}) {
                 name="first-name"
                 id="first-name"
                 autoComplete="given-name"
-                className="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                className="py-3 px-4 block w-full shadow-sm focus:ring-lime focus:border-lime border-gray-300 rounded-md"
               />
             </div>
           </div>
@@ -93,7 +93,7 @@ export default function Form ({_id}) {
                 name="last-name"
                 id="last-name"
                 autoComplete="family-name"
-                className="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                className="py-3 px-4 block w-full shadow-sm focus:ring-lime focus:border-lime border-gray-300 rounded-md"
               />
             </div>
           </div>
@@ -107,7 +107,7 @@ export default function Form ({_id}) {
                 name="company"
                 id="company"
                 autoComplete="organization"
-                className="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                className="py-3 px-4 block w-full shadow-sm focus:ring-lime focus:border-lime border-gray-300 rounded-md"
               />
             </div>
           </div>
@@ -121,7 +121,7 @@ export default function Form ({_id}) {
                 name="email"
                 type="email"
                 autoComplete="email"
-                className="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                className="py-3 px-4 block w-full shadow-sm focus:ring-lime focus:border-lime border-gray-300 rounded-md"
               />
             </div>
           </div>
@@ -137,7 +137,7 @@ export default function Form ({_id}) {
                 <select
                   id="country"
                   name="country"
-                  className="h-full py-0 pl-4 pr-8 border-transparent bg-transparent text-gray-500 focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
+                  className="h-full py-0 pl-4 pr-8 border-transparent bg-transparent text-gray-500 focus:ring-lime focus:border-lime rounded-md"
                 >
                   <option>US</option>
                   <option>CA</option>
@@ -149,7 +149,7 @@ export default function Form ({_id}) {
                 name="phone-number"
                 id="phone-number"
                 autoComplete="tel"
-                className="py-3 px-4 block w-full pl-20 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                className="py-3 px-4 block w-full pl-20 focus:ring-lime focus:border-lime border-gray-300 rounded-md"
                 placeholder="+1 (555) 987-6543"
               />
             </div>
@@ -163,7 +163,7 @@ export default function Form ({_id}) {
                 id="message"
                 name="message"
                 rows={4}
-                className="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border border-gray-300 rounded-md"
+                className="py-3 px-4 block w-full shadow-sm focus:ring-lime focus:border-lime border border-gray-300 rounded-md"
                 defaultValue={''}
               />
             </div>

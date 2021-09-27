@@ -4,7 +4,10 @@ import { MenuIcon, XIcon } from '@heroicons/react/outline';
 
 const navigation = [
   { name: 'Features', href: '#features' },
-  { name: 'Get Started', href: 'mailto:info@keisales.com?cc=subject=Subscribe%20To%20KEI%20Field%20Reports&body=I%20would%20like%20access%20to%20KEI%20field%20report%20data%0d%0aName%0d%0aCompany%20Name%0d%0aEmail' },
+  {
+    name: 'Get Started',
+    href: 'mailto:info@keisales.com?cc=subject=Subscribe%20To%20KEI%20Field%20Reports&body=I%20would%20like%20access%20to%20KEI%20field%20report%20data%0d%0aName%0d%0aCompany%20Name%0d%0aEmail',
+  },
 ];
 
 export default function HeroHeader() {
@@ -30,15 +33,16 @@ export default function HeroHeader() {
               >
                 <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                   <div className="flex items-center justify-between w-full md:w-auto">
-                    <a href="#">
+                    <a href="/">
                       <span className="sr-only">Workflow</span>
                       <img
-                        className="h-8 w-auto sm:h-10"
-                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                        className="h-[100px]"
+                        src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
+                        alt=""
                       />
                     </a>
                     <div className="-mr-2 flex items-center md:hidden">
-                      <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                      <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-lime">
                         <span className="sr-only">Open main menu</span>
                         <MenuIcon className="h-6 w-6" aria-hidden="true" />
                       </Popover.Button>
@@ -75,14 +79,17 @@ export default function HeroHeader() {
                 <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                   <div className="px-5 pt-4 flex items-center justify-between">
                     <div>
-                      <img
-                        className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                        alt=""
-                      />
+                      <a href="/">
+                        <span className="sr-only">Workflow</span>
+                        <img
+                          className="h-[100px]"
+                          src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
+                          alt=""
+                        />
+                      </a>
                     </div>
                     <div className="-mr-2">
-                      <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                      <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-lime">
                         <span className="sr-only">Close main menu</span>
                         <XIcon className="h-6 w-6" aria-hidden="true" />
                       </Popover.Button>
@@ -101,7 +108,7 @@ export default function HeroHeader() {
                   </div>
                   <a
                     href="#"
-                    className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
+                    className="block w-full px-5 py-3 text-center font-medium text-lime bg-gray-50 hover:bg-gray-100"
                   >
                     Log in
                   </a>
@@ -116,7 +123,7 @@ export default function HeroHeader() {
                 <span className="block xl:inline">
                   Kirschenman Field Reports
                 </span>{' '}
-                <span className="block text-indigo-600 xl:inline">
+                <span className="block text-lime xl:inline">
                   Live Produce Data
                 </span>
               </h1>
@@ -128,7 +135,7 @@ export default function HeroHeader() {
                 <div className="rounded-md shadow">
                   <a
                     href="mailto:info@keisales.com?cc=subject=Subscribe%20To%20KEI%20Field%20Reports&body=I%20would%20like%20access%20to%20KEI%20field%20report%20data%0d%0aName%0d%0aCompany%20Name%0d%0aEmail"
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-lime hover:bg-lime md:py-4 md:text-lg md:px-10"
                   >
                     Contact
                   </a>
@@ -136,7 +143,7 @@ export default function HeroHeader() {
                 <div className="mt-3 sm:mt-0 sm:ml-3">
                   <a
                     href="/login"
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-lime bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
                   >
                     Login
                   </a>

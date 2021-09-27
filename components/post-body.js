@@ -36,7 +36,7 @@ export default function PostBody({
               <dt className="font-medium text-gray-900">Inpection Date</dt>
               <dd className="mt-2 text-sm text-gray-500">
                 {date
-                  ? new Date(date).toLocaleDateString('fr-CA', {
+                  ? new Date(date).toLocaleDateString('en-US', {
                       month: '2-digit',
                       day: '2-digit',
                       year: 'numeric',

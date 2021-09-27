@@ -233,7 +233,7 @@ export default function Example({allPosts, preview}) {
                           className={({ selected }) =>
                             classNames(
                               selected
-                                ? 'text-indigo-600 border-indigo-600'
+                                ? 'text-lime border-lime'
                                 : 'text-gray-900 border-transparent',
                               'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
                             )
@@ -325,7 +325,7 @@ export default function Example({allPosts, preview}) {
         </Transition.Root>
 
         <header className="relative bg-white">
-          <p className="bg-indigo-600 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
+          <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
             KEI Field Reports Now Available!
           </p>
 
@@ -346,10 +346,10 @@ export default function Example({allPosts, preview}) {
 
                 {/* Logo */}
                 <div className="ml-4 flex lg:ml-0">
-                  <a href="/dashboard">
+                <a href="/dashboard">
                     <span className="sr-only">Workflow</span>
                     <img
-                      className="h-100"
+                      className="h-[100px]"
                       src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
                       alt=""
                     />
@@ -367,7 +367,7 @@ export default function Example({allPosts, preview}) {
                               <Popover.Button
                                 className={classNames(
                                   open
-                                    ? 'border-indigo-600 text-indigo-600'
+                                    ? 'border-lime text-lime'
                                     : 'border-transparent text-gray-700 hover:text-gray-800',
                                   'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
                                 )}
@@ -559,7 +559,7 @@ export default function Example({allPosts, preview}) {
                                     name={`${section.id}[]`}
                                     defaultValue={option.value}
                                     type="checkbox"
-                                    className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                    className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
                                   />
                                   <label
                                     htmlFor={`${section.id}-${optionIdx}-mobile`}
@@ -673,7 +673,7 @@ export default function Example({allPosts, preview}) {
                                 name={`${section.id}[]`}
                                 defaultValue={option.value}
                                 type="checkbox"
-                                className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
                               />
                               <label
                                 htmlFor={`${section.id}-${optionIdx}`}
@@ -728,11 +728,14 @@ export default function Example({allPosts, preview}) {
               <div className="grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-8 md:gap-y-16 md:auto-rows-min">
                 {/* Image section */}
                 <div className="col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1">
-                  <img
-                    src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                    alt=""
-                    className="h-8 w-auto"
-                  />
+                <a href="/dashboard">
+                    <span className="sr-only">Workflow</span>
+                    <img
+                      className="h-[100px]"
+                      src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
+                      alt=""
+                    />
+                  </a>
                 </div>
 
                 {/* Sitemap sections */}
