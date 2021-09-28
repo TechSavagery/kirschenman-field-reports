@@ -36,7 +36,7 @@ export default function HeroHeader() {
                     <a href="/">
                       <span className="sr-only">Workflow</span>
                       <img
-                        className="h-[100px]"
+                        className="h-[100px] py-[25px]"
                         src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
                         alt=""
                       />
