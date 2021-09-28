@@ -1,4 +1,5 @@
 import BlockContent from '@sanity/block-content-to-react';
+import markdownStyles from './markdown-styles.module.css';
 /* This example requires Tailwind CSS v2.0+ */
 export default function ReportHeaderStats({
   week,

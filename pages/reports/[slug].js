@@ -522,7 +522,7 @@ export default function Post({ post, morePosts, preview }) {
           </nav>
         </div>
 
-        <main className="max-w-full mx-auto px-4 lg:max-w-7xl lg:px-8">
+        <main className="max-w-full mx-auto px-4 lg:max-w-full lg:px-8">
           {router.isFallback ? (
             <PostTitle>Loading…</PostTitle>
           ) : (
