@@ -37,7 +37,7 @@ export default function HeroHeader() {
                       <span className="sr-only">Workflow</span>
                       <img
                         className="h-[100px]"
-                        style="padding-top:20px"
+                        style={{paddingTop: '20px'}}
                         src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
                         alt=""
                       />
