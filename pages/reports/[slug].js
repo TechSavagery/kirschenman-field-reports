@@ -180,6 +180,7 @@ export default function Post({ post, morePosts, preview }) {
     return <ErrorPage statusCode={404} />;
   }
   return (
+    <Container>
     <div className="bg-white">
       <div>
         {/* Mobile menu */}
@@ -578,7 +579,7 @@ export default function Post({ post, morePosts, preview }) {
                   <a href="/dashboard">
                     <span className="sr-only">Workflow</span>
                     <img
-                      className="h-[100px]"
+                      className="h-[50px]"
                       src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
                       alt=""
                     />
@@ -654,6 +655,7 @@ export default function Post({ post, morePosts, preview }) {
         </footer>
       </div>
     </div>
+    </Container>
   );
 }
 
