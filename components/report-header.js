@@ -24,7 +24,8 @@ export default function ReportHeader({
               {lot ? lot.name : 'N/A'}
             </span>{' '}
             <span className="block text-lime xl:inline">
-              online business
+            {week ? week.toUpperCase().replace('EEK-', '') : 'N/A'} -{' '}
+                  {new Date(inspectionDate).getFullYear()}-{' '}
             </span>
             <span className="block xl:inline">
               {' '}

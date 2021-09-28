@@ -14,7 +14,7 @@ import Head from 'next/head';
 import { CMS_NAME } from '../../lib/constants';
 import Form from '../../components/form';
 import PageHeader from '../../components/page-header';
-import ReportHeader from '../../components/report-header';
+import ReportHeaderSplit from '../../components/report-header-split';
 import DashboardFooter from '../../components/dashboard-footer';
 import { Fragment, useState } from 'react';
 import {
@@ -532,7 +532,7 @@ export default function Post({ post, morePosts, preview }) {
                   <title>{post.title} | KEI Field Reports</title>
                   {/* <meta property="og:image" content={post.ogImage.url} /> */}
                 </Head>
-                <ReportHeader
+                <ReportHeaderSplit
                   label={post.label}
                   variety={post.variety}
                   lot={post.lot}
