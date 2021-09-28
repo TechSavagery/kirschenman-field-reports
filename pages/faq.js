@@ -176,7 +176,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function FAQ({ allPosts, preview }) {
+export default function FaqPage({ allPosts, preview }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const allReports = allPosts.slice(0, 12);
