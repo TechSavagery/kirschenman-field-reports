@@ -521,12 +521,11 @@ export default function Post({ post, morePosts, preview }) {
           </nav>
         </div>
 
-        <main className="max-w-2xl mx-auto px-4 lg:max-w-7xl lg:px-8">
+        <main className="max-w-7xl mx-auto px-4 lg:max-w-7xl lg:px-8">
           {router.isFallback ? (
             <PostTitle>Loading…</PostTitle>
           ) : (
             <>
-              <PageHeader />
               <article>
                 <Head>
                   <title>{post.title} | KEI Field Reports</title>
