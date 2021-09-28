@@ -30,7 +30,7 @@ import {
   XIcon,
 } from '@heroicons/react/outline';
 import { ChevronDownIcon, PlusSmIcon } from '@heroicons/react/solid';
-import ReportCard from '../../components/report-card';
+import ReportCard from '../components/report-card';
 import { getAllPostsForHome } from '../../lib/api';
 import FAQ from '../components/faq';
 
