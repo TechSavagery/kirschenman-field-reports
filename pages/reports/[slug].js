@@ -190,6 +190,7 @@ export default function Example({ post, morePosts, preview }) {
   defaultVariety.name = "no-variety"
   const defaultLot = new Object()
   defaultLot.name = "no-lot"
+  const defaultDate = new Date()
   return (
     <div className="bg-white">
       <div>
@@ -542,7 +543,7 @@ export default function Example({ post, morePosts, preview }) {
                 label={post?.label ? post.label : defaultLabel}
                 variety={post?.variety ? post.variety : defaultVariety}
                 lot={post?.lot ? post.lot : defaultLot}
-                inspectionDate={post.date}
+                inspectionDate={post?.date ? post.date : defaultDate }
                 mainImage={post.coverImage}
                 content={post.body}
                 week={post.week}
@@ -561,7 +562,7 @@ export default function Example({ post, morePosts, preview }) {
                 lot={post?.lot ? post.lot : defaultLot}
                 blockNumber={post.blockNumber}
                 images={post.images}
-                date={post.date}
+                date={post?.date ? post.date : defaultDate }
               />
             </article>
             <Form _id={post._id} />
