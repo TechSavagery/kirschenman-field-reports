@@ -1,3 +1,4 @@
+import BlockContent from '@sanity/block-content-to-react';
 /* This example requires Tailwind CSS v2.0+ */
 export default function ReportHeaderStats({
   week,
@@ -22,7 +23,12 @@ export default function ReportHeaderStats({
             })}
           </h2>
           <p className="mt-3 text-xl text-gray-500 sm:mt-4">
-          {content[0]?.children[0].text ? content[0]?.children[0].text : "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus repellat laudantium." }
+            <BlockContent
+              blocks={content}
+              projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
+              dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
+              className={markdownStyles.markdown}
+            />{' '}
           </p>
         </div>
       </div>
@@ -34,7 +40,7 @@ export default function ReportHeaderStats({
               <dl className="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-3">
                 <div className="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
                   <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
-                  {lot ? lot.name : 'N/A'}
+                    {lot ? lot.name : 'N/A'}
                   </dt>
                   <dd className="order-1 text-5xl font-extrabold text-lime">
                     100%
@@ -45,7 +51,7 @@ export default function ReportHeaderStats({
                     Label
                   </dt>
                   <dd className="order-1 text-5xl font-extrabold text-lime">
-                  {label ? label.name : 'N/A'}
+                    {label ? label.name : 'N/A'}
                   </dd>
                 </div>
                 <div className="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
