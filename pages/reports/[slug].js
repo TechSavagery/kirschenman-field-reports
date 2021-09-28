@@ -188,6 +188,8 @@ export default function Example({ post, morePosts, preview }) {
   defaultLabel.name = "no-label"
   const defaultVariety = new Object()
   defaultVariety.name = "no-variety"
+  const defaultLot = new Object()
+  defaultLot.name = "no-lot"
   return (
     <div className="bg-white">
       <div>
@@ -539,7 +541,7 @@ export default function Example({ post, morePosts, preview }) {
               <ReportHeader
                 label={post?.label ? post.label : defaultLabel}
                 variety={post?.variety ? post.variety : defaultVariety}
-                lot={post.lot}
+                lot={post?.lot ? post.lot : defaultLot}
                 inspectionDate={post.date}
                 mainImage={post.coverImage}
                 content={post.body}
@@ -556,7 +558,7 @@ export default function Example({ post, morePosts, preview }) {
                 label={post?.label ? post.label : defaultLabel}
                 appearance={post.appearance}
                 variety={post?.variety ? post.variety : defaultVariety}
-                lot={post.lot}
+                lot={post?.lot ? post.lot : defaultLot}
                 blockNumber={post.blockNumber}
                 images={post.images}
                 date={post.date}
