@@ -20,8 +20,8 @@ export default function ReportHeaderSplit({
       <div className="h-56 bg-indigo-600 sm:h-72 lg:absolute lg:left-0 lg:h-full lg:w-1/2">
         <img
           className="w-full h-full object-cover"
-          src={imageBuilder(mainImage).width(720).height(554).url()}
-          alt="Support team"
+          src={imageBuilder(mainImage).width(640).height(508).url()}
+          alt="Grape Report Main Image "
         />
       </div>
       <div className="relative max-w-7xl mx-auto px-4 py-8 sm:py-12 sm:px-6 lg:py-16">
@@ -51,7 +51,7 @@ export default function ReportHeaderSplit({
                 <dt className="order-2 text-base font-medium text-gray-500">
                   Lot
                 </dt>
-                <dd className="order-1 text-2xl font-extrabold text-indigo-600 sm:text-3xl">
+                <dd className="order-1 text-2xl font-extrabold text-lime sm:text-3xl">
                   {lot ? lot.name : 'N/A'}
                 </dd>
               </div>
@@ -59,7 +59,7 @@ export default function ReportHeaderSplit({
                 <dt className="order-2 text-base font-medium text-gray-500">
                   Label
                 </dt>
-                <dd className="order-1 text-2xl font-extrabold text-indigo-600 sm:text-3xl">
+                <dd className="order-1 text-2xl font-extrabold text-lime sm:text-3xl">
                   {label ? label.name : 'N/A'}
                 </dd>
               </div>
@@ -67,13 +67,21 @@ export default function ReportHeaderSplit({
                 <dt className="order-2 text-base font-medium text-gray-500">
                   Week
                 </dt>
-                <dd className="order-1 text-2xl font-extrabold text-indigo-600 sm:text-3xl">
+                <dd className="order-1 text-2xl font-extrabold text-lime sm:text-3xl">
                   {' '}
                   {week ? week.toUpperCase().replace('EEK-', '') : 'N/A'} -{' '}
                   {new Date(inspectionDate).getFullYear()}
                 </dd>
               </div>
             </dl>
+          </div>
+          <div className="py-20px flex items-center">
+            <img
+              src={reporter.picture}
+              className="w-12 h-12 rounded-full mr-4"
+              alt={reporter.name}
+            />
+            <div className="text-xl font-bold">{name}</div>
           </div>
         </div>
       </div>
