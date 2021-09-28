@@ -186,6 +186,8 @@ export default function Example({ post, morePosts, preview }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const defaultLabel = new Object()
   defaultLabel.name = "no-label"
+  const defaultVariety = new Object()
+  defaultVariety.name = "no-variety"
   return (
     <div className="bg-white">
       <div>
@@ -536,7 +538,7 @@ export default function Example({ post, morePosts, preview }) {
               </Head>
               <ReportHeader
                 label={post?.label ? post.label : defaultLabel}
-                variety={post.variety}
+                variety={post?.variety ? post.variety : defaultVariety}
                 lot={post.lot}
                 inspectionDate={post.date}
                 mainImage={post.coverImage}
@@ -553,7 +555,7 @@ export default function Example({ post, morePosts, preview }) {
                 firmness={post.firmness}
                 label={post?.label ? post.label : defaultLabel}
                 appearance={post.appearance}
-                variety={post.variety}
+                variety={post?.variety ? post.variety : defaultVariety}
                 lot={post.lot}
                 blockNumber={post.blockNumber}
                 images={post.images}
