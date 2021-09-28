@@ -30,7 +30,6 @@ import {
   ShoppingBagIcon,
   XIcon,
 } from '@heroicons/react/outline';
-import ReportHeaderStats from '../../components/report-header-stats';
 
 const navigation = {
   categories: [
