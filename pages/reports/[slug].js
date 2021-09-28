@@ -37,6 +37,8 @@ import PostBody from '../../components/post-body';
 import ReportHeader from '../../components/report-header';
 import DashboardFooter from '../../components/dashboard-footer';
 import Form from '../../components/form'
+import { useRouter } from 'next/router';
+import ErrorPage from 'next/error';
 
 
 const navigation = {
@@ -181,7 +183,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Example({ post, morePosts, preview }) {
+export default function Post({ post, morePosts, preview }) {
+  const router = useRouter();
+  if (!router.isFallback && !post?.slug) {
+    return <ErrorPage statusCode={404} />;
+  }
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const defaultLabel = new Object()
