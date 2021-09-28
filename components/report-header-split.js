@@ -38,12 +38,7 @@ export default function ReportHeaderSplit({
             })}
           </h2>
           <p className="mt-6 text-lg text-gray-500">
-            <BlockContent
-              blocks={content}
-              projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
-              dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
-              className={markdownStyles.markdown}
-            />
+              {content[0]?.children[0].text ? content[0]?.children[0].text : "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus repellat laudantium." }
           </p>
           <div className="mt-8 overflow-hidden">
             <dl className="-mx-8 -mt-8 flex flex-wrap">
