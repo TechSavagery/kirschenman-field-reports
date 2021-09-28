@@ -32,11 +32,11 @@ export default function HeroHeader() {
                 aria-label="Global"
               >
                 <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
-                  <div className="flex items-center justify-between w-full md:w-auto">
+                  <div className="py-[20px] flex items-center justify-between w-full md:w-auto">
                     <a href="/">
                       <span className="sr-only">Workflow</span>
                       <img
-                        className="h-[100px] py-[25px]"
+                        className="h-[100px]"
                         src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
                         alt=""
                       />
