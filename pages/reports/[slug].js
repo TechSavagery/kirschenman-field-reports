@@ -14,7 +14,7 @@ import Head from 'next/head';
 import { CMS_NAME } from '../../lib/constants';
 import Form from '../../components/form';
 import PageHeader from '../../components/page-header';
-import ReportHeaderStats from '../../components/report-header-stats';
+import ReportHeaderStats from '../../components/report-header-split';
 import DashboardFooter from '../../components/dashboard-footer';
 import { Fragment, useState } from 'react';
 import {

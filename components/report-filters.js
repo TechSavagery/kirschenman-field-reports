@@ -357,6 +357,9 @@ export default function ReportFilters({ reports }) {
                       inspectionDate={report.date}
                       mainImage={report.coverImage}
                       slug={report.slug}
+                      content={report.body}
+                      reporter={report.reporter}
+
                     />
                   ))}
                 </div>

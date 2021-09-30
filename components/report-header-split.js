@@ -19,16 +19,13 @@ export default function ReportHeaderSplit({
     <div className="relative bg-white">
       <div className="h-56 bg-indigo-600 sm:h-72 lg:absolute lg:left-0 lg:h-full lg:w-1/2">
         <img
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-lg bg:white"
           src={imageBuilder(mainImage).width(640).height(508).url()}
           alt="Grape Report Main Image "
         />
       </div>
       <div className="relative max-w-7xl mx-auto px-4 py-8 sm:py-12 sm:px-6 lg:py-16">
         <div className="max-w-2xl mx-auto lg:max-w-none lg:mr-0 lg:ml-auto lg:w-1/2 lg:pl-10">
-          <div>
-            <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white"></div>
-          </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900 sm:text-4xl">
             {variety ? variety.name : 'N/A'} -{' '}
             {new Date(inspectionDate).toLocaleDateString('en-US', {
@@ -70,7 +67,7 @@ export default function ReportHeaderSplit({
               </div>
             </dl>
           </div>
-          <div className="py-20px flex items-center">
+          <div className="py-[20px] flex items-center">
             <img
               src={reporter.picture}
               className="w-12 h-12 rounded-full mr-4"

@@ -17,6 +17,9 @@ module.exports = {
         success: '#0070f3',
         cyan: '#79FFE1',
         lime: colors.lime[500],
+        rose: colors.rose,
+        teal: colors.teal,
+        cyan: colors.cyan,
       },
       spacing: {
         28: '7rem',

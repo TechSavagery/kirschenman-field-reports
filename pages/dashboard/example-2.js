@@ -878,6 +878,9 @@ export default function Example({ allPosts }) {
                     inspectionDate={report.date}
                     mainImage={report.coverImage}
                     slug={report.slug}
+                    content={report.body}
+                    reporter={report.reporter}
+
                   />
                 ))}
               </div>

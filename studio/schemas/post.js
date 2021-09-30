@@ -375,11 +375,18 @@ export default {
       title: 'title',
       reporter: 'reporter.name',
       media: 'mainImage',
+      date: 'publishedAt',
     },
     prepare(selection) {
-      const { reporter } = selection;
+      const { reporter, date } = selection;
       return Object.assign({}, selection, {
-        subtitle: reporter && `by ${reporter}`,
+        subtitle:
+          reporter &&
+          `by ${reporter} - ${new Date(date).toLocaleDateString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: 'numeric',
+          })}`,
       });
     },
   },
