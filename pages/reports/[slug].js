@@ -647,8 +647,8 @@ export default function Example({ post, morePosts, preview }) {
                       <div className="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <RadioGroup.Option
                           as="div"
-                          key={post.label.name}
-                          value={post.label.name}
+                          key={post?.label?.name}
+                          value={post?.label?.name}
                           className={({ active }) =>
                             classNames(
                               active ? 'ring-2 ring-indigo-500' : '',
@@ -677,7 +677,7 @@ export default function Example({ post, morePosts, preview }) {
                                 as="p"
                                 className="mt-1 text-sm text-gray-500"
                               >
-                                {post.lot.name}
+                                {post?.lot?.name}
                               </RadioGroup.Description>
                               <div
                                 className={classNames(
@@ -693,8 +693,8 @@ export default function Example({ post, morePosts, preview }) {
                         </RadioGroup.Option>
                         <RadioGroup.Option
                           as="div"
-                          key={post.date}
-                          value={post.date}
+                          key={post?.date}
+                          value={post?.date}
                           className={({ active }) =>
                             classNames(
                               active ? 'ring-2 ring-indigo-500' : '',
@@ -723,7 +723,7 @@ export default function Example({ post, morePosts, preview }) {
                                 as="p"
                                 className="mt-1 text-sm text-gray-500"
                               >
-                                {post.date
+                                {post?.date
                                   ? new Date(post.date).toLocaleDateString(
                                       'en-US',
                                       {
@@ -748,8 +748,8 @@ export default function Example({ post, morePosts, preview }) {
                         </RadioGroup.Option>
                         <RadioGroup.Option
                           as="div"
-                          key={post.brix}
-                          value={post.brix}
+                          key={post?.brix}
+                          value={post?.brix}
                           className={({ active }) =>
                             classNames(
                               active ? 'ring-2 ring-indigo-500' : '',
@@ -778,7 +778,7 @@ export default function Example({ post, morePosts, preview }) {
                                 as="p"
                                 className="mt-1 text-sm text-gray-500"
                               >
-                                {post.brix}
+                                {post?.brix}
                               </RadioGroup.Description>
                               <div
                                 className={classNames(
@@ -794,8 +794,8 @@ export default function Example({ post, morePosts, preview }) {
                         </RadioGroup.Option>
                         <RadioGroup.Option
                           as="div"
-                          key={post.sizeMin}
-                          value={post.sizeMin}
+                          key={post?.sizeMin}
+                          value={post?.sizeMin}
                           className={({ active }) =>
                             classNames(
                               active ? 'ring-2 ring-indigo-500' : '',
@@ -824,9 +824,9 @@ export default function Example({ post, morePosts, preview }) {
                                 as="p"
                                 className="mt-1 text-sm text-gray-500"
                               >
-                                {post.sizeMin}
+                                {post?.sizeMin}
                                 {' mm - '}
-                                {post.sizeMax}
+                                {post?.sizeMax}
                                 {' mm'}
                               </RadioGroup.Description>
                               <div
@@ -843,8 +843,8 @@ export default function Example({ post, morePosts, preview }) {
                         </RadioGroup.Option>
                         <RadioGroup.Option
                           as="div"
-                          key={post.variety.name}
-                          value={post.variety.name}
+                          key={post?.variety.name}
+                          value={post?.variety.name}
                           className={({ active }) =>
                             classNames(
                               active ? 'ring-2 ring-indigo-500' : '',
@@ -873,11 +873,11 @@ export default function Example({ post, morePosts, preview }) {
                                 as="p"
                                 className="mt-1 text-sm text-gray-500"
                               >
-                                {post.label.name}
+                                {post?.label.name}
                                 {' - '}
-                                {post.variety.name}
+                                {post?.variety.name}
                                 {' - '}
-                                {post.lot.name}
+                                {post?.lot.name}
                               </RadioGroup.Description>
                               <div
                                 className={classNames(
@@ -893,8 +893,8 @@ export default function Example({ post, morePosts, preview }) {
                         </RadioGroup.Option>
                         <RadioGroup.Option
                           as="div"
-                          key={post.appearance.name}
-                          value={post.appearance.name}
+                          key={post?.appearance.name}
+                          value={post?.appearance.name}
                           className={({ active }) =>
                             classNames(
                               active ? 'ring-2 ring-indigo-500' : '',
@@ -923,7 +923,7 @@ export default function Example({ post, morePosts, preview }) {
                                 as="p"
                                 className="mt-1 text-sm text-gray-500"
                               >
-                                {post.appearance.name}
+                                {post?.appearance.name}
                               </RadioGroup.Description>
                               <div
                                 className={classNames(
@@ -939,8 +939,8 @@ export default function Example({ post, morePosts, preview }) {
                         </RadioGroup.Option>
                         <RadioGroup.Option
                           as="div"
-                          key={post.flavor.name}
-                          value={post.flavor.name}
+                          key={post?.flavor.name}
+                          value={post?.flavor.name}
                           className={({ active }) =>
                             classNames(
                               active ? 'ring-2 ring-indigo-500' : '',
@@ -969,7 +969,7 @@ export default function Example({ post, morePosts, preview }) {
                                 as="p"
                                 className="mt-1 text-sm text-gray-500"
                               >
-                                {post.flavor.name}
+                                {post?.flavor.name}
                               </RadioGroup.Description>
                               <div
                                 className={classNames(
@@ -985,8 +985,8 @@ export default function Example({ post, morePosts, preview }) {
                         </RadioGroup.Option>
                         <RadioGroup.Option
                           as="div"
-                          key={post.firmness.name}
-                          value={post.firmness.name}
+                          key={post?.firmness.name}
+                          value={post?.firmness.name}
                           className={({ active }) =>
                             classNames(
                               active ? 'ring-2 ring-indigo-500' : '',
@@ -1015,7 +1015,7 @@ export default function Example({ post, morePosts, preview }) {
                                 as="p"
                                 className="mt-1 text-sm text-gray-500"
                               >
-                                {post.appearance.name}
+                                {post?.appearance.name}
                               </RadioGroup.Description>
                               <div
                                 className={classNames(
