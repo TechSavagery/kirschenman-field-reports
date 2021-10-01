@@ -28,11 +28,11 @@ export default function ReportCard({
       <div className="flex-1 bg-white p-6 flex flex-col justify-between">
         <div className="flex-1">
           <p className="text-sm font-medium text-cyan-600">
-            <a href={slug} className="hover:underline">
+            <a href={`/reports/${slug}`} className="hover:underline">
               {label ? label.name : 'N/A'}
             </a>
           </p>
-          <a href={slug} className="block mt-2">
+          <a href={`/reports/${slug}`} className="block mt-2">
             <p className="text-md font-semibold text-gray-900">
               {lot ? lot.name : 'N/A'}
               {' - '}

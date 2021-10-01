@@ -1,68 +1,136 @@
-import { useRouter } from 'next/router';
-import ErrorPage from 'next/error';
-import Container from '../../components/container';
-import PostBody from '../../components/post-body';
-import MoreStories from '../../components/more-stories';
-import Header from '../../components/header';
-import PostHeader from '../../components/post-header';
-import Comments from '../../components/comments';
-import SectionSeparator from '../../components/section-separator';
-import Layout from '../../components/layout';
-import { getAllPostsWithSlug, getPostAndMorePosts } from '../../lib/api';
-import PostTitle from '../../components/post-title';
-import Head from 'next/head';
-import { CMS_NAME } from '../../lib/constants';
-import Form from '../../components/form';
-import PageHeader from '../../components/page-header';
-import ReportHeaderStats from '../../components/report-header-split';
-import DashboardFooter from '../../components/dashboard-footer';
-import { Fragment, useState } from 'react';
+/*
+  This example requires Tailwind CSS v2.0+ 
+  
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+      require('@tailwindcss/aspect-ratio'),
+    ],
+  }
+  ```
+*/
+import { Fragment, useState, useRef } from 'react';
 import {
   Dialog,
-  Disclosure,
   Popover,
+  RadioGroup,
   Tab,
   Transition,
 } from '@headlessui/react';
 import {
   MenuIcon,
-  SearchIcon,
-  ShoppingBagIcon,
+  DownloadIcon,
+  ShieldCheckIcon,
+  ClipboardIcon,
   XIcon,
 } from '@heroicons/react/outline';
+import {
+  CheckIcon,
+  QuestionMarkCircleIcon,
+  StarIcon,
+  GlobeIcon,
+  CurrencyDollarIcon,
+} from '@heroicons/react/solid';
+import { getPostAndMorePosts, getAllPostsWithSlug } from '../../lib/api';
+import BlockContent from '@sanity/block-content-to-react';
+import markdownStyles from '../../components/markdown-styles.module.css';
+import { imageBuilder } from '../../lib/sanity';
+import ReactToPrint from 'react-to-print';
 
 const navigation = {
   categories: [
     {
-      id: 'data',
-      name: 'Data',
-      featured: [
-        {
-          name: '',
-          href: '#',
-          imageSrc:
-            'https://images.pexels.com/photos/974314/pexels-photo-974314.jpeg',
-          imageAlt:
-            'Models sitting back to back, wearing Basic Tee in black and bone.',
-        },
-        {
-          name: '',
-          href: '#',
-          imageSrc:
-            'https://images.pexels.com/photos/39351/purple-grapes-vineyard-napa-valley-napa-vineyard-39351.jpeg',
-          imageAlt:
-            'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-        },
-      ],
+      id: 'reports',
+      name: 'Reports',
       sections: [
         {
-          id: 'reports',
-          name: 'Reports',
+          id: 'clothing',
+          name: 'Clothing',
           items: [
-            { name: 'Grape', href: '#' },
-            { name: 'Potato', href: '#' },
-            { name: 'Watermelon', href: '#' },
-            { name: 'Stone Fruit', href: '#' },
+            { name: 'Tops', href: '#' },
+            { name: 'Dresses', href: '#' },
+            { name: 'Pants', href: '#' },
+            { name: 'Denim', href: '#' },
+            { name: 'Sweaters', href: '#' },
+            { name: 'T-Shirts', href: '#' },
+            { name: 'Jackets', href: '#' },
+            { name: 'Activewear', href: '#' },
+            { name: 'Browse All', href: '#' },
+          ],
+        },
+        {
+          id: 'accessories',
+          name: 'Accessories',
+          items: [
+            { name: 'Watches', href: '#' },
+            { name: 'Wallets', href: '#' },
+            { name: 'Bags', href: '#' },
+            { name: 'Sunglasses', href: '#' },
+            { name: 'Hats', href: '#' },
+            { name: 'Belts', href: '#' },
+          ],
+        },
+        {
+          id: 'brands',
+          name: 'Brands',
+          items: [
+            { name: 'Full Nelson', href: '#' },
+            { name: 'My Way', href: '#' },
+            { name: 'Re-Arranged', href: '#' },
+            { name: 'Counterfeit', href: '#' },
+            { name: 'Significant Other', href: '#' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'info',
+      name: 'Info',
+      sections: [
+        {
+          id: 'company',
+          name: 'Company',
+          items: [
+            { name: 'About Us', href: '#' },
+            { name: 'Locations', href: '#' },
+            { name: 'Blog', href: '#' },
+          ],
+        },
+        {
+          id: 'contact',
+          name: 'Contact',
+          items: [
+            { name: 'Email', href: '#' },
+            { name: 'Phone', href: '#' },
+            { name: 'Locations', href: '#' },
+          ],
+        },
+        {
+          id: 'produce-info',
+          name: 'Produce Info',
+          items: [
+            {
+              name: 'Grapes',
+              href: 'https://www.kirschenman.com/products/grapes/',
+            },
+            {
+              name: 'Stone Fruits',
+              href: 'https://www.kirschenman.com/products/stone-fruits/',
+            },
+            {
+              name: 'Watermelon',
+              href: 'https://www.kirschenman.com/products/watermelons/',
+            },
+            {
+              name: 'Potato',
+              href: 'https://www.kirschenman.com/products/potatoes/',
+            },
           ],
         },
       ],
@@ -73,99 +141,106 @@ const navigation = {
     { name: 'FAQ', href: '/faq' },
   ],
 };
-const breadcrumbs = [{ id: 1, name: 'Dashboard', href: '#' }];
-const filters = [
+const policiesCards = [
   {
-    id: 'label',
-    name: 'Label',
-    options: [
-      { value: 'new-yorker', label: 'New Yorker', checked: false },
-      { value: 'ultimate', label: 'Ultimate', checked: false },
-      { value: 'sun-power', label: 'SunPower', checked: true },
-      { value: 'marvin-boy', label: 'Marvin Boy', checked: false },
-      { value: 'roosters-pride', label: 'Roosters Pride', checked: false },
-      { value: 'flying-tiger', label: 'Purple', checked: false },
-    ],
+    name: 'International delivery',
+    icon: GlobeIcon,
+    description: 'Get your order in 2 years',
   },
   {
-    id: 'variety',
-    name: 'Variety',
-    options: [
-      { value: 'candy-sanp', label: 'Candy Snap', checked: false },
-      { value: 'autumn-king', label: 'Autumn King', checked: false },
-      { value: 'sweet-celebration', label: 'Sweet Celebration', checked: true },
-      { value: 'milano', label: 'Milano', checked: false },
-      { value: 'great-green', label: 'Great Green', checked: false },
-    ],
+    name: 'Loyalty rewards',
+    icon: CurrencyDollarIcon,
+    description: "Don't look at other tees",
   },
   {
-    id: 'lot',
-    name: 'Lot',
-    options: [
-      { value: '2l', label: 'Delis', checked: false },
-      { value: '6l', label: 'Edison', checked: false },
-      { value: '12l', label: 'Kosakeff', checked: false },
-      { value: '18l', label: 'REDR', checked: false },
-      { value: '20l', label: 'Peck', checked: false },
-      { value: '40l', label: 'SEC11', checked: true },
-    ],
+    name: 'International delivery',
+    icon: GlobeIcon,
+    description: 'Get your order in 2 years',
   },
   {
-    id: 'week',
-    name: 'Week',
-    options: [
-      { value: 'week-38', label: 'Week 38', checked: false },
-      { value: 'week-39', label: 'Week 39', checked: false },
-      { value: 'week-40', label: 'Week 40', checked: false },
-      { value: 'week-41', label: 'Week 41', checked: false },
-      { value: 'week-42', label: 'Week 42', checked: false },
-      { value: 'week-43', label: 'Week 43', checked: false },
-    ],
+    name: 'Loyalty rewards',
+    icon: CurrencyDollarIcon,
+    description: "Don't look at other tees",
+  },
+  {
+    name: 'International delivery',
+    icon: GlobeIcon,
+    description: 'Get your order in 2 years',
+  },
+  {
+    name: 'Loyalty rewards',
+    icon: CurrencyDollarIcon,
+    description: "Don't look at other tees",
   },
 ];
-const products = [
-  {
-    id: 1,
-    name: 'Basic Tee 8-Pack',
-    href: '#',
-    price: '$256',
-    description:
-      'Get the full lineup of our Basic Tees. Have a fresh shirt all week, and an extra for laundry day.',
-    options: '8 colors',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-01.jpg',
-    imageAlt:
-      'Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green.',
-  },
-  {
-    id: 2,
-    name: 'Basic Tee',
-    href: '#',
-    price: '$32',
-    description:
-      'Look like a visionary CEO and wear the same black t-shirt every day.',
-    options: 'Black',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-02.jpg',
-    imageAlt: 'Front of plain black t-shirt.',
-  },
-  // More products...
+const userNavigation = [
+  { name: 'Sign in', href: '#' },
+  { name: 'Create account', href: '#' },
 ];
+const product = {
+  name: 'Marilyn - Timco - 09/28/2021',
+  href: '#',
+  price: '$220',
+  description:
+    "Don't compromise on snack-carrying capacity with this lightweight and spacious bag. The drawstring top keeps all your favorite chips, crisps, fries, biscuits, crackers, and cookies secure.",
+  imageSrc:
+    'https://tailwindui.com/img/ecommerce-images/product-page-04-featured-product-shot.jpg',
+  imageAlt:
+    'Light green canvas bag with black straps, handle, front zipper pouch, and drawstring top.',
+  breadcrumbs: [
+    { id: 1, name: 'Reports', href: '#' },
+    { id: 2, name: 'Grapes', href: '#' },
+  ],
+  sizes: [
+    { name: 'Lot', description: '' },
+    {
+      name: 'Inspection Date',
+      description: '',
+    },
+    { name: 'Brix', description: '' },
+    {
+      name: 'Size',
+      description: '',
+    },
+    { name: 'Type', description: '' },
+    {
+      name: 'Appearance',
+      description: '',
+    },
+    {
+      name: 'Flavor',
+      description: '',
+    },
+    {
+      name: 'Firmness',
+      description: '',
+    },
+  ],
+};
 const footerNavigation = {
-  reports: [
-    { name: 'Grapes', href: '#' },
-    { name: 'Potato', href: '#' },
-    { name: 'Watermelon', href: '#' },
-    { name: 'Stone Fruite', href: '#' },
+  products: [
+    { name: 'Bags', href: '#' },
+    { name: 'Tees', href: '#' },
+    { name: 'Objects', href: '#' },
+    { name: 'Home Goods', href: '#' },
     { name: 'Accessories', href: '#' },
   ],
-  pages: [
-    { name: 'Dashboard', href: 'dashboard' },
-    { name: 'FAQ', href: '/faq' },
+  company: [
+    { name: 'Who we are', href: '#' },
+    { name: 'Sustainability', href: '#' },
+    { name: 'Press', href: '#' },
+    { name: 'Careers', href: '#' },
+    { name: 'Terms & Conditions', href: '#' },
+    { name: 'Privacy', href: '#' },
   ],
-  contact: [
-    { name: 'Phone: (559)789-9878', href: '#' },
-    { name: 'Email: info@keisales.com', href: '#' },
+  customerService: [
+    { name: 'Contact', href: '#' },
+    { name: 'Shipping', href: '#' },
+    { name: 'Returns', href: '#' },
+    { name: 'Warranty', href: '#' },
+    { name: 'Secure Payments', href: '#' },
+    { name: 'FAQ', href: '#' },
+    { name: 'Find a store', href: '#' },
   ],
 };
 
@@ -173,453 +248,901 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Post({ post, morePosts, preview }) {
-  const router = useRouter();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />;
+export default function Example({ post, morePosts, preview }) {
+  const reportDownloadRef = useRef();
+  const [open, setOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
+  function copy() {
+    const el = document.createElement('input');
+    el.value = window.location.href;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    setCopied(true);
+    setTimeout(function () {
+      setCopied(false);
+    }, 1500);
   }
   return (
-    <Container>
-    <div className="bg-white">
-      <div>
-        {/* Mobile menu */}
-        <Transition.Root show={mobileMenuOpen} as={Fragment}>
-          <Dialog
-            as="div"
-            className="fixed inset-0 flex z-40 lg:hidden"
-            onClose={setMobileMenuOpen}
+    <div className="bg-gray-50">
+      {/* Mobile menu */}
+      <Transition.Root show={open} as={Fragment}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 flex z-40 lg:hidden"
+          onClose={setOpen}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="transition-opacity ease-linear duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-opacity ease-linear duration-300"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
-            <Transition.Child
-              as={Fragment}
-              enter="transition-opacity ease-linear duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="transition-opacity ease-linear duration-300"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-25" />
-            </Transition.Child>
+            <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-25" />
+          </Transition.Child>
 
-            <Transition.Child
-              as={Fragment}
-              enter="transition ease-in-out duration-300 transform"
-              enterFrom="-translate-x-full"
-              enterTo="translate-x-0"
-              leave="transition ease-in-out duration-300 transform"
-              leaveFrom="translate-x-0"
-              leaveTo="-translate-x-full"
-            >
-              <div className="relative max-w-xs w-full bg-white shadow-xl pb-12 flex flex-col overflow-y-auto">
-                <div className="px-4 pt-5 pb-2 flex">
-                  <button
-                    type="button"
-                    className="-m-2 p-2 rounded-md inline-flex items-center justify-center text-gray-400"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span className="sr-only">Close menu</span>
-                    <XIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                </div>
-
-                {/* Links */}
-                <Tab.Group as="div" className="mt-2">
-                  <div className="border-b border-gray-200">
-                    <Tab.List className="-mb-px flex px-4 space-x-8">
-                      {navigation.categories.map((category) => (
-                        <Tab
-                          key={category.name}
-                          className={({ selected }) =>
-                            classNames(
-                              selected
-                                ? 'text-lime border-lime'
-                                : 'text-gray-900 border-transparent',
-                              'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
-                            )
-                          }
-                        >
-                          {category.name}
-                        </Tab>
-                      ))}
-                    </Tab.List>
-                  </div>
-                  <Tab.Panels as={Fragment}>
-                    {navigation.categories.map((category) => (
-                      <Tab.Panel
-                        key={category.name}
-                        className="pt-10 pb-8 px-4 space-y-10"
-                      >
-                        <div className="grid grid-cols-2 gap-x-4">
-                          {category.featured.map((item) => (
-                            <div
-                              key={item.name}
-                              className="group relative text-sm"
-                            >
-                              <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
-                                <img
-                                  src={item.imageSrc}
-                                  alt={item.imageAlt}
-                                  className="object-center object-cover"
-                                />
-                              </div>
-                              <a
-                                href={item.href}
-                                className="mt-6 block font-medium text-gray-900"
-                              >
-                                <span
-                                  className="absolute z-10 inset-0"
-                                  aria-hidden="true"
-                                />
-                                {item.name}
-                              </a>
-                            </div>
-                          ))}
-                        </div>
-                        {category.sections.map((section) => (
-                          <div key={section.name}>
-                            <p
-                              id={`${category.id}-${section.id}-heading-mobile`}
-                              className="font-medium text-gray-900"
-                            >
-                              {section.name}
-                            </p>
-                            <ul
-                              role="list"
-                              aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
-                              className="mt-6 flex flex-col space-y-6"
-                            >
-                              {section.items.map((item) => (
-                                <li key={item.name} className="flow-root">
-                                  <a
-                                    href={item.href}
-                                    className="-m-2 p-2 block text-gray-500"
-                                  >
-                                    {item.name}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </Tab.Panel>
-                    ))}
-                  </Tab.Panels>
-                </Tab.Group>
-
-                <div className="border-t border-gray-200 py-6 px-4 space-y-6">
-                  {navigation.pages.map((page) => (
-                    <div key={page.name} className="flow-root">
-                      <a
-                        href={page.href}
-                        className="-m-2 p-2 block font-medium text-gray-900"
-                      >
-                        {page.name}
-                      </a>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Transition.Child>
-          </Dialog>
-        </Transition.Root>
-
-        <header className="relative bg-white">
-          <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
-            KEI Field Reports Now Available!
-          </p>
-
-          <nav
-            aria-label="Top"
-            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          <Transition.Child
+            as={Fragment}
+            enter="transition ease-in-out duration-300 transform"
+            enterFrom="-translate-x-full"
+            enterTo="translate-x-0"
+            leave="transition ease-in-out duration-300 transform"
+            leaveFrom="translate-x-0"
+            leaveTo="-translate-x-full"
           >
-            <div className="border-b border-gray-200">
-              <div className="h-16 flex items-center">
+            <div className="relative max-w-xs w-full bg-white shadow-xl pb-12 flex flex-col overflow-y-auto">
+              <div className="px-4 pt-5 pb-2 flex">
                 <button
                   type="button"
-                  className="bg-white p-2 rounded-md text-gray-400 lg:hidden"
-                  onClick={() => setMobileMenuOpen(true)}
+                  className="-m-2 p-2 rounded-md inline-flex items-center justify-center text-gray-400"
+                  onClick={() => setOpen(false)}
                 >
-                  <span className="sr-only">Open menu</span>
-                  <MenuIcon className="h-6 w-6" aria-hidden="true" />
+                  <span className="sr-only">Close menu</span>
+                  <XIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
+              </div>
 
-                {/* Logo */}
-                <div className="ml-4 flex lg:ml-0">
-                  <a href="/dashboard">
-                    <span className="sr-only">Workflow</span>
-                    <img
-                      className="h-[100px]"
-                      src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
-                      alt=""
-                    />
+              {/* Links */}
+              <Tab.Group as="div" className="mt-2">
+                <div className="border-b border-gray-200">
+                  <Tab.List className="-mb-px flex px-4 space-x-8">
+                    {navigation.categories.map((category) => (
+                      <Tab
+                        key={category.name}
+                        className={({ selected }) =>
+                          classNames(
+                            selected
+                              ? 'text-indigo-600 border-indigo-600'
+                              : 'text-gray-900 border-transparent',
+                            'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
+                          )
+                        }
+                      >
+                        {category.name}
+                      </Tab>
+                    ))}
+                  </Tab.List>
+                </div>
+                <Tab.Panels as={Fragment}>
+                  {navigation.categories.map((category) => (
+                    <Tab.Panel
+                      key={category.name}
+                      className="pt-10 pb-8 px-4 space-y-10"
+                    >
+                      {category.sections.map((section) => (
+                        <div key={section.name}>
+                          <p
+                            id={`${category.id}-${section.id}-heading-mobile`}
+                            className="font-medium text-gray-900"
+                          >
+                            {section.name}
+                          </p>
+                          <ul
+                            role="list"
+                            aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
+                            className="mt-6 flex flex-col space-y-6"
+                          >
+                            {section.items.map((item) => (
+                              <li key={item.name} className="flow-root">
+                                <a
+                                  href={item.href}
+                                  className="-m-2 p-2 block text-gray-500"
+                                >
+                                  {item.name}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </Tab.Panel>
+                  ))}
+                </Tab.Panels>
+              </Tab.Group>
+
+              <div className="border-t border-gray-200 py-6 px-4 space-y-6">
+                {navigation.pages.map((page) => (
+                  <div key={page.name} className="flow-root">
+                    <a
+                      href={page.href}
+                      className="-m-2 p-2 block font-medium text-gray-900"
+                    >
+                      {page.name}
+                    </a>
+                  </div>
+                ))}
+              </div>
+
+              <div className="border-t border-gray-200 py-6 px-4 space-y-6">
+                <div className="flow-root">
+                  <a
+                    href="#"
+                    className="-m-2 p-2 block font-medium text-gray-900"
+                  >
+                    Sign in
                   </a>
                 </div>
+                <div className="flow-root">
+                  <a
+                    href="#"
+                    className="-m-2 p-2 block font-medium text-gray-900"
+                  >
+                    Create account
+                  </a>
+                </div>
+              </div>
 
-                {/* Flyout menus */}
-                <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
-                  <div className="h-full flex space-x-8">
-                    {navigation.categories.map((category) => (
-                      <Popover key={category.name} className="flex">
-                        {({ open }) => (
-                          <>
-                            <div className="relative flex">
-                              <Popover.Button
-                                className={classNames(
-                                  open
-                                    ? 'border-lime text-lime'
-                                    : 'border-transparent text-gray-700 hover:text-gray-800',
-                                  'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
-                                )}
-                              >
-                                {category.name}
-                              </Popover.Button>
-                            </div>
+              <div className="border-t border-gray-200 py-6 px-4">
+                <a href="#" className="-m-2 p-2 flex items-center">
+                  <img
+                    src="https://tailwindui.com/img/flags/flag-canada.svg"
+                    alt=""
+                    className="w-5 h-auto block flex-shrink-0"
+                  />
+                  <span className="ml-3 block text-base font-medium text-gray-900">
+                    CAD
+                  </span>
+                  <span className="sr-only">, change currency</span>
+                </a>
+              </div>
+            </div>
+          </Transition.Child>
+        </Dialog>
+      </Transition.Root>
 
-                            <Transition
-                              as={Fragment}
-                              enter="transition ease-out duration-200"
-                              enterFrom="opacity-0"
-                              enterTo="opacity-100"
-                              leave="transition ease-in duration-150"
-                              leaveFrom="opacity-100"
-                              leaveTo="opacity-0"
+      <header className="relative bg-white">
+        <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
+          Grape Field Data is now Live!
+        </p>
+
+        <nav
+          aria-label="Top"
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        >
+          <div className="border-b border-gray-200">
+            <div className="h-16 flex items-center">
+              <button
+                type="button"
+                className="bg-white p-2 rounded-md text-gray-400 lg:hidden"
+                onClick={() => setOpen(true)}
+              >
+                <span className="sr-only">Open menu</span>
+                <MenuIcon className="h-6 w-6" aria-hidden="true" />
+              </button>
+
+              {/* Logo */}
+              <div className="ml-4 flex lg:ml-0">
+                <a href="#">
+                  <span className="sr-only">Workflow</span>
+                  <img
+                    className="pt-[10px]"
+                    src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
+                    alt=""
+                    style={{ height: '75px', paddingTop: '8px' }}
+                  />
+                </a>
+              </div>
+
+              {/* Flyout menus */}
+              <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
+                <div className="h-full flex space-x-8">
+                  {navigation.categories.map((category) => (
+                    <Popover key={category.name} className="flex">
+                      {({ open }) => (
+                        <>
+                          <div className="relative flex">
+                            <Popover.Button
+                              className={classNames(
+                                open
+                                  ? 'border-indigo-600 text-indigo-600'
+                                  : 'border-transparent text-gray-700 hover:text-gray-800',
+                                'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
+                              )}
                             >
-                              <Popover.Panel className="absolute z-10 top-full inset-x-0 text-sm text-gray-500">
-                                {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                                <div
-                                  className="absolute inset-0 top-1/2 bg-white shadow"
-                                  aria-hidden="true"
-                                />
+                              {category.name}
+                            </Popover.Button>
+                          </div>
 
-                                <div className="relative bg-white">
-                                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                                    <div className="grid grid-cols-2 gap-y-10 gap-x-8 py-16">
-                                      <div className="col-start-2 grid grid-cols-2 gap-x-8">
-                                        {category.featured.map((item) => (
-                                          <div
-                                            key={item.name}
-                                            className="group relative text-base sm:text-sm"
+                          <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-200"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                            leave="transition ease-in duration-150"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                          >
+                            <Popover.Panel className="absolute z-10 top-full inset-x-0 text-sm text-gray-500">
+                              {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
+                              <div
+                                className="absolute inset-0 top-1/2 bg-white shadow"
+                                aria-hidden="true"
+                              />
+
+                              <div className="relative bg-white">
+                                <div className="max-w-7xl mx-auto px-8">
+                                  <div className="grid grid-cols-2 gap-y-10 gap-x-8 py-16">
+                                    <div className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 text-sm">
+                                      {category.sections.map((section) => (
+                                        <div key={section.name}>
+                                          <p
+                                            id={`${section.name}-heading`}
+                                            className="font-medium text-gray-900"
                                           >
-                                            <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
-                                              <img
-                                                src={item.imageSrc}
-                                                alt={item.imageAlt}
-                                                className="object-center object-cover"
-                                              />
-                                            </div>
-                                            <a
-                                              href={item.href}
-                                              className="mt-6 block font-medium text-gray-900"
-                                            >
-                                              <span
-                                                className="absolute z-10 inset-0"
-                                                aria-hidden="true"
-                                              />
-                                              {item.name}
-                                            </a>
-                                          </div>
-                                        ))}
-                                      </div>
-                                      <div className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 text-sm">
-                                        {category.sections.map((section) => (
-                                          <div key={section.name}>
-                                            <p
-                                              id={`${section.name}-heading`}
-                                              className="font-medium text-gray-900"
-                                            >
-                                              {section.name}
-                                            </p>
-                                            <ul
-                                              role="list"
-                                              aria-labelledby={`${section.name}-heading`}
-                                              className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                            >
-                                              {section.items.map((item) => (
-                                                <li
-                                                  key={item.name}
-                                                  className="flex"
+                                            {section.name}
+                                          </p>
+                                          <ul
+                                            role="list"
+                                            aria-labelledby={`${section.name}-heading`}
+                                            className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
+                                          >
+                                            {section.items.map((item) => (
+                                              <li
+                                                key={item.name}
+                                                className="flex"
+                                              >
+                                                <a
+                                                  href={item.href}
+                                                  className="hover:text-gray-800"
                                                 >
-                                                  <a
-                                                    href={item.href}
-                                                    className="hover:text-gray-800"
-                                                  >
-                                                    {item.name}
-                                                  </a>
-                                                </li>
-                                              ))}
-                                            </ul>
-                                          </div>
-                                        ))}
-                                      </div>
+                                                  {item.name}
+                                                </a>
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      ))}
                                     </div>
                                   </div>
                                 </div>
-                              </Popover.Panel>
-                            </Transition>
-                          </>
-                        )}
-                      </Popover>
-                    ))}
+                              </div>
+                            </Popover.Panel>
+                          </Transition>
+                        </>
+                      )}
+                    </Popover>
+                  ))}
 
-                    {navigation.pages.map((page) => (
-                      <a
-                        key={page.name}
-                        href={page.href}
-                        className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                      >
-                        {page.name}
-                      </a>
-                    ))}
-                  </div>
-                </Popover.Group>
+                  {navigation.pages.map((page) => (
+                    <a
+                      key={page.name}
+                      href={page.href}
+                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                    >
+                      {page.name}
+                    </a>
+                  ))}
+                </div>
+              </Popover.Group>
+
+              <div className="ml-auto flex items-center">
+                {/* Search */}
+                <div className="flex lg:ml-6">
+                  <button
+                    onClick={copy}
+                    className="p-2 text-gray-400 hover:text-gray-500"
+                  >
+                    {!copied ? (
+                      <ClipboardIcon className="w-6 h-6" aria-hidden="true" />
+                    ) : (
+                      <CheckIcon
+                        className="w-6 h-6 text-lime"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </button>
+                </div>
+
+                {/* Cart */}
+                <div className="ml-4 flow-root lg:ml-6">
+                  <a href="#" className="group -m-2 p-2 flex items-center">
+                    <button>
+                      <DownloadIcon
+                        className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </a>
+                </div>
               </div>
             </div>
-          </nav>
-        </header>
-      </div>
+          </div>
+        </nav>
+      </header>
 
-      <div>
-        <div className="border-b border-gray-200">
-          <nav
-            aria-label="Breadcrumb"
-            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-          >
-            <ol role="list" className="flex items-center space-x-4 py-4">
-              {breadcrumbs.map((breadcrumb) => (
-                <li key={breadcrumb.id}>
-                  <div className="flex items-center">
-                    <a
-                      href={breadcrumb.href}
-                      className="mr-4 text-sm font-medium text-gray-900"
-                    >
-                      {breadcrumb.name}
-                    </a>
-                    <svg
-                      viewBox="0 0 6 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                      className="h-5 w-auto text-gray-300"
-                    >
-                      <path
-                        d="M4.878 4.34H3.551L.27 16.532h1.327l3.281-12.19z"
-                        fill="currentColor"
-                      />
-                    </svg>
+      <main ref={reportDownloadRef}>
+        {/* Product */}
+        <div className="bg-white">
+          <div className="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:pt-24 sm:pb-32 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-x-8">
+            {/* Product details */}
+            <div className="lg:max-w-lg lg:self-end">
+              <nav aria-label="Breadcrumb">
+                <ol role="list" className="flex items-center space-x-2">
+                  {product.breadcrumbs.map((breadcrumb, breadcrumbIdx) => (
+                    <li key={breadcrumb.id}>
+                      <div className="flex items-center text-sm">
+                        <a
+                          href={breadcrumb.href}
+                          className="font-medium text-gray-500 hover:text-gray-900"
+                        >
+                          {breadcrumb.name}
+                        </a>
+                        {breadcrumbIdx !== product.breadcrumbs.length - 1 ? (
+                          <svg
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            aria-hidden="true"
+                            className="ml-2 flex-shrink-0 h-5 w-5 text-gray-300"
+                          >
+                            <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+                          </svg>
+                        ) : null}
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+
+              <div className="mt-4">
+                <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                  {post.lot.name}
+                  {' - '}
+                  {post.variety.name}
+                  {' - '}{' '}
+                  {post.week
+                    ? post.week.toUpperCase().replace('EEK-', '')
+                    : 'N/A'}
+                  {'-'}
+                  {new Date(post.date).getFullYear()}
+                </h1>
+              </div>
+
+              <section aria-labelledby="information-heading" className="mt-4">
+                <h2 id="information-heading" className="sr-only">
+                  Product information
+                </h2>
+
+                <div className="pb-10 mt-4 space-y-6">
+                  <p className="text-base text-gray-500">
+                    <BlockContent
+                      blocks={post.body}
+                      projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
+                      dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
+                      className={markdownStyles.markdown}
+                    />{' '}
+                  </p>
+                </div>
+
+                <form>
+                  <div className="sm:flex sm:justify-between">
+                    {/* Size selector */}
+                    <RadioGroup value={selectedSize} onChange={setSelectedSize}>
+                      <RadioGroup.Label className="block text-sm font-medium text-gray-700"></RadioGroup.Label>
+                      <div className="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <RadioGroup.Option
+                          as="div"
+                          key={post.label.name}
+                          value={post.label.name}
+                          className={({ active }) =>
+                            classNames(
+                              active ? 'ring-2 ring-indigo-500' : '',
+                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                            )
+                          }
+                        >
+                          {({ active, checked }) => (
+                            <>
+                              <RadioGroup.Label
+                                as="p"
+                                className="text-base font-medium text-gray-900"
+                              >
+                                Lot
+                                <a
+                                  href="#"
+                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                >
+                                  <QuestionMarkCircleIcon
+                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                    aria-hidden="true"
+                                  />
+                                </a>
+                              </RadioGroup.Label>
+                              <RadioGroup.Description
+                                as="p"
+                                className="mt-1 text-sm text-gray-500"
+                              >
+                                {post.lot.name}
+                              </RadioGroup.Description>
+                              <div
+                                className={classNames(
+                                  checked
+                                    ? 'border-transparent'
+                                    : 'border-transparent',
+                                  'absolute -inset-px rounded-lg pointer-events-none'
+                                )}
+                                aria-hidden="true"
+                              />
+                            </>
+                          )}
+                        </RadioGroup.Option>
+                        <RadioGroup.Option
+                          as="div"
+                          key={post.date}
+                          value={post.date}
+                          className={({ active }) =>
+                            classNames(
+                              active ? 'ring-2 ring-indigo-500' : '',
+                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                            )
+                          }
+                        >
+                          {({ active, checked }) => (
+                            <>
+                              <RadioGroup.Label
+                                as="p"
+                                className="text-base font-medium text-gray-900"
+                              >
+                                Inspection Date
+                                <a
+                                  href="#"
+                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                >
+                                  <QuestionMarkCircleIcon
+                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                    aria-hidden="true"
+                                  />
+                                </a>
+                              </RadioGroup.Label>
+                              <RadioGroup.Description
+                                as="p"
+                                className="mt-1 text-sm text-gray-500"
+                              >
+                                {post.date
+                                  ? new Date(post.date).toLocaleDateString(
+                                      'en-US',
+                                      {
+                                        month: '2-digit',
+                                        day: '2-digit',
+                                        year: 'numeric',
+                                      }
+                                    )
+                                  : 'xxxxxxx'}
+                              </RadioGroup.Description>
+                              <div
+                                className={classNames(
+                                  checked
+                                    ? 'border-transparent'
+                                    : 'border-transparent',
+                                  'absolute -inset-px rounded-lg pointer-events-none'
+                                )}
+                                aria-hidden="true"
+                              />
+                            </>
+                          )}
+                        </RadioGroup.Option>
+                        <RadioGroup.Option
+                          as="div"
+                          key={post.brix}
+                          value={post.brix}
+                          className={({ active }) =>
+                            classNames(
+                              active ? 'ring-2 ring-indigo-500' : '',
+                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                            )
+                          }
+                        >
+                          {({ active, checked }) => (
+                            <>
+                              <RadioGroup.Label
+                                as="p"
+                                className="text-base font-medium text-gray-900"
+                              >
+                                Brix
+                                <a
+                                  href="#"
+                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                >
+                                  <QuestionMarkCircleIcon
+                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                    aria-hidden="true"
+                                  />
+                                </a>
+                              </RadioGroup.Label>
+                              <RadioGroup.Description
+                                as="p"
+                                className="mt-1 text-sm text-gray-500"
+                              >
+                                {post.brix}
+                              </RadioGroup.Description>
+                              <div
+                                className={classNames(
+                                  checked
+                                    ? 'border-transparent'
+                                    : 'border-transparent',
+                                  'absolute -inset-px rounded-lg pointer-events-none'
+                                )}
+                                aria-hidden="true"
+                              />
+                            </>
+                          )}
+                        </RadioGroup.Option>
+                        <RadioGroup.Option
+                          as="div"
+                          key={post.sizeMin}
+                          value={post.sizeMin}
+                          className={({ active }) =>
+                            classNames(
+                              active ? 'ring-2 ring-indigo-500' : '',
+                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                            )
+                          }
+                        >
+                          {({ active, checked }) => (
+                            <>
+                              <RadioGroup.Label
+                                as="p"
+                                className="text-base font-medium text-gray-900"
+                              >
+                                Size
+                                <a
+                                  href="#"
+                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                >
+                                  <QuestionMarkCircleIcon
+                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                    aria-hidden="true"
+                                  />
+                                </a>
+                              </RadioGroup.Label>
+                              <RadioGroup.Description
+                                as="p"
+                                className="mt-1 text-sm text-gray-500"
+                              >
+                                {post.sizeMin}
+                                {' mm - '}
+                                {post.sizeMax}
+                                {' mm'}
+                              </RadioGroup.Description>
+                              <div
+                                className={classNames(
+                                  checked
+                                    ? 'border-transparent'
+                                    : 'border-transparent',
+                                  'absolute -inset-px rounded-lg pointer-events-none'
+                                )}
+                                aria-hidden="true"
+                              />
+                            </>
+                          )}
+                        </RadioGroup.Option>
+                        <RadioGroup.Option
+                          as="div"
+                          key={post.variety.name}
+                          value={post.variety.name}
+                          className={({ active }) =>
+                            classNames(
+                              active ? 'ring-2 ring-indigo-500' : '',
+                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                            )
+                          }
+                        >
+                          {({ active, checked }) => (
+                            <>
+                              <RadioGroup.Label
+                                as="p"
+                                className="text-base font-medium text-gray-900"
+                              >
+                                Type
+                                <a
+                                  href="#"
+                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                >
+                                  <QuestionMarkCircleIcon
+                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                    aria-hidden="true"
+                                  />
+                                </a>
+                              </RadioGroup.Label>
+                              <RadioGroup.Description
+                                as="p"
+                                className="mt-1 text-sm text-gray-500"
+                              >
+                                {post.label.name}
+                                {' - '}
+                                {post.variety.name}
+                                {' - '}
+                                {post.lot.name}
+                              </RadioGroup.Description>
+                              <div
+                                className={classNames(
+                                  checked
+                                    ? 'border-transparent'
+                                    : 'border-transparent',
+                                  'absolute -inset-px rounded-lg pointer-events-none'
+                                )}
+                                aria-hidden="true"
+                              />
+                            </>
+                          )}
+                        </RadioGroup.Option>
+                        <RadioGroup.Option
+                          as="div"
+                          key={post.appearance.name}
+                          value={post.appearance.name}
+                          className={({ active }) =>
+                            classNames(
+                              active ? 'ring-2 ring-indigo-500' : '',
+                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                            )
+                          }
+                        >
+                          {({ active, checked }) => (
+                            <>
+                              <RadioGroup.Label
+                                as="p"
+                                className="text-base font-medium text-gray-900"
+                              >
+                                Appearance
+                                <a
+                                  href="#"
+                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                >
+                                  <QuestionMarkCircleIcon
+                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                    aria-hidden="true"
+                                  />
+                                </a>
+                              </RadioGroup.Label>
+                              <RadioGroup.Description
+                                as="p"
+                                className="mt-1 text-sm text-gray-500"
+                              >
+                                {post.appearance.name}
+                              </RadioGroup.Description>
+                              <div
+                                className={classNames(
+                                  checked
+                                    ? 'border-transparent'
+                                    : 'border-transparent',
+                                  'absolute -inset-px rounded-lg pointer-events-none'
+                                )}
+                                aria-hidden="true"
+                              />
+                            </>
+                          )}
+                        </RadioGroup.Option>
+                        <RadioGroup.Option
+                          as="div"
+                          key={post.flavor.name}
+                          value={post.flavor.name}
+                          className={({ active }) =>
+                            classNames(
+                              active ? 'ring-2 ring-indigo-500' : '',
+                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                            )
+                          }
+                        >
+                          {({ active, checked }) => (
+                            <>
+                              <RadioGroup.Label
+                                as="p"
+                                className="text-base font-medium text-gray-900"
+                              >
+                                Flavor
+                                <a
+                                  href="#"
+                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                >
+                                  <QuestionMarkCircleIcon
+                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                    aria-hidden="true"
+                                  />
+                                </a>
+                              </RadioGroup.Label>
+                              <RadioGroup.Description
+                                as="p"
+                                className="mt-1 text-sm text-gray-500"
+                              >
+                                {post.flavor.name}
+                              </RadioGroup.Description>
+                              <div
+                                className={classNames(
+                                  checked
+                                    ? 'border-transparent'
+                                    : 'border-transparent',
+                                  'absolute -inset-px rounded-lg pointer-events-none'
+                                )}
+                                aria-hidden="true"
+                              />
+                            </>
+                          )}
+                        </RadioGroup.Option>
+                        <RadioGroup.Option
+                          as="div"
+                          key={post.firmness.name}
+                          value={post.firmness.name}
+                          className={({ active }) =>
+                            classNames(
+                              active ? 'ring-2 ring-indigo-500' : '',
+                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                            )
+                          }
+                        >
+                          {({ active, checked }) => (
+                            <>
+                              <RadioGroup.Label
+                                as="p"
+                                className="text-base font-medium text-gray-900"
+                              >
+                                Firmness
+                                <a
+                                  href="#"
+                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                >
+                                  <QuestionMarkCircleIcon
+                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                    aria-hidden="true"
+                                  />
+                                </a>
+                              </RadioGroup.Label>
+                              <RadioGroup.Description
+                                as="p"
+                                className="mt-1 text-sm text-gray-500"
+                              >
+                                {post.appearance.name}
+                              </RadioGroup.Description>
+                              <div
+                                className={classNames(
+                                  checked
+                                    ? 'border-transparent'
+                                    : 'border-transparent',
+                                  'absolute -inset-px rounded-lg pointer-events-none'
+                                )}
+                                aria-hidden="true"
+                              />
+                            </>
+                          )}
+                        </RadioGroup.Option>
+                      </div>
+                    </RadioGroup>
                   </div>
-                </li>
-              ))}
-              <li className="text-sm">
-                <a
-                  href="#"
-                  aria-current="page"
-                  className="font-medium text-gray-500 hover:text-gray-600"
-                >
-                  Home
-                </a>
-              </li>
-            </ol>
-          </nav>
+                  <div className="mt-10">
+                    <ReactToPrint
+                      trigger={() => (
+                        <button
+                          type="submit"
+                          className="w-full bg-lime border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                        >
+                          Download Report
+                        </button>
+                      )}
+                      content={() => reportDownloadRef.current}
+                      documentTitle={`${post.label.name}-${post.variety.name}-${
+                        post.lot.name
+                      }-${
+                        post.week
+                          ? post.week.toUpperCase().replace('EEK-', '')
+                          : 'N/A'
+                      }-${new Date(post.date).getFullYear()} `}
+                    />
+                  </div>
+                </form>
+              </section>
+            </div>
+
+            {/* Product image */}
+            <div className="mt-10 lg:mt-0 lg:col-start-2 lg:row-span-2 lg:self-center">
+              <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
+                <img
+                  src="https://bjs.scene7.com/is/image/bjs/12911?$bjs-Zoom$"
+                  alt={product.imageAlt}
+                  className="w-full h-full object-center object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Product form */}
+            <div className="mt-10 lg:max-w-lg lg:col-start-1 lg:row-start-2 lg:self-start">
+              <section aria-labelledby="options-heading">
+                <h2 id="options-heading" className="sr-only">
+                  Product options
+                </h2>
+              </section>
+            </div>
+          </div>
         </div>
 
-        <main className="max-w-full mx-auto px-4 lg:max-w-full lg:px-8">
-          {router.isFallback ? (
-            <PostTitle>Loading…</PostTitle>
-          ) : (
-            <>
-              <article>
-                <Head>
-                  <title>{post.title} | KEI Field Reports</title>
-                  {/* <meta property="og:image" content={post.ogImage.url} /> */}
-                </Head>
-                <ReportHeaderStats
-                  label={post.label}
-                  variety={post.variety}
-                  lot={post.lot}
-                  inspectionDate={post.date}
-                  mainImage={post.coverImage}
-                  content={post.body}
-                  week={post.week}
-                  reporter={post.reporter}
-                />
-                <PostBody
-                  content={post.body}
-                  brix={post.brix}
-                  sizeMax={post.sizeMax}
-                  sizeMin={post.sizeMin}
-                  flavor={post.flavor}
-                  firmness={post.firmness}
-                  label={post.label}
-                  appearance={post.appearance}
-                  variety={post.variety}
-                  lot={post.lot}
-                  blockNumber={post.blockNumber}
-                  images={post.images}
-                  date={post.date}
-                />
-              </article>
-              <Form _id={post._id} />
-              <DashboardFooter />
-            </>
-          )}
-        </main>
+        <div className="max-w-2xl mx-auto px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
+          {/* Details section */}
+          <section aria-labelledby="details-heading">
+            <div className="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-8">
+              {post.images.map((image) => (
+                <div key={image.asset._ref}>
+                  <div className="w-full aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
+                    <img
+                      src={imageBuilder(image).width(592).height(395).url()}
+                      alt="image.asset._ref"
+                      className="w-full h-full object-center object-cover"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
 
-        <footer
-          aria-labelledby="footer-heading"
-          className="bg-white border-t border-gray-200"
-        >
-          <h2 id="footer-heading" className="sr-only">
-            Footer
-          </h2>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="py-20">
-              <div className="grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-8 md:gap-y-16 md:auto-rows-min">
-                {/* Image section */}
+          {/* Policies section */}
+        </div>
+      </main>
 
-                {/* Sitemap sections */}
-                <div className="mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6">
-                  <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-900">
-                        Reports
-                      </h3>
-                      <ul role="list" className="mt-6 space-y-6">
-                        {footerNavigation.reports.map((item) => (
-                          <li key={item.name} className="text-sm">
-                            <a
-                              href={item.href}
-                              className="text-gray-500 hover:text-gray-600"
-                            >
-                              {item.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-900">
-                        Pages
-                      </h3>
-                      <ul role="list" className="mt-6 space-y-6">
-                        {footerNavigation.pages.map((item) => (
-                          <li key={item.name} className="text-sm">
-                            <a
-                              href={item.href}
-                              className="text-gray-500 hover:text-gray-600"
-                            >
-                              {item.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+      <footer aria-labelledby="footer-heading" className="bg-white">
+        <h2 id="footer-heading" className="sr-only">
+          Footer
+        </h2>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="border-t border-gray-200 py-20">
+            <div className="grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-8 md:gap-y-16 md:auto-rows-min">
+              {/* Image section */}
+              <div className="col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1">
+                <img
+                  className="pt-[10px]"
+                  src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
+                  alt=""
+                  style={{ height: '65px' }}
+                />
+              </div>
+
+              {/* Sitemap sections */}
+              <div className="mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6">
+                <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-900">
+                      Products
+                    </h3>
+                    <ul role="list" className="mt-6 space-y-6">
+                      {footerNavigation.products.map((item) => (
+                        <li key={item.name} className="text-sm">
+                          <a
+                            href={item.href}
+                            className="text-gray-500 hover:text-gray-600"
+                          >
+                            {item.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                   <div>
                     <h3 className="text-sm font-medium text-gray-900">
-                      Contact
+                      Company
                     </h3>
                     <ul role="list" className="mt-6 space-y-6">
-                      {footerNavigation.contact.map((item) => (
+                      {footerNavigation.company.map((item) => (
                         <li key={item.name} className="text-sm">
                           <a
                             href={item.href}
@@ -632,20 +1155,65 @@ export default function Post({ post, morePosts, preview }) {
                     </ul>
                   </div>
                 </div>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-900">
+                    Customer Service
+                  </h3>
+                  <ul role="list" className="mt-6 space-y-6">
+                    {footerNavigation.customerService.map((item) => (
+                      <li key={item.name} className="text-sm">
+                        <a
+                          href={item.href}
+                          className="text-gray-500 hover:text-gray-600"
+                        >
+                          {item.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Newsletter section */}
+              <div className="mt-12 md:mt-0 md:row-start-2 md:col-start-3 md:col-span-8 lg:row-start-1 lg:col-start-9 lg:col-span-4">
+                <h3 className="text-sm font-medium text-gray-900">
+                  Sign up for our newsletter
+                </h3>
+                <p className="mt-6 text-sm text-gray-500">
+                  Early access feature invitations sent to your inbox.
+                </p>
+                <form className="mt-2 flex sm:max-w-md">
+                  <label htmlFor="email-address" className="sr-only">
+                    Email address
+                  </label>
+                  <input
+                    id="email-address"
+                    type="text"
+                    autoComplete="email"
+                    required
+                    className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  />
+                  <div className="ml-4 flex-shrink-0">
+                    <button
+                      type="submit"
+                      className="w-full bg-lime border border-transparent rounded-md shadow-sm py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                      Sign up
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
-
-            <div className="border-t border-gray-100 py-10 text-center">
-              <p className="text-sm text-gray-500">
-                &copy; {new Date().getFullYear()} Kirschenman Enterprises, Inc.
-                All rights reserved.
-              </p>
-            </div>
           </div>
-        </footer>
-      </div>
+
+          <div className="border-t border-gray-100 py-10 text-center">
+            <p className="text-sm text-gray-500">
+              &copy; 2021 Kirschenman Enterprises, Inc. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
-    </Container>
   );
 }
 

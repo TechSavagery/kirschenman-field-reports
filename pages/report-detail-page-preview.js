@@ -329,8 +329,18 @@ function classNames(...classes) {
 
 export default function Example() {
   const [open, setOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
-
+  function copy() {
+    const el = document.createElement('input');
+    el.value = window.location.href;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    setCopied(true);
+    setTimeout(function(){ setCopied(false); }, 1500);
+  }
   return (
     <div className="bg-gray-50">
       {/* Mobile menu */}
@@ -512,7 +522,7 @@ export default function Example() {
 
       <header className="relative bg-white">
         <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
-          Grape Field Data is now Live! 
+          Grape Field Data is now Live!
         </p>
 
         <nav
@@ -535,11 +545,11 @@ export default function Example() {
                 <a href="#">
                   <span className="sr-only">Workflow</span>
                   <img
-                      className="pt-[10px]"
-                      src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
-                      alt=""
-                      style={{height: "75px", paddingTop: "8px"}}
-                    />
+                    className="pt-[10px]"
+                    src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
+                    alt=""
+                    style={{ height: '75px', paddingTop: '8px' }}
+                  />
                 </a>
               </div>
 
@@ -670,10 +680,19 @@ export default function Example() {
               <div className="ml-auto flex items-center">
                 {/* Search */}
                 <div className="flex lg:ml-6">
-                  <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
-                    <span className="sr-only">Search</span>
-                    <ClipboardIcon className="w-6 h-6" aria-hidden="true" />
-                  </a>
+                  <button
+                    onClick={copy}
+                    className="p-2 text-gray-400 hover:text-gray-500"
+                  >
+                    {!copied ? (
+                      <ClipboardIcon className="w-6 h-6" aria-hidden="true" />
+                    ) : (
+                      <CheckIcon
+                        className="w-6 h-6 text-lime"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </button>
                 </div>
 
                 {/* Cart */}
@@ -802,7 +821,7 @@ export default function Example() {
                   <div className="mt-10">
                     <button
                       type="submit"
-                      className="w-full bg-lime border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                      className="w-full bg-lime border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
                     >
                       Download Report
                     </button>
@@ -907,12 +926,12 @@ export default function Example() {
             <div className="grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-8 md:gap-y-16 md:auto-rows-min">
               {/* Image section */}
               <div className="col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1">
-              <img
-                      className="pt-[10px]"
-                      src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
-                      alt=""
-                      style={{height: "65px"}}
-                    />
+                <img
+                  className="pt-[10px]"
+                  src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
+                  alt=""
+                  style={{ height: '65px' }}
+                />
               </div>
 
               {/* Sitemap sections */}
@@ -1014,3 +1033,5 @@ export default function Example() {
     </div>
   );
 }
+
+
