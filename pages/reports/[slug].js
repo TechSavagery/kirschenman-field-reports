@@ -611,15 +611,15 @@ export default function Example({ post, morePosts, preview }) {
 
               <div className="mt-4">
                 <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                  {post.lot.name}
+                  {post?.lot.name}
                   {' - '}
-                  {post.variety.name}
+                  {post?.variety.name}
                   {' - '}{' '}
-                  {post.week
-                    ? post.week.toUpperCase().replace('EEK-', '')
+                  {post?.week
+                    ? post?.week.toUpperCase().replace('EEK-', '')
                     : 'N/A'}
                   {'-'}
-                  {new Date(post.date).getFullYear()}
+                  {new Date(post?.date).getFullYear()}
                 </h1>
               </div>
 
@@ -631,7 +631,7 @@ export default function Example({ post, morePosts, preview }) {
                 <div className="pb-10 mt-4 space-y-6">
                   <p className="text-base text-gray-500">
                     <BlockContent
-                      blocks={post.body}
+                      blocks={post?.body}
                       projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
                       dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
                       className={markdownStyles.markdown}
@@ -724,7 +724,7 @@ export default function Example({ post, morePosts, preview }) {
                                 className="mt-1 text-sm text-gray-500"
                               >
                                 {post?.date
-                                  ? new Date(post.date).toLocaleDateString(
+                                  ? new Date(post?.date).toLocaleDateString(
                                       'en-US',
                                       {
                                         month: '2-digit',
@@ -1043,13 +1043,13 @@ export default function Example({ post, morePosts, preview }) {
                         </button>
                       )}
                       content={() => reportDownloadRef.current}
-                      documentTitle={`${post.label.name}-${post.variety.name}-${
-                        post.lot.name
+                      documentTitle={`${post?.label.name}-${post?.variety.name}-${
+                        post?.lot.name
                       }-${
-                        post.week
-                          ? post.week.toUpperCase().replace('EEK-', '')
+                        post?.week
+                          ? post?.week.toUpperCase().replace('EEK-', '')
                           : 'N/A'
-                      }-${new Date(post.date).getFullYear()} `}
+                      }-${new Date(post?.date).getFullYear()} `}
                     />
                   </div>
                 </form>
@@ -1082,7 +1082,7 @@ export default function Example({ post, morePosts, preview }) {
           {/* Details section */}
           <section aria-labelledby="details-heading">
             <div className="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-8">
-              {post.images.map((image) => (
+              {post?.images.map((image) => (
                 <div key={image.asset._ref}>
                   <div className="w-full aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
                     <img
@@ -1235,7 +1235,7 @@ export async function getStaticPaths() {
     paths:
       allPosts?.map((post) => ({
         params: {
-          slug: post.slug,
+          slug: post?.slug,
         },
       })) || [],
     fallback: true,
