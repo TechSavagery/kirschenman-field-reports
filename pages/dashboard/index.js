@@ -348,9 +348,10 @@ export default function Example({allPosts, preview}) {
                   <a href="/dashboard">
                     <span className="sr-only">Workflow</span>
                     <img
-                      className="h-[100px]"
+                      className=""
                       src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
                       alt=""
+                      style={{ height: '75px' }}
                     />
                   </a>
                 </div>

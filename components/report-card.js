@@ -19,15 +19,18 @@ export default function ReportCard({
       className="flex flex-col rounded-lg shadow-lg overflow-hidden"
     >
       <div className="flex-shrink-0">
-        <img
-          className="h-48 w-full object-cover"
-          src={imageBuilder(mainImage).width(384).height(192).url()}
-          alt=""
-        />
+        <a href={`/reports/${slug}`}>
+          {' '}
+          <img
+            className="h-48 w-full object-cover"
+            src={imageBuilder(mainImage).width(384).height(192).url()}
+            alt=""
+          />
+        </a>
       </div>
       <div className="flex-1 bg-white p-6 flex flex-col justify-between">
         <div className="flex-1">
-          <p className="text-sm font-medium text-cyan-600">
+          <p className="text-sm font-medium text-lime">
             <a href={`/reports/${slug}`} className="hover:underline">
               {label ? label.name : 'N/A'}
             </a>
@@ -45,6 +48,7 @@ export default function ReportCard({
 
             <p className="mt-3 text-md text-gray-500 sm:mt-4">
               <BlockContent
+                href={`/reports/${slug}`}
                 blocks={content}
                 projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
                 dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}

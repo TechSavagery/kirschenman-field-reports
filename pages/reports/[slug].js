@@ -50,41 +50,33 @@ const navigation = {
       name: 'Reports',
       sections: [
         {
-          id: 'clothing',
-          name: 'Clothing',
+          id: 'produce',
+          name: 'Produce',
           items: [
-            { name: 'Tops', href: '#' },
-            { name: 'Dresses', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Denim', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' },
+            { name: 'Grapes', href: '/dashboard/grapes' },
+            { name: 'Potato', href: '' },
+            { name: 'Watermelon', href: '#' },
+            { name: 'Stone Fruits', href: '#' },
           ],
         },
         {
-          id: 'accessories',
-          name: 'Accessories',
+          id: 'lots',
+          name: 'Lots (coming soon)',
           items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
-            { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Belts', href: '#' },
+            { name: 'Grape Lots', href: '#' },
+            { name: 'Potato Lots', href: '#' },
+            { name: 'Watermelon Lots', href: '#' },
+            { name: 'Stone Fruite Lots', href: '#' },
           ],
         },
         {
           id: 'brands',
-          name: 'Brands',
+          name: 'Brands (coming soon)',
           items: [
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Significant Other', href: '#' },
+            { name: 'Grape Brands', href: '#' },
+            { name: 'Potato Brands', href: '#' },
+            { name: 'Watermelon Brands', href: '#' },
+            { name: 'Stone Fruit Brands', href: '#' },
           ],
         },
       ],
@@ -97,18 +89,17 @@ const navigation = {
           id: 'company',
           name: 'Company',
           items: [
-            { name: 'About Us', href: '#' },
-            { name: 'Locations', href: '#' },
-            { name: 'Blog', href: '#' },
+            { name: 'About Us', href: 'https://www.kirschenman.com/about' },
+            { name: 'Locations', href: 'https://www.kirschenman.com/contact/' },
+            { name: 'Blog', href: 'https://www.kirschenman.com/category/current-trends/' },
           ],
         },
         {
           id: 'contact',
           name: 'Contact',
           items: [
-            { name: 'Email', href: '#' },
-            { name: 'Phone', href: '#' },
-            { name: 'Locations', href: '#' },
+            { name: 'Email: info@keiproduce.com', href: 'mailto:info@keiproduce.com' },
+            { name: 'Phone: (661)201-7744', href: 'tel:661-201-7744'},
           ],
         },
         {
@@ -141,42 +132,6 @@ const navigation = {
     { name: 'FAQ', href: '/faq' },
   ],
 };
-const policiesCards = [
-  {
-    name: 'International delivery',
-    icon: GlobeIcon,
-    description: 'Get your order in 2 years',
-  },
-  {
-    name: 'Loyalty rewards',
-    icon: CurrencyDollarIcon,
-    description: "Don't look at other tees",
-  },
-  {
-    name: 'International delivery',
-    icon: GlobeIcon,
-    description: 'Get your order in 2 years',
-  },
-  {
-    name: 'Loyalty rewards',
-    icon: CurrencyDollarIcon,
-    description: "Don't look at other tees",
-  },
-  {
-    name: 'International delivery',
-    icon: GlobeIcon,
-    description: 'Get your order in 2 years',
-  },
-  {
-    name: 'Loyalty rewards',
-    icon: CurrencyDollarIcon,
-    description: "Don't look at other tees",
-  },
-];
-const userNavigation = [
-  { name: 'Sign in', href: '#' },
-  { name: 'Create account', href: '#' },
-];
 const product = {
   name: 'Marilyn - Timco - 09/28/2021',
   href: '#',
@@ -218,29 +173,37 @@ const product = {
   ],
 };
 const footerNavigation = {
-  products: [
-    { name: 'Bags', href: '#' },
-    { name: 'Tees', href: '#' },
-    { name: 'Objects', href: '#' },
-    { name: 'Home Goods', href: '#' },
-    { name: 'Accessories', href: '#' },
+  reports: [
+    { name: 'Grapes', href: '/dashboard/grapes' },
+    { name: 'Potato', href: '' },
+    { name: 'Watermelon', href: '#' },
+    { name: 'Stone Fruits', href: '#' },
   ],
   company: [
-    { name: 'Who we are', href: '#' },
-    { name: 'Sustainability', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Careers', href: '#' },
-    { name: 'Terms & Conditions', href: '#' },
-    { name: 'Privacy', href: '#' },
+    { name: 'About Us', href: 'https://www.kirschenman.com/about' },
+    { name: 'Website', href: 'https://www.kirschenman.com/' },
+    { name: 'Blog', href: 'https://www.kirschenman.com/category/current-trends/' },
+    { name: 'Email: info@keiproduce.com', href: 'mailto:info@keiproduce.com' },
+    { name: 'Phone: (661)201-7744', href: 'tel:661-201-7744'},
+    { name: 'Locations', href: 'https://www.kirschenman.com/contact/' }
   ],
-  customerService: [
-    { name: 'Contact', href: '#' },
-    { name: 'Shipping', href: '#' },
-    { name: 'Returns', href: '#' },
-    { name: 'Warranty', href: '#' },
-    { name: 'Secure Payments', href: '#' },
-    { name: 'FAQ', href: '#' },
-    { name: 'Find a store', href: '#' },
+  produceInfo: [
+    {
+      name: 'Grapes',
+      href: 'https://www.kirschenman.com/products/grapes/',
+    },
+    {
+      name: 'Stone Fruits',
+      href: 'https://www.kirschenman.com/products/stone-fruits/',
+    },
+    {
+      name: 'Watermelon',
+      href: 'https://www.kirschenman.com/products/watermelons/',
+    },
+    {
+      name: 'Potato',
+      href: 'https://www.kirschenman.com/products/potatoes/',
+    },
   ],
 };
 
@@ -317,7 +280,7 @@ export default function Example({ post, morePosts, preview }) {
                         className={({ selected }) =>
                           classNames(
                             selected
-                              ? 'text-indigo-600 border-indigo-600'
+                              ? 'text-lime border-lime'
                               : 'text-gray-900 border-transparent',
                             'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
                           )
@@ -377,39 +340,6 @@ export default function Example({ post, morePosts, preview }) {
                   </div>
                 ))}
               </div>
-
-              <div className="border-t border-gray-200 py-6 px-4 space-y-6">
-                <div className="flow-root">
-                  <a
-                    href="#"
-                    className="-m-2 p-2 block font-medium text-gray-900"
-                  >
-                    Sign in
-                  </a>
-                </div>
-                <div className="flow-root">
-                  <a
-                    href="#"
-                    className="-m-2 p-2 block font-medium text-gray-900"
-                  >
-                    Create account
-                  </a>
-                </div>
-              </div>
-
-              <div className="border-t border-gray-200 py-6 px-4">
-                <a href="#" className="-m-2 p-2 flex items-center">
-                  <img
-                    src="https://tailwindui.com/img/flags/flag-canada.svg"
-                    alt=""
-                    className="w-5 h-auto block flex-shrink-0"
-                  />
-                  <span className="ml-3 block text-base font-medium text-gray-900">
-                    CAD
-                  </span>
-                  <span className="sr-only">, change currency</span>
-                </a>
-              </div>
             </div>
           </Transition.Child>
         </Dialog>
@@ -437,7 +367,7 @@ export default function Example({ post, morePosts, preview }) {
 
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
-                <a href="#">
+                <a href="/">
                   <span className="sr-only">Workflow</span>
                   <img
                     className="pt-[10px]"
@@ -459,7 +389,7 @@ export default function Example({ post, morePosts, preview }) {
                             <Popover.Button
                               className={classNames(
                                 open
-                                  ? 'border-indigo-600 text-indigo-600'
+                                  ? 'border-lime text-lime'
                                   : 'border-transparent text-gray-700 hover:text-gray-800',
                                 'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
                               )}
@@ -649,9 +579,10 @@ export default function Example({ post, morePosts, preview }) {
                           as="div"
                           key={post?.label?.name}
                           value={post?.label?.name}
+                          style={{paddingRight:'80px'}}
                           className={({ active }) =>
                             classNames(
-                              active ? 'ring-2 ring-indigo-500' : '',
+                              active ? 'ring-2 ring-lime' : '',
                               'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
                             )
                           }
@@ -695,10 +626,11 @@ export default function Example({ post, morePosts, preview }) {
                           as="div"
                           key={post?.date}
                           value={post?.date}
+                          style={{paddingRight:'80px'}}
                           className={({ active }) =>
                             classNames(
-                              active ? 'ring-2 ring-indigo-500' : '',
-                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                              active ? 'ring-2 ring-lime' : '',
+                              'relative block border border-gray-300 rounded-lg p-4 px-[30] min-w-full cursor-pointer focus:outline-none'
                             )
                           }
                         >
@@ -732,7 +664,7 @@ export default function Example({ post, morePosts, preview }) {
                                         year: 'numeric',
                                       }
                                     )
-                                  : 'xxxxxxx'}
+                                  : 'xxxxxxx'}<span></span>
                               </RadioGroup.Description>
                               <div
                                 className={classNames(
@@ -752,7 +684,7 @@ export default function Example({ post, morePosts, preview }) {
                           value={post?.brix}
                           className={({ active }) =>
                             classNames(
-                              active ? 'ring-2 ring-indigo-500' : '',
+                              active ? 'ring-2 ring-lime' : '',
                               'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
                             )
                           }
@@ -1060,8 +992,8 @@ export default function Example({ post, morePosts, preview }) {
             <div className="mt-10 lg:mt-0 lg:col-start-2 lg:row-span-2 lg:self-center">
               <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
                 <img
-                  src="https://bjs.scene7.com/is/image/bjs/12911?$bjs-Zoom$"
-                  alt={product.imageAlt}
+                  src={imageBuilder(post?.variety?.image).width(592).height(592).url()}
+                  alt={post?.variety?.name}
                   className="w-full h-full object-center object-cover"
                 />
               </div>
@@ -1122,10 +1054,10 @@ export default function Example({ post, morePosts, preview }) {
                 <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
                   <div>
                     <h3 className="text-sm font-medium text-gray-900">
-                      Products
+                      Reports
                     </h3>
                     <ul role="list" className="mt-6 space-y-6">
-                      {footerNavigation.products.map((item) => (
+                      {footerNavigation.reports.map((item) => (
                         <li key={item.name} className="text-sm">
                           <a
                             href={item.href}
@@ -1157,10 +1089,10 @@ export default function Example({ post, morePosts, preview }) {
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-gray-900">
-                    Customer Service
+                    Produce Info
                   </h3>
                   <ul role="list" className="mt-6 space-y-6">
-                    {footerNavigation.customerService.map((item) => (
+                    {footerNavigation.produceInfo.map((item) => (
                       <li key={item.name} className="text-sm">
                         <a
                           href={item.href}
@@ -1191,12 +1123,12 @@ export default function Example({ post, morePosts, preview }) {
                     type="text"
                     autoComplete="email"
                     required
-                    className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-lime focus:ring-1 focus:ring-lime"
                   />
                   <div className="ml-4 flex-shrink-0">
                     <button
                       type="submit"
-                      className="w-full bg-lime border border-transparent rounded-md shadow-sm py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className="w-full bg-lime border border-transparent rounded-md shadow-sm py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime"
                     >
                       Sign up
                     </button>
@@ -1208,7 +1140,7 @@ export default function Example({ post, morePosts, preview }) {
 
           <div className="border-t border-gray-100 py-10 text-center">
             <p className="text-sm text-gray-500">
-              &copy; 2021 Kirschenman Enterprises, Inc. All rights reserved.
+              &copy; {new Date().getFullYear()} Kirschenman Enterprises, Inc. All rights reserved.
             </p>
           </div>
         </div>
