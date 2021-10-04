@@ -244,9 +244,9 @@ export default {
       to: { type: 'lot' },
     },
     {
-      name: 'blockNumber',
-      title: 'Block #',
-      type: 'string',
+      name: 'bagData',
+      title: 'Bunches/Bag',
+      type: 'number',
     },
     {
       name: 'label',
@@ -376,9 +376,10 @@ export default {
       reporter: 'reporter.name',
       media: 'mainImage',
       date: 'publishedAt',
+      published: '_id'
     },
     prepare(selection) {
-      const { reporter, date } = selection;
+      const { reporter, date, published } = selection;
       return Object.assign({}, selection, {
         subtitle:
           reporter &&
@@ -386,7 +387,7 @@ export default {
             month: '2-digit',
             day: '2-digit',
             year: 'numeric',
-          })}`,
+          })} - ${published.includes('draft') ? 'Internal' : 'Published'}`,
       });
     },
   },
