@@ -59,13 +59,13 @@ const features = [
   {
     name: 'Real Time Quality Assesment',
     description:
-      'All of our locations are leverage on unified data entry system to ensure you recieve reprots as soon as they are submitted.',
+      'All of our locations are leveraged on a unified data entry system to ensure you receive reports as soon as they are submitted.',
     icon: LockClosedIcon,
   },
   {
     name: 'Daily Reports',
     description:
-      'Our reports will bring you specific data for each produce such as size, taste, appearance, as weel as suporting images and reporter comments.',
+      'Our reports will bring you specific data for each produce such as size, taste, appearance, as well as supporting images and reporter comments.',
     icon: RefreshIcon,
   },
   {
@@ -629,7 +629,7 @@ export default function Example({ allPosts, preview }) {
               />
               <div
                 aria-hidden="true"
-                className="absolute inset-0 bg-gradient-to-r from-lime to-lime mix-blend-multiply"
+                className="absolute inset-0"
               />
             </div>
             <div className="relative mx-auto max-w-md px-4 py-12 sm:max-w-7xl sm:px-6 sm:py-20 md:py-28 lg:px-8 lg:py-32">
@@ -640,7 +640,7 @@ export default function Example({ allPosts, preview }) {
                 <p className="mt-3 text-lg text-gray-300">
                   Our team is dedicated to providing you with up to date
                   information about our products to make your purchasing
-                  decision and process as seamless as possible.If you have any
+                  decision and process as seamless as possible. If you have any
                   questions fell free to reach out to our team!
                 </p>
                 <div className="mt-8">

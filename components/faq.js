@@ -4,34 +4,29 @@ import { ChevronDownIcon } from '@heroicons/react/outline'
 
 const faqs = [
   {
-    question: "How many lots are you operating?",
-    answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-  },
-  {
     question: "What is the best time for selecting stone fruits?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Our fruits are some of the first peaches and nectarines available in the state of California.  We generally have peaches and nectarines available from late April through May.  Please see our full varietal line up with white and yellow peaches and nectarines as well as harvest estimates.  ",
   },
   {
     question: "Where can I buy your produce?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Our products are available at your local Costco.  Please reach out to our team to point out where product is available in your location. ",
   },
   {
     question: "How can I access the reports?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "The reports are readily available by simply requesting a login to create a user name and password.",
   },
   {
     question: "Do you have videos of the crops as well?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Yes, our harvest team is equipped to provide short video clips upon request.  You can reach out for tailored reports of exactly what your customers are looking for.",
   },
   {
     question: "When will watermelon field reports be available?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "We are coordinating with our watermelon staff now to discuss plans for the 2022 season.",
   },
 
   // More questions...

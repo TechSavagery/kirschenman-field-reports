@@ -91,15 +91,21 @@ const navigation = {
           items: [
             { name: 'About Us', href: 'https://www.kirschenman.com/about' },
             { name: 'Locations', href: 'https://www.kirschenman.com/contact/' },
-            { name: 'Blog', href: 'https://www.kirschenman.com/category/current-trends/' },
+            {
+              name: 'Blog',
+              href: 'https://www.kirschenman.com/category/current-trends/',
+            },
           ],
         },
         {
           id: 'contact',
           name: 'Contact',
           items: [
-            { name: 'Email: info@keiproduce.com', href: 'mailto:info@keiproduce.com' },
-            { name: 'Phone: (661)201-7744', href: 'tel:661-201-7744'},
+            {
+              name: 'Email: info@keiproduce.com',
+              href: 'mailto:info@keiproduce.com',
+            },
+            { name: 'Phone: (661)201-7744', href: 'tel:661-201-7744' },
           ],
         },
         {
@@ -182,10 +188,13 @@ const footerNavigation = {
   company: [
     { name: 'About Us', href: 'https://www.kirschenman.com/about' },
     { name: 'Website', href: 'https://www.kirschenman.com/' },
-    { name: 'Blog', href: 'https://www.kirschenman.com/category/current-trends/' },
+    {
+      name: 'Blog',
+      href: 'https://www.kirschenman.com/category/current-trends/',
+    },
     { name: 'Email: info@keiproduce.com', href: 'mailto:info@keiproduce.com' },
-    { name: 'Phone: (661)201-7744', href: 'tel:661-201-7744'},
-    { name: 'Locations', href: 'https://www.kirschenman.com/contact/' }
+    { name: 'Phone: (661)201-7744', href: 'tel:661-201-7744' },
+    { name: 'Locations', href: 'https://www.kirschenman.com/contact/' },
   ],
   produceInfo: [
     {
@@ -490,7 +499,10 @@ export default function Example({ post, morePosts, preview }) {
 
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
-                  <a href="#" className="group -m-2 p-2 flex items-center">
+                  <a
+                    href={`mailto:em${'fsdfd'}ail@email.de`}
+                    className="group -m-2 p-2 flex items-center"
+                  >
                     <button>
                       <DownloadIcon
                         className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
@@ -579,7 +591,7 @@ export default function Example({ post, morePosts, preview }) {
                           as="div"
                           key={post?.label?.name}
                           value={post?.label?.name}
-                          style={{paddingRight:'80px'}}
+                          style={{ paddingRight: '80px' }}
                           className={({ active }) =>
                             classNames(
                               active ? 'ring-2 ring-lime' : '',
@@ -626,7 +638,7 @@ export default function Example({ post, morePosts, preview }) {
                           as="div"
                           key={post?.date}
                           value={post?.date}
-                          style={{paddingRight:'80px'}}
+                          style={{ paddingRight: '80px' }}
                           className={({ active }) =>
                             classNames(
                               active ? 'ring-2 ring-lime' : '',
@@ -664,7 +676,8 @@ export default function Example({ post, morePosts, preview }) {
                                         year: 'numeric',
                                       }
                                     )
-                                  : 'xxxxxxx'}<span></span>
+                                  : 'xxxxxxx'}
+                                <span></span>
                               </RadioGroup.Description>
                               <div
                                 className={classNames(
@@ -965,24 +978,14 @@ export default function Example({ post, morePosts, preview }) {
                     </RadioGroup>
                   </div>
                   <div className="mt-10">
-                    <ReactToPrint
-                      trigger={() => (
-                        <button
-                          type="submit"
-                          className="w-full bg-lime border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-                        >
-                          Download Report
-                        </button>
-                      )}
-                      content={() => reportDownloadRef.current}
-                      documentTitle={`${post?.label.name}-${post?.variety.name}-${
-                        post?.lot.name
-                      }-${
-                        post?.week
-                          ? post?.week.toUpperCase().replace('EEK-', '')
-                          : 'N/A'
-                      }-${new Date(post?.date).getFullYear()} `}
-                    />
+                    <a
+                      href={`mailto:em${'fsdfd'}ail@email.de`}
+                      className="group -m-2 p-2 flex items-center"
+                    >
+                      <button className="w-full bg-lime border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500">
+                        Contact Team
+                      </button>
+                    </a>
                   </div>
                 </form>
               </section>
@@ -992,7 +995,10 @@ export default function Example({ post, morePosts, preview }) {
             <div className="mt-10 lg:mt-0 lg:col-start-2 lg:row-span-2 lg:self-center">
               <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
                 <img
-                  src={imageBuilder(post?.variety?.image).width(592).height(592).url()}
+                  src={imageBuilder(post?.variety?.image)
+                    .width(592)
+                    .height(592)
+                    .url()}
                   alt={post?.variety?.name}
                   className="w-full h-full object-center object-cover"
                 />
@@ -1140,7 +1146,8 @@ export default function Example({ post, morePosts, preview }) {
 
           <div className="border-t border-gray-100 py-10 text-center">
             <p className="text-sm text-gray-500">
-              &copy; {new Date().getFullYear()} Kirschenman Enterprises, Inc. All rights reserved.
+              &copy; {new Date().getFullYear()} Kirschenman Enterprises, Inc.
+              All rights reserved.
             </p>
           </div>
         </div>

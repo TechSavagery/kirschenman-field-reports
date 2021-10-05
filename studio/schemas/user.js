@@ -22,6 +22,11 @@ export default {
         name: 'password',
         type: 'string',
         hidden: true
+      },
+      {
+        name: 'metric',
+        type: 'array',
+        of: [{type: 'metric'}],
       }
     ]
   };

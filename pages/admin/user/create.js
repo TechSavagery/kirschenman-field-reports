@@ -1,6 +1,30 @@
 import { LockClosedIcon } from '@heroicons/react/solid';
+import { useSession, signIn, signOut } from 'next-auth/client';
+import { useState } from 'react';
+import { signUp } from 'next-auth-sanity/client';
 
 export default function CreateUser() {
+  const [email, setEmail] = useState('');
+  const [session, loading] = useSession();
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const user = await signUp({
+      email,
+      password,
+      name,
+    });
+
+    await signIn('credentials', {
+      redirect: false,
+      email,
+      password,
+    });
+
+    console.log(user);
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -14,7 +38,12 @@ export default function CreateUser() {
             />
           </a>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form
+          onSubmit={handleSubmit}
+          className="mt-8 space-y-6"
+          action="#"
+          method="POST"
+        >
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -22,9 +51,9 @@ export default function CreateUser() {
                 Name
               </label>
               <input
-                id="email-address"
-                name="email"
-                type="email"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                type="name"
                 autoComplete="email"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-lime focus:border-lime focus:z-10 sm:text-sm"
@@ -33,24 +62,11 @@ export default function CreateUser() {
             </div>
             <div>
               <label htmlFor="email-address" className="sr-only">
-                Company Name
+                Email
               </label>
               <input
-                id="email-address"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-lime focus:border-lime focus:z-10 sm:text-sm"
-                placeholder="Company Name"
-              />
-            </div>
-            <div>
-              <label htmlFor="email-address" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email-address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 name="email"
                 type="email"
                 autoComplete="email"
@@ -64,10 +80,9 @@ export default function CreateUser() {
                 Password
               </label>
               <input
-                id="password"
-                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
-                autoComplete="current-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-lime focus:border-lime focus:z-10 sm:text-sm"
                 placeholder="Password"
