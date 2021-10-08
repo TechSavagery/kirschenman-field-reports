@@ -29,6 +29,7 @@ import {
   ShieldCheckIcon,
   ClipboardIcon,
   XIcon,
+  MailIcon,
 } from '@heroicons/react/outline';
 import {
   CheckIcon,
@@ -42,6 +43,8 @@ import BlockContent from '@sanity/block-content-to-react';
 import markdownStyles from '../../components/markdown-styles.module.css';
 import { imageBuilder } from '../../lib/sanity';
 import ReactToPrint from 'react-to-print';
+import { useSession } from 'next-auth/client';
+import PasswordProtect from '../../components/password-protect';
 
 const navigation = {
   categories: [
@@ -225,9 +228,10 @@ export default function Example({ post, morePosts, preview }) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
+  const [session, loading] = useSession();
   function copy() {
     const el = document.createElement('input');
-    el.value = window.location.href;
+    el.value = window.location.href.replace('?#', '');
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');
@@ -236,6 +240,12 @@ export default function Example({ post, morePosts, preview }) {
     setTimeout(function () {
       setCopied(false);
     }, 1500);
+  }
+  if (typeof window !== 'undefined' && loading) return null;
+
+  // If no session exists, display access denied message
+  if (!session) {
+    return <PasswordProtect />;
   }
   return (
     <div className="bg-gray-50">
@@ -500,15 +510,18 @@ export default function Example({ post, morePosts, preview }) {
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
                   <a
-                    href={`mailto:em${'fsdfd'}ail@email.de`}
+                    href={`mailto:?subject=KEI%20Report%3A%20${encodeURIComponent(
+                      post.slug
+                    )}&body=Hello%2C%20%0A%0APlease%20review%20the%20following%20report%3A%0A${window.location.href.replace(
+                      '?#',
+                      ''
+                    )}%0A%0A%0AHere%20is%20the%20login%20info%20below%3A%0A%0AUsername%3A%0APassword%3A%20%0A`}
                     className="group -m-2 p-2 flex items-center"
                   >
-                    <button>
-                      <DownloadIcon
-                        className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                        aria-hidden="true"
-                      />
-                    </button>
+                    <MailIcon
+                      className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                      aria-hidden="true"
+                    />
                   </a>
                 </div>
               </div>
@@ -979,12 +992,15 @@ export default function Example({ post, morePosts, preview }) {
                   </div>
                   <div className="mt-10">
                     <a
-                      href={`mailto:em${'fsdfd'}ail@email.de`}
-                      className="group -m-2 p-2 flex items-center"
+                      href={`mailto:info@keiproduce.com?subject=Request%20Info%20for%20${encodeURIComponent(
+                        post.slug
+                      )}&body=Hello%20KEI%20Staff%2C%20%0A%0AI%20would%20more%20info%20for%20the%20following%20report%3A%0A${window.location.href.replace(
+                        '?#',
+                        ''
+                      )}%0A%0A%0AHere%20is%20my%20info%20below%3A%0A%0AName%3A%0AEmail%3A%20%0ACompany%3A%20%0APhone%20Number%3A`}
+                      className="w-full bg-lime border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
                     >
-                      <button className="w-full bg-lime border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500">
-                        Contact Team
-                      </button>
+                      Contact Team
                     </a>
                   </div>
                 </form>
@@ -1113,7 +1129,7 @@ export default function Example({ post, morePosts, preview }) {
               </div>
 
               {/* Newsletter section */}
-              <div className="mt-12 md:mt-0 md:row-start-2 md:col-start-3 md:col-span-8 lg:row-start-1 lg:col-start-9 lg:col-span-4">
+              {/* <div className="mt-12 md:mt-0 md:row-start-2 md:col-start-3 md:col-span-8 lg:row-start-1 lg:col-start-9 lg:col-span-4">
                 <h3 className="text-sm font-medium text-gray-900">
                   Sign up for our newsletter
                 </h3>
@@ -1140,7 +1156,7 @@ export default function Example({ post, morePosts, preview }) {
                     </button>
                   </div>
                 </form>
-              </div>
+              </div> */}
             </div>
           </div>
 

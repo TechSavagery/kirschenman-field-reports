@@ -1,11 +1,11 @@
 export default {
-  name: 'metric',
-  title: 'Metric',
+  name: 'metrics',
+  title: 'Metrics',
   type: 'object',
   fields: [
     {
-      name: 'title',
-      title: 'Report',
+      name: 'metricType',
+      title: 'metric',
       type: 'string',
     },
     {

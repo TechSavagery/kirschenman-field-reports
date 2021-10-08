@@ -1,10 +1,29 @@
 import { LockClosedIcon } from '@heroicons/react/solid';
+import { providers, signIn, getSession, csrfToken, useSession } from "next-auth/client";
+import { useState, useRouter } from 'react';
 
 export default function Login() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [isLoginStarted, setIsLoginStarted] = useState(false)
+  const [loginError, setLoginError] = useState('')
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+  signIn("credentials", {
+      redirect: true, 
+      email,
+      password,
+      callbackUrl: `${encodeURIComponent(window.location.origin + '/dashboard')}`
+    })
+    .then((error) => console.log(error))
+    .catch((error) => console.log(error));
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
-        <div class="flex justify-center">
+        <div className="flex justify-center">
           <a href="/dashboard">
             <span className="sr-only">Workflow</span>
             <img
@@ -14,21 +33,23 @@ export default function Login() {
             />
           </a>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form onSubmit={(e) => handleLogin(e)} className="mt-8 space-y-6">
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="email-address" className="sr-only">
-                Email address
+              <label htmlFor="username" className="sr-only">
+                Username
               </label>
               <input
-                id="email-address"
-                name="email"
-                type="email"
-                autoComplete="email"
+                id="username"
+                name="username"
+                type="name"
+                value={email}
+                autoComplete="name"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-lime focus:border-lime focus:z-10 sm:text-sm"
-                placeholder="Email address"
+                placeholder="Username"
+                onChange={e => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -39,10 +60,12 @@ export default function Login() {
                 id="password"
                 name="password"
                 type="password"
+                value={password}
                 autoComplete="current-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-lime focus:border-lime focus:z-10 sm:text-sm"
                 placeholder="Password"
+                onChange={e => setPassword(e.target.value)}
               />
             </div>
           </div>
@@ -65,4 +88,22 @@ export default function Login() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const session = await getSession({ req });
+
+  if (session) {
+    return {
+      redirect: { destination: "/dashboard" },
+    };
+  }
+
+  return {
+    props: {
+      providers: await providers(context),
+      csrfToken: await csrfToken(context),
+    },
+  };
 }

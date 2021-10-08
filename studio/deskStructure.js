@@ -18,7 +18,8 @@ export default () =>
               ),
             ])
         ),
-      // We also need to remove the new singletons from the main list
+      ...S.documentTypeListItems().filter(listItem => ['user'].includes(listItem.getId())),
       ...S.documentTypeListItems().filter(listItem => ['post'].includes(listItem.getId()))
     ])
+    
 

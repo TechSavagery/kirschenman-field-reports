@@ -79,19 +79,39 @@ const navigation = {
 const breadcrumbs = [{ id: 1, name: 'Dashboard', href: '#' }];
 const footerNavigation = {
   reports: [
-    { name: 'Grapes', href: '#' },
-    { name: 'Potato', href: '#' },
+    { name: 'Grapes', href: '/dashboard/grapes' },
+    { name: 'Potato', href: '' },
     { name: 'Watermelon', href: '#' },
-    { name: 'Stone Fruite', href: '#' },
-    { name: 'Accessories', href: '#' },
+    { name: 'Stone Fruits', href: '#' },
   ],
-  pages: [
-    { name: 'Dashboard', href: 'dashboard' },
-    { name: 'FAQ', href: '/faq' },
+  company: [
+    { name: 'About Us', href: 'https://www.kirschenman.com/about' },
+    { name: 'Website', href: 'https://www.kirschenman.com/' },
+    {
+      name: 'Blog',
+      href: 'https://www.kirschenman.com/category/current-trends/',
+    },
+    { name: 'Email: info@keiproduce.com', href: 'mailto:info@keiproduce.com' },
+    { name: 'Phone: (661)201-7744', href: 'tel:661-201-7744' },
+    { name: 'Locations', href: 'https://www.kirschenman.com/contact/' },
   ],
-  contact: [
-    { name: 'Phone: (559)789-9878', href: '#' },
-    { name: 'Email: info@keisales.com', href: '#' },
+  produceInfo: [
+    {
+      name: 'Grapes',
+      href: 'https://www.kirschenman.com/products/grapes/',
+    },
+    {
+      name: 'Stone Fruits',
+      href: 'https://www.kirschenman.com/products/stone-fruits/',
+    },
+    {
+      name: 'Watermelon',
+      href: 'https://www.kirschenman.com/products/watermelons/',
+    },
+    {
+      name: 'Potato',
+      href: 'https://www.kirschenman.com/products/potatoes/',
+    },
   ],
 };
 
@@ -447,61 +467,49 @@ export default function FaqPage({ allPosts, preview }) {
 
         <FAQ />
 
-        <footer
-          aria-labelledby="footer-heading"
-          className="bg-white border-t border-gray-200"
-        >
-          <h2 id="footer-heading" className="sr-only">
-            Footer
-          </h2>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="py-20">
-              <div className="grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-8 md:gap-y-16 md:auto-rows-min">
-                {/* Image section */}
-                {/* Sitemap sections */}
-                <div className="mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6">
-                  <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-900">
-                        Reports
-                      </h3>
-                      <ul role="list" className="mt-6 space-y-6">
-                        {footerNavigation.reports.map((item) => (
-                          <li key={item.name} className="text-sm">
-                            <a
-                              href={item.href}
-                              className="text-gray-500 hover:text-gray-600"
-                            >
-                              {item.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-900">
-                        Pages
-                      </h3>
-                      <ul role="list" className="mt-6 space-y-6">
-                        {footerNavigation.pages.map((item) => (
-                          <li key={item.name} className="text-sm">
-                            <a
-                              href={item.href}
-                              className="text-gray-500 hover:text-gray-600"
-                            >
-                              {item.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+        <footer aria-labelledby="footer-heading" className="bg-white">
+        <h2 id="footer-heading" className="sr-only">
+          Footer
+        </h2>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="border-t border-gray-200 py-20">
+            <div className="grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-8 md:gap-y-16 md:auto-rows-min">
+              {/* Image section */}
+              <div className="col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1">
+                <img
+                  className="pt-[10px]"
+                  src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
+                  alt=""
+                  style={{ height: '65px' }}
+                />
+              </div>
+
+              {/* Sitemap sections */}
+              <div className="mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6">
+                <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-900">
+                      Reports
+                    </h3>
+                    <ul role="list" className="mt-6 space-y-6">
+                      {footerNavigation.reports.map((item) => (
+                        <li key={item.name} className="text-sm">
+                          <a
+                            href={item.href}
+                            className="text-gray-500 hover:text-gray-600"
+                          >
+                            {item.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                   <div>
                     <h3 className="text-sm font-medium text-gray-900">
-                      Contact
+                      Company
                     </h3>
                     <ul role="list" className="mt-6 space-y-6">
-                      {footerNavigation.contact.map((item) => (
+                      {footerNavigation.company.map((item) => (
                         <li key={item.name} className="text-sm">
                           <a
                             href={item.href}
@@ -514,17 +522,65 @@ export default function FaqPage({ allPosts, preview }) {
                     </ul>
                   </div>
                 </div>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-900">
+                    Produce Info
+                  </h3>
+                  <ul role="list" className="mt-6 space-y-6">
+                    {footerNavigation.produceInfo.map((item) => (
+                      <li key={item.name} className="text-sm">
+                        <a
+                          href={item.href}
+                          className="text-gray-500 hover:text-gray-600"
+                        >
+                          {item.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
 
-            <div className="border-t border-gray-100 py-10 text-center">
-              <p className="text-sm text-gray-500">
-                &copy; {new Date().getFullYear()} Kirschenman Enterprises, Inc.
-                All rights reserved.
-              </p>
+              {/* Newsletter section */}
+              {/* <div className="mt-12 md:mt-0 md:row-start-2 md:col-start-3 md:col-span-8 lg:row-start-1 lg:col-start-9 lg:col-span-4">
+                <h3 className="text-sm font-medium text-gray-900">
+                  Sign up for our newsletter
+                </h3>
+                <p className="mt-6 text-sm text-gray-500">
+                  Early access feature invitations sent to your inbox.
+                </p>
+                <form className="mt-2 flex sm:max-w-md">
+                  <label htmlFor="email-address" className="sr-only">
+                    Email address
+                  </label>
+                  <input
+                    id="email-address"
+                    type="text"
+                    autoComplete="email"
+                    required
+                    className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-lime focus:ring-1 focus:ring-lime"
+                  />
+                  <div className="ml-4 flex-shrink-0">
+                    <button
+                      type="submit"
+                      className="w-full bg-lime border border-transparent rounded-md shadow-sm py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime"
+                    >
+                      Sign up
+                    </button>
+                  </div>
+                </form>
+              </div> */}
             </div>
           </div>
-        </footer>
+
+          <div className="border-t border-gray-100 py-10 text-center">
+            <p className="text-sm text-gray-500">
+              &copy; {new Date().getFullYear()} Kirschenman Enterprises, Inc.
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
       </div>
     </div>
   );

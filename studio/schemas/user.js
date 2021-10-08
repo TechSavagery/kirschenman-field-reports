@@ -24,9 +24,10 @@ export default {
         hidden: true
       },
       {
-        name: 'metric',
+        name: 'metrics',
+        title: 'Metrics',
         type: 'array',
-        of: [{type: 'metric'}],
+        of: [{type: 'metrics'}],
       }
     ]
   };

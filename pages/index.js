@@ -43,10 +43,11 @@ import { getAllPostsForHome } from '../lib/api';
 import { imageBuilder } from '../lib/sanity';
 import BlockContent from '@sanity/block-content-to-react';
 import markdownStyles from '../components/markdown-styles.module.css';
+import FAQ from '../components/faq';
 
 const navigation = [
   { name: 'Features', href: '#features' },
-  { name: 'Contact', href: '#' },
+  { name: 'FAQ', href: '#faq' },
   { name: 'Reports', href: '/dashboard' },
 ];
 const features = [
@@ -243,13 +244,13 @@ export default function Example({ allPosts, preview }) {
               </div>
               <div className="hidden md:flex md:items-center md:space-x-6">
                 <a
-                  href="#"
+                  href="mailto:info@keiproduce.com"
                   className="text-base font-medium text-white hover:text-gray-300"
                 >
                   Contact Us
                 </a>
                 <a
-                  href="#"
+                  href="/dashboard"
                   className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700"
                 >
                   Dashboard
@@ -429,7 +430,10 @@ export default function Example({ allPosts, preview }) {
           </div>
 
           {/* Feature section with grid */}
-          <div className="relative bg-white py-16 sm:py-24 lg:py-32">
+          <div
+            id="features"
+            className="relative bg-white py-16 sm:py-24 lg:py-32"
+          >
             <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
               <div className="mt-12">
                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2">
@@ -618,6 +622,9 @@ export default function Example({ allPosts, preview }) {
               </div>
             </div>
           </div>
+          <div class="pb-5" id="faq">
+            <FAQ id="faq" />
+          </div>
 
           {/* CTA Section */}
           <div className="relative bg-gray-900">
@@ -627,10 +634,7 @@ export default function Example({ allPosts, preview }) {
                 src="https://www.kirschenman.com/wp-content/uploads/2020/07/covid-farmingguidelines.jpg"
                 alt=""
               />
-              <div
-                aria-hidden="true"
-                className="absolute inset-0"
-              />
+              <div aria-hidden="true" className="absolute inset-0" />
             </div>
             <div className="relative mx-auto max-w-md px-4 py-12 sm:max-w-7xl sm:px-6 sm:py-20 md:py-28 lg:px-8 lg:py-32">
               <div className="md:ml-auto md:w-1/2 md:pl-10">
@@ -646,7 +650,7 @@ export default function Example({ allPosts, preview }) {
                 <div className="mt-8">
                   <div className="inline-flex rounded-md shadow">
                     <a
-                      href="#"
+                      href="tel:661-201-7744"
                       className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50"
                     >
                       Give Us a Call!
