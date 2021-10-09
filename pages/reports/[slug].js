@@ -15,7 +15,7 @@
   }
   ```
 */
-import { Fragment, useState, useRef } from 'react';
+import { Fragment, useState, useRef, useEffect } from 'react';
 import {
   Dialog,
   Popover,
@@ -45,6 +45,7 @@ import { imageBuilder } from '../../lib/sanity';
 import ReactToPrint from 'react-to-print';
 import { useSession } from 'next-auth/client';
 import PasswordProtect from '../../components/password-protect';
+import track, { useTracking } from 'react-tracking';
 
 const navigation = {
   categories: [
@@ -229,6 +230,16 @@ export default function Example({ post, morePosts, preview }) {
   const [copied, setCopied] = useState(false);
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
   const [session, loading] = useSession();
+  const [sesh, setSesh] = useState(session);
+  const { Track, trackEvent } = useTracking({ page: `report page example` });
+  useEffect((session) => {
+    console.log({
+      event: `${post.brix}`,
+      client: `fgdhfgh`,
+      url: `${window.location.href.replace('#', '')}`,
+    });
+  }, []);
+
   function copy() {
     const el = document.createElement('input');
     el.value = window.location.href.replace('?#', '');
@@ -236,6 +247,10 @@ export default function Example({ post, morePosts, preview }) {
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
+    console.log({
+      event: `report-copied`,
+      client: `${session.user.email}`,
+    });
     setCopied(true);
     setTimeout(function () {
       setCopied(false);
@@ -248,855 +263,883 @@ export default function Example({ post, morePosts, preview }) {
     return <PasswordProtect />;
   }
   return (
-    <div className="bg-gray-50">
-      {/* Mobile menu */}
-      <Transition.Root show={open} as={Fragment}>
-        <Dialog
-          as="div"
-          className="fixed inset-0 flex z-40 lg:hidden"
-          onClose={setOpen}
-        >
-          <Transition.Child
-            as={Fragment}
-            enter="transition-opacity ease-linear duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transition-opacity ease-linear duration-300"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+    <Track>
+      <div className="bg-gray-50">
+        {/* Mobile menu */}
+        <Transition.Root show={open} as={Fragment}>
+          <Dialog
+            as="div"
+            className="fixed inset-0 flex z-40 lg:hidden"
+            onClose={setOpen}
           >
-            <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-25" />
-          </Transition.Child>
+            <Transition.Child
+              as={Fragment}
+              enter="transition-opacity ease-linear duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="transition-opacity ease-linear duration-300"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-25" />
+            </Transition.Child>
 
-          <Transition.Child
-            as={Fragment}
-            enter="transition ease-in-out duration-300 transform"
-            enterFrom="-translate-x-full"
-            enterTo="translate-x-0"
-            leave="transition ease-in-out duration-300 transform"
-            leaveFrom="translate-x-0"
-            leaveTo="-translate-x-full"
+            <Transition.Child
+              as={Fragment}
+              enter="transition ease-in-out duration-300 transform"
+              enterFrom="-translate-x-full"
+              enterTo="translate-x-0"
+              leave="transition ease-in-out duration-300 transform"
+              leaveFrom="translate-x-0"
+              leaveTo="-translate-x-full"
+            >
+              <div className="relative max-w-xs w-full bg-white shadow-xl pb-12 flex flex-col overflow-y-auto">
+                <div className="px-4 pt-5 pb-2 flex">
+                  <button
+                    type="button"
+                    className="-m-2 p-2 rounded-md inline-flex items-center justify-center text-gray-400"
+                    onClick={() => setOpen(false)}
+                  >
+                    <span className="sr-only">Close menu</span>
+                    <XIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
+                </div>
+
+                {/* Links */}
+                <Tab.Group as="div" className="mt-2">
+                  <div className="border-b border-gray-200">
+                    <Tab.List className="-mb-px flex px-4 space-x-8">
+                      {navigation.categories.map((category) => (
+                        <Tab
+                          key={category.name}
+                          className={({ selected }) =>
+                            classNames(
+                              selected
+                                ? 'text-lime border-lime'
+                                : 'text-gray-900 border-transparent',
+                              'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
+                            )
+                          }
+                        >
+                          {category.name}
+                        </Tab>
+                      ))}
+                    </Tab.List>
+                  </div>
+                  <Tab.Panels as={Fragment}>
+                    {navigation.categories.map((category) => (
+                      <Tab.Panel
+                        key={category.name}
+                        className="pt-10 pb-8 px-4 space-y-10"
+                      >
+                        {category.sections.map((section) => (
+                          <div key={section.name}>
+                            <p
+                              id={`${category.id}-${section.id}-heading-mobile`}
+                              className="font-medium text-gray-900"
+                            >
+                              {section.name}
+                            </p>
+                            <ul
+                              role="list"
+                              aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
+                              className="mt-6 flex flex-col space-y-6"
+                            >
+                              {section.items.map((item) => (
+                                <li key={item.name} className="flow-root">
+                                  <a
+                                    href={item.href}
+                                    className="-m-2 p-2 block text-gray-500"
+                                  >
+                                    {item.name}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </Tab.Panel>
+                    ))}
+                  </Tab.Panels>
+                </Tab.Group>
+
+                <div className="border-t border-gray-200 py-6 px-4 space-y-6">
+                  {navigation.pages.map((page) => (
+                    <div key={page.name} className="flow-root">
+                      <a
+                        href={page.href}
+                        className="-m-2 p-2 block font-medium text-gray-900"
+                      >
+                        {page.name}
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Transition.Child>
+          </Dialog>
+        </Transition.Root>
+
+        <header className="relative bg-white">
+          <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
+            Grape Field Data is now Live!
+          </p>
+
+          <nav
+            aria-label="Top"
+            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
           >
-            <div className="relative max-w-xs w-full bg-white shadow-xl pb-12 flex flex-col overflow-y-auto">
-              <div className="px-4 pt-5 pb-2 flex">
+            <div className="border-b border-gray-200">
+              <div className="h-16 flex items-center">
                 <button
                   type="button"
-                  className="-m-2 p-2 rounded-md inline-flex items-center justify-center text-gray-400"
-                  onClick={() => setOpen(false)}
+                  className="bg-white p-2 rounded-md text-gray-400 lg:hidden"
+                  onClick={() => setOpen(true)}
                 >
-                  <span className="sr-only">Close menu</span>
-                  <XIcon className="h-6 w-6" aria-hidden="true" />
+                  <span className="sr-only">Open menu</span>
+                  <MenuIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
+
+                {/* Logo */}
+                <div className="ml-4 flex lg:ml-0">
+                  <a href="/">
+                    <span className="sr-only">Workflow</span>
+                    <img
+                      className="pt-[10px]"
+                      src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
+                      alt=""
+                      style={{ height: '75px', paddingTop: '8px' }}
+                    />
+                  </a>
+                </div>
+
+                {/* Flyout menus */}
+                <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
+                  <div className="h-full flex space-x-8">
+                    {navigation.categories.map((category) => (
+                      <Popover key={category.name} className="flex">
+                        {({ open }) => (
+                          <>
+                            <div className="relative flex">
+                              <Popover.Button
+                                className={classNames(
+                                  open
+                                    ? 'border-lime text-lime'
+                                    : 'border-transparent text-gray-700 hover:text-gray-800',
+                                  'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
+                                )}
+                              >
+                                {category.name}
+                              </Popover.Button>
+                            </div>
+
+                            <Transition
+                              as={Fragment}
+                              enter="transition ease-out duration-200"
+                              enterFrom="opacity-0"
+                              enterTo="opacity-100"
+                              leave="transition ease-in duration-150"
+                              leaveFrom="opacity-100"
+                              leaveTo="opacity-0"
+                            >
+                              <Popover.Panel className="absolute z-10 top-full inset-x-0 text-sm text-gray-500">
+                                {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
+                                <div
+                                  className="absolute inset-0 top-1/2 bg-white shadow"
+                                  aria-hidden="true"
+                                />
+
+                                <div className="relative bg-white">
+                                  <div className="max-w-7xl mx-auto px-8">
+                                    <div className="grid grid-cols-2 gap-y-10 gap-x-8 py-16">
+                                      <div className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 text-sm">
+                                        {category.sections.map((section) => (
+                                          <div key={section.name}>
+                                            <p
+                                              id={`${section.name}-heading`}
+                                              className="font-medium text-gray-900"
+                                            >
+                                              {section.name}
+                                            </p>
+                                            <ul
+                                              role="list"
+                                              aria-labelledby={`${section.name}-heading`}
+                                              className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
+                                            >
+                                              {section.items.map((item) => (
+                                                <li
+                                                  key={item.name}
+                                                  className="flex"
+                                                >
+                                                  <a
+                                                    href={item.href}
+                                                    className="hover:text-gray-800"
+                                                  >
+                                                    {item.name}
+                                                  </a>
+                                                </li>
+                                              ))}
+                                            </ul>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </Popover.Panel>
+                            </Transition>
+                          </>
+                        )}
+                      </Popover>
+                    ))}
+
+                    {navigation.pages.map((page) => (
+                      <a
+                        key={page.name}
+                        href={page.href}
+                        className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                      >
+                        {page.name}
+                      </a>
+                    ))}
+                  </div>
+                </Popover.Group>
+
+                <div className="ml-auto flex items-center">
+                  {/* Search */}
+                  <div className="flex lg:ml-6">
+                    <button
+                      onClick={copy}
+                      className="p-2 text-gray-400 hover:text-gray-500"
+                    >
+                      {!copied ? (
+                        <ClipboardIcon className="w-6 h-6" aria-hidden="true" />
+                      ) : (
+                        <CheckIcon
+                          className="w-6 h-6 text-lime"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </button>
+                  </div>
+
+                  {/* Cart */}
+                  <div className="ml-4 flow-root lg:ml-6">
+                    <a
+                      onClick={() => {
+                        console.log({
+                          event: `report-emailed`,
+                          client: `${session.user.email}`,
+                        });
+                      }}
+                      href={`mailto:?subject=KEI%20Report%3A%20${encodeURIComponent(
+                        post.slug
+                      )}&body=Hello%2C%20%0A%0APlease%20review%20the%20following%20report%3A%0A${window.location.href.replace(
+                        '?#',
+                        ''
+                      )}%0A%0A%0AHere%20is%20the%20login%20info%20below%3A%0A%0AUsername%3A%0APassword%3A%20%0A`}
+                      className="group -m-2 p-2 flex items-center"
+                    >
+                      <MailIcon
+                        className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </header>
+
+        <main ref={reportDownloadRef}>
+          {/* Product */}
+          <div className="bg-white">
+            <div className="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:pt-24 sm:pb-32 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-x-8">
+              {/* Product details */}
+              <div className="lg:max-w-lg lg:self-end">
+                <nav aria-label="Breadcrumb">
+                  <ol role="list" className="flex items-center space-x-2">
+                    {product.breadcrumbs.map((breadcrumb, breadcrumbIdx) => (
+                      <li key={breadcrumb.id}>
+                        <div className="flex items-center text-sm">
+                          <a
+                            href={breadcrumb.href}
+                            className="font-medium text-gray-500 hover:text-gray-900"
+                          >
+                            {breadcrumb.name}
+                          </a>
+                          {breadcrumbIdx !== product.breadcrumbs.length - 1 ? (
+                            <svg
+                              viewBox="0 0 20 20"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="currentColor"
+                              aria-hidden="true"
+                              className="ml-2 flex-shrink-0 h-5 w-5 text-gray-300"
+                            >
+                              <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+                            </svg>
+                          ) : null}
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
+
+                <div className="mt-4">
+                  <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    {post?.lot.name}
+                    {' - '}
+                    {post?.variety.name}
+                    {' - '}{' '}
+                    {post?.week
+                      ? post?.week.toUpperCase().replace('EEK-', '')
+                      : 'N/A'}
+                    {'-'}
+                    {new Date(post?.date).getFullYear()}
+                  </h1>
+                </div>
+
+                <section aria-labelledby="information-heading" className="mt-4">
+                  <h2 id="information-heading" className="sr-only">
+                    Product information
+                  </h2>
+
+                  <div className="pb-10 mt-4 space-y-6">
+                    <p className="text-base text-gray-500">
+                      <BlockContent
+                        blocks={post?.body}
+                        projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
+                        dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
+                        className={markdownStyles.markdown}
+                      />{' '}
+                    </p>
+                  </div>
+
+                  <form>
+                    <div className="sm:flex sm:justify-between">
+                      {/* Size selector */}
+                      <RadioGroup
+                        value={selectedSize}
+                        onChange={setSelectedSize}
+                      >
+                        <RadioGroup.Label className="block text-sm font-medium text-gray-700"></RadioGroup.Label>
+                        <div className="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                          <RadioGroup.Option
+                            as="div"
+                            key={post?.label?.name}
+                            value={post?.label?.name}
+                            style={{ paddingRight: '80px' }}
+                            className={({ active }) =>
+                              classNames(
+                                active ? 'ring-2 ring-lime' : '',
+                                'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                              )
+                            }
+                          >
+                            {({ active, checked }) => (
+                              <>
+                                <RadioGroup.Label
+                                  as="p"
+                                  className="text-base font-medium text-gray-900"
+                                >
+                                  Lot
+                                  <a
+                                    href="#"
+                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                  >
+                                    <QuestionMarkCircleIcon
+                                      className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                      aria-hidden="true"
+                                    />
+                                  </a>
+                                </RadioGroup.Label>
+                                <RadioGroup.Description
+                                  as="p"
+                                  className="mt-1 text-sm text-gray-500"
+                                >
+                                  {post?.lot?.name}
+                                </RadioGroup.Description>
+                                <div
+                                  className={classNames(
+                                    checked
+                                      ? 'border-transparent'
+                                      : 'border-transparent',
+                                    'absolute -inset-px rounded-lg pointer-events-none'
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              </>
+                            )}
+                          </RadioGroup.Option>
+                          <RadioGroup.Option
+                            as="div"
+                            key={post?.date}
+                            value={post?.date}
+                            style={{ paddingRight: '80px' }}
+                            className={({ active }) =>
+                              classNames(
+                                active ? 'ring-2 ring-lime' : '',
+                                'relative block border border-gray-300 rounded-lg p-4 px-[30] min-w-full cursor-pointer focus:outline-none'
+                              )
+                            }
+                          >
+                            {({ active, checked }) => (
+                              <>
+                                <RadioGroup.Label
+                                  as="p"
+                                  className="text-base font-medium text-gray-900"
+                                >
+                                  Inspection Date
+                                  <a
+                                    href="#"
+                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                  >
+                                    <QuestionMarkCircleIcon
+                                      className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                      aria-hidden="true"
+                                    />
+                                  </a>
+                                </RadioGroup.Label>
+                                <RadioGroup.Description
+                                  as="p"
+                                  className="mt-1 text-sm text-gray-500"
+                                >
+                                  {post?.date
+                                    ? new Date(post?.date).toLocaleDateString(
+                                        'en-US',
+                                        {
+                                          month: '2-digit',
+                                          day: '2-digit',
+                                          year: 'numeric',
+                                        }
+                                      )
+                                    : 'xxxxxxx'}
+                                  <span></span>
+                                </RadioGroup.Description>
+                                <div
+                                  className={classNames(
+                                    checked
+                                      ? 'border-transparent'
+                                      : 'border-transparent',
+                                    'absolute -inset-px rounded-lg pointer-events-none'
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              </>
+                            )}
+                          </RadioGroup.Option>
+                          <RadioGroup.Option
+                            as="div"
+                            key={post?.brix}
+                            value={post?.brix}
+                            className={({ active }) =>
+                              classNames(
+                                active ? 'ring-2 ring-lime' : '',
+                                'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                              )
+                            }
+                          >
+                            {({ active, checked }) => (
+                              <>
+                                <RadioGroup.Label
+                                  as="p"
+                                  className="text-base font-medium text-gray-900"
+                                >
+                                  Brix
+                                  <a
+                                    href="#"
+                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                  >
+                                    <QuestionMarkCircleIcon
+                                      className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                      aria-hidden="true"
+                                    />
+                                  </a>
+                                </RadioGroup.Label>
+                                <RadioGroup.Description
+                                  as="p"
+                                  className="mt-1 text-sm text-gray-500"
+                                >
+                                  {post?.brix}
+                                </RadioGroup.Description>
+                                <div
+                                  className={classNames(
+                                    checked
+                                      ? 'border-transparent'
+                                      : 'border-transparent',
+                                    'absolute -inset-px rounded-lg pointer-events-none'
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              </>
+                            )}
+                          </RadioGroup.Option>
+                          <RadioGroup.Option
+                            as="div"
+                            key={post?.sizeMin}
+                            value={post?.sizeMin}
+                            className={({ active }) =>
+                              classNames(
+                                active ? 'ring-2 ring-indigo-500' : '',
+                                'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                              )
+                            }
+                          >
+                            {({ active, checked }) => (
+                              <>
+                                <RadioGroup.Label
+                                  as="p"
+                                  className="text-base font-medium text-gray-900"
+                                >
+                                  Size
+                                  <a
+                                    href="#"
+                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                  >
+                                    <QuestionMarkCircleIcon
+                                      className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                      aria-hidden="true"
+                                    />
+                                  </a>
+                                </RadioGroup.Label>
+                                <RadioGroup.Description
+                                  as="p"
+                                  className="mt-1 text-sm text-gray-500"
+                                >
+                                  {post?.sizeMin}
+                                  {' mm - '}
+                                  {post?.sizeMax}
+                                  {' mm'}
+                                </RadioGroup.Description>
+                                <div
+                                  className={classNames(
+                                    checked
+                                      ? 'border-transparent'
+                                      : 'border-transparent',
+                                    'absolute -inset-px rounded-lg pointer-events-none'
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              </>
+                            )}
+                          </RadioGroup.Option>
+                          <RadioGroup.Option
+                            as="div"
+                            key={post?.variety.name}
+                            value={post?.variety.name}
+                            className={({ active }) =>
+                              classNames(
+                                active ? 'ring-2 ring-indigo-500' : '',
+                                'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                              )
+                            }
+                          >
+                            {({ active, checked }) => (
+                              <>
+                                <RadioGroup.Label
+                                  as="p"
+                                  className="text-base font-medium text-gray-900"
+                                >
+                                  Type
+                                  <a
+                                    href="#"
+                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                  >
+                                    <QuestionMarkCircleIcon
+                                      className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                      aria-hidden="true"
+                                    />
+                                  </a>
+                                </RadioGroup.Label>
+                                <RadioGroup.Description
+                                  as="p"
+                                  className="mt-1 text-sm text-gray-500"
+                                >
+                                  {post?.label.name}
+                                  {' - '}
+                                  {post?.variety.name}
+                                  {' - '}
+                                  {post?.lot.name}
+                                </RadioGroup.Description>
+                                <div
+                                  className={classNames(
+                                    checked
+                                      ? 'border-transparent'
+                                      : 'border-transparent',
+                                    'absolute -inset-px rounded-lg pointer-events-none'
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              </>
+                            )}
+                          </RadioGroup.Option>
+                          <RadioGroup.Option
+                            as="div"
+                            key={post?.appearance.name}
+                            value={post?.appearance.name}
+                            className={({ active }) =>
+                              classNames(
+                                active ? 'ring-2 ring-indigo-500' : '',
+                                'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                              )
+                            }
+                          >
+                            {({ active, checked }) => (
+                              <>
+                                <RadioGroup.Label
+                                  as="p"
+                                  className="text-base font-medium text-gray-900"
+                                >
+                                  Appearance
+                                  <a
+                                    href="#"
+                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                  >
+                                    <QuestionMarkCircleIcon
+                                      className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                      aria-hidden="true"
+                                    />
+                                  </a>
+                                </RadioGroup.Label>
+                                <RadioGroup.Description
+                                  as="p"
+                                  className="mt-1 text-sm text-gray-500"
+                                >
+                                  {post?.appearance.name}
+                                </RadioGroup.Description>
+                                <div
+                                  className={classNames(
+                                    checked
+                                      ? 'border-transparent'
+                                      : 'border-transparent',
+                                    'absolute -inset-px rounded-lg pointer-events-none'
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              </>
+                            )}
+                          </RadioGroup.Option>
+                          <RadioGroup.Option
+                            as="div"
+                            key={post?.flavor.name}
+                            value={post?.flavor.name}
+                            className={({ active }) =>
+                              classNames(
+                                active ? 'ring-2 ring-indigo-500' : '',
+                                'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                              )
+                            }
+                          >
+                            {({ active, checked }) => (
+                              <>
+                                <RadioGroup.Label
+                                  as="p"
+                                  className="text-base font-medium text-gray-900"
+                                >
+                                  Flavor
+                                  <a
+                                    href="#"
+                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                  >
+                                    <QuestionMarkCircleIcon
+                                      className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                      aria-hidden="true"
+                                    />
+                                  </a>
+                                </RadioGroup.Label>
+                                <RadioGroup.Description
+                                  as="p"
+                                  className="mt-1 text-sm text-gray-500"
+                                >
+                                  {post?.flavor.name}
+                                </RadioGroup.Description>
+                                <div
+                                  className={classNames(
+                                    checked
+                                      ? 'border-transparent'
+                                      : 'border-transparent',
+                                    'absolute -inset-px rounded-lg pointer-events-none'
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              </>
+                            )}
+                          </RadioGroup.Option>
+                          <RadioGroup.Option
+                            as="div"
+                            key={post?.firmness.name}
+                            value={post?.firmness.name}
+                            className={({ active }) =>
+                              classNames(
+                                active ? 'ring-2 ring-indigo-500' : '',
+                                'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
+                              )
+                            }
+                          >
+                            {({ active, checked }) => (
+                              <>
+                                <RadioGroup.Label
+                                  as="p"
+                                  className="text-base font-medium text-gray-900"
+                                >
+                                  Firmness
+                                  <a
+                                    href="#"
+                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
+                                  >
+                                    <QuestionMarkCircleIcon
+                                      className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                      aria-hidden="true"
+                                    />
+                                  </a>
+                                </RadioGroup.Label>
+                                <RadioGroup.Description
+                                  as="p"
+                                  className="mt-1 text-sm text-gray-500"
+                                >
+                                  {post?.appearance.name}
+                                </RadioGroup.Description>
+                                <div
+                                  className={classNames(
+                                    checked
+                                      ? 'border-transparent'
+                                      : 'border-transparent',
+                                    'absolute -inset-px rounded-lg pointer-events-none'
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              </>
+                            )}
+                          </RadioGroup.Option>
+                        </div>
+                      </RadioGroup>
+                    </div>
+                    <div className="mt-10">
+                      <a
+                        href={`mailto:info@keiproduce.com?subject=Request%20Info%20for%20${encodeURIComponent(
+                          post.slug
+                        )}&body=Hello%20KEI%20Staff%2C%20%0A%0AI%20would%20like%20more%20info%20for%20the%20following%20report%3A%0A${window.location.href.replace(
+                          '?#',
+                          ''
+                        )}%0A%0A%0AHere%20is%20my%20info%20below%3A%0A%0AName%3A%0AEmail%3A%20%0ACompany%3A%20%0APhone%20Number%3A`}
+                        className="w-full bg-lime border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                      >
+                        Contact Team
+                      </a>
+                    </div>
+                  </form>
+                </section>
               </div>
 
-              {/* Links */}
-              <Tab.Group as="div" className="mt-2">
-                <div className="border-b border-gray-200">
-                  <Tab.List className="-mb-px flex px-4 space-x-8">
-                    {navigation.categories.map((category) => (
-                      <Tab
-                        key={category.name}
-                        className={({ selected }) =>
-                          classNames(
-                            selected
-                              ? 'text-lime border-lime'
-                              : 'text-gray-900 border-transparent',
-                            'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
-                          )
-                        }
-                      >
-                        {category.name}
-                      </Tab>
-                    ))}
-                  </Tab.List>
+              {/* Product image */}
+              <div className="mt-10 lg:mt-0 lg:col-start-2 lg:row-span-2 lg:self-center">
+                <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
+                  <img
+                    src={imageBuilder(post?.variety?.image)
+                      .width(592)
+                      .height(592)
+                      .url()}
+                    alt={post?.variety?.name}
+                    className="w-full h-full object-center object-cover"
+                  />
                 </div>
-                <Tab.Panels as={Fragment}>
-                  {navigation.categories.map((category) => (
-                    <Tab.Panel
-                      key={category.name}
-                      className="pt-10 pb-8 px-4 space-y-10"
-                    >
-                      {category.sections.map((section) => (
-                        <div key={section.name}>
-                          <p
-                            id={`${category.id}-${section.id}-heading-mobile`}
-                            className="font-medium text-gray-900"
-                          >
-                            {section.name}
-                          </p>
-                          <ul
-                            role="list"
-                            aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
-                            className="mt-6 flex flex-col space-y-6"
-                          >
-                            {section.items.map((item) => (
-                              <li key={item.name} className="flow-root">
-                                <a
-                                  href={item.href}
-                                  className="-m-2 p-2 block text-gray-500"
-                                >
-                                  {item.name}
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </Tab.Panel>
-                  ))}
-                </Tab.Panels>
-              </Tab.Group>
+              </div>
 
-              <div className="border-t border-gray-200 py-6 px-4 space-y-6">
-                {navigation.pages.map((page) => (
-                  <div key={page.name} className="flow-root">
-                    <a
-                      href={page.href}
-                      className="-m-2 p-2 block font-medium text-gray-900"
-                    >
-                      {page.name}
-                    </a>
+              {/* Product form */}
+              <div className="mt-10 lg:max-w-lg lg:col-start-1 lg:row-start-2 lg:self-start">
+                <section aria-labelledby="options-heading">
+                  <h2 id="options-heading" className="sr-only">
+                    Product options
+                  </h2>
+                </section>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-2xl mx-auto px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
+            {/* Details section */}
+            <section aria-labelledby="details-heading">
+              <div className="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-8">
+                {post?.images.map((image) => (
+                  <div key={image.asset._ref}>
+                    <div className="w-full aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
+                      <img
+                        src={imageBuilder(image).width(592).height(395).url()}
+                        alt="image.asset._ref"
+                        className="w-full h-full object-center object-cover"
+                      />
+                    </div>
                   </div>
                 ))}
               </div>
-            </div>
-          </Transition.Child>
-        </Dialog>
-      </Transition.Root>
+            </section>
 
-      <header className="relative bg-white">
-        <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
-          Grape Field Data is now Live!
-        </p>
+            {/* Policies section */}
+          </div>
+        </main>
 
-        <nav
-          aria-label="Top"
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-        >
-          <div className="border-b border-gray-200">
-            <div className="h-16 flex items-center">
-              <button
-                type="button"
-                className="bg-white p-2 rounded-md text-gray-400 lg:hidden"
-                onClick={() => setOpen(true)}
-              >
-                <span className="sr-only">Open menu</span>
-                <MenuIcon className="h-6 w-6" aria-hidden="true" />
-              </button>
-
-              {/* Logo */}
-              <div className="ml-4 flex lg:ml-0">
-                <a href="/">
-                  <span className="sr-only">Workflow</span>
+        <footer aria-labelledby="footer-heading" className="bg-white">
+          <h2 id="footer-heading" className="sr-only">
+            Footer
+          </h2>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="border-t border-gray-200 py-20">
+              <div className="grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-8 md:gap-y-16 md:auto-rows-min">
+                {/* Image section */}
+                <div className="col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1">
                   <img
                     className="pt-[10px]"
                     src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
                     alt=""
-                    style={{ height: '75px', paddingTop: '8px' }}
+                    style={{ height: '65px' }}
                   />
-                </a>
-              </div>
+                </div>
 
-              {/* Flyout menus */}
-              <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
-                <div className="h-full flex space-x-8">
-                  {navigation.categories.map((category) => (
-                    <Popover key={category.name} className="flex">
-                      {({ open }) => (
-                        <>
-                          <div className="relative flex">
-                            <Popover.Button
-                              className={classNames(
-                                open
-                                  ? 'border-lime text-lime'
-                                  : 'border-transparent text-gray-700 hover:text-gray-800',
-                                'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
-                              )}
+                {/* Sitemap sections */}
+                <div className="mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6">
+                  <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
+                    <div>
+                      <h3 className="text-sm font-medium text-gray-900">
+                        Reports
+                      </h3>
+                      <ul role="list" className="mt-6 space-y-6">
+                        {footerNavigation.reports.map((item) => (
+                          <li key={item.name} className="text-sm">
+                            <a
+                              href={item.href}
+                              className="text-gray-500 hover:text-gray-600"
                             >
-                              {category.name}
-                            </Popover.Button>
-                          </div>
-
-                          <Transition
-                            as={Fragment}
-                            enter="transition ease-out duration-200"
-                            enterFrom="opacity-0"
-                            enterTo="opacity-100"
-                            leave="transition ease-in duration-150"
-                            leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                          >
-                            <Popover.Panel className="absolute z-10 top-full inset-x-0 text-sm text-gray-500">
-                              {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                              <div
-                                className="absolute inset-0 top-1/2 bg-white shadow"
-                                aria-hidden="true"
-                              />
-
-                              <div className="relative bg-white">
-                                <div className="max-w-7xl mx-auto px-8">
-                                  <div className="grid grid-cols-2 gap-y-10 gap-x-8 py-16">
-                                    <div className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 text-sm">
-                                      {category.sections.map((section) => (
-                                        <div key={section.name}>
-                                          <p
-                                            id={`${section.name}-heading`}
-                                            className="font-medium text-gray-900"
-                                          >
-                                            {section.name}
-                                          </p>
-                                          <ul
-                                            role="list"
-                                            aria-labelledby={`${section.name}-heading`}
-                                            className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                          >
-                                            {section.items.map((item) => (
-                                              <li
-                                                key={item.name}
-                                                className="flex"
-                                              >
-                                                <a
-                                                  href={item.href}
-                                                  className="hover:text-gray-800"
-                                                >
-                                                  {item.name}
-                                                </a>
-                                              </li>
-                                            ))}
-                                          </ul>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </Popover.Panel>
-                          </Transition>
-                        </>
-                      )}
-                    </Popover>
-                  ))}
-
-                  {navigation.pages.map((page) => (
-                    <a
-                      key={page.name}
-                      href={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                    >
-                      {page.name}
-                    </a>
-                  ))}
-                </div>
-              </Popover.Group>
-
-              <div className="ml-auto flex items-center">
-                {/* Search */}
-                <div className="flex lg:ml-6">
-                  <button
-                    onClick={copy}
-                    className="p-2 text-gray-400 hover:text-gray-500"
-                  >
-                    {!copied ? (
-                      <ClipboardIcon className="w-6 h-6" aria-hidden="true" />
-                    ) : (
-                      <CheckIcon
-                        className="w-6 h-6 text-lime"
-                        aria-hidden="true"
-                      />
-                    )}
-                  </button>
-                </div>
-
-                {/* Cart */}
-                <div className="ml-4 flow-root lg:ml-6">
-                  <a
-                    href={`mailto:?subject=KEI%20Report%3A%20${encodeURIComponent(
-                      post.slug
-                    )}&body=Hello%2C%20%0A%0APlease%20review%20the%20following%20report%3A%0A${window.location.href.replace(
-                      '?#',
-                      ''
-                    )}%0A%0A%0AHere%20is%20the%20login%20info%20below%3A%0A%0AUsername%3A%0APassword%3A%20%0A`}
-                    className="group -m-2 p-2 flex items-center"
-                  >
-                    <MailIcon
-                      className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                      aria-hidden="true"
-                    />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </nav>
-      </header>
-
-      <main ref={reportDownloadRef}>
-        {/* Product */}
-        <div className="bg-white">
-          <div className="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:pt-24 sm:pb-32 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-x-8">
-            {/* Product details */}
-            <div className="lg:max-w-lg lg:self-end">
-              <nav aria-label="Breadcrumb">
-                <ol role="list" className="flex items-center space-x-2">
-                  {product.breadcrumbs.map((breadcrumb, breadcrumbIdx) => (
-                    <li key={breadcrumb.id}>
-                      <div className="flex items-center text-sm">
-                        <a
-                          href={breadcrumb.href}
-                          className="font-medium text-gray-500 hover:text-gray-900"
-                        >
-                          {breadcrumb.name}
-                        </a>
-                        {breadcrumbIdx !== product.breadcrumbs.length - 1 ? (
-                          <svg
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            aria-hidden="true"
-                            className="ml-2 flex-shrink-0 h-5 w-5 text-gray-300"
-                          >
-                            <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
-                          </svg>
-                        ) : null}
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </nav>
-
-              <div className="mt-4">
-                <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                  {post?.lot.name}
-                  {' - '}
-                  {post?.variety.name}
-                  {' - '}{' '}
-                  {post?.week
-                    ? post?.week.toUpperCase().replace('EEK-', '')
-                    : 'N/A'}
-                  {'-'}
-                  {new Date(post?.date).getFullYear()}
-                </h1>
-              </div>
-
-              <section aria-labelledby="information-heading" className="mt-4">
-                <h2 id="information-heading" className="sr-only">
-                  Product information
-                </h2>
-
-                <div className="pb-10 mt-4 space-y-6">
-                  <p className="text-base text-gray-500">
-                    <BlockContent
-                      blocks={post?.body}
-                      projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
-                      dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
-                      className={markdownStyles.markdown}
-                    />{' '}
-                  </p>
-                </div>
-
-                <form>
-                  <div className="sm:flex sm:justify-between">
-                    {/* Size selector */}
-                    <RadioGroup value={selectedSize} onChange={setSelectedSize}>
-                      <RadioGroup.Label className="block text-sm font-medium text-gray-700"></RadioGroup.Label>
-                      <div className="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <RadioGroup.Option
-                          as="div"
-                          key={post?.label?.name}
-                          value={post?.label?.name}
-                          style={{ paddingRight: '80px' }}
-                          className={({ active }) =>
-                            classNames(
-                              active ? 'ring-2 ring-lime' : '',
-                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
-                            )
-                          }
-                        >
-                          {({ active, checked }) => (
-                            <>
-                              <RadioGroup.Label
-                                as="p"
-                                className="text-base font-medium text-gray-900"
-                              >
-                                Lot
-                                <a
-                                  href="#"
-                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                >
-                                  <QuestionMarkCircleIcon
-                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                    aria-hidden="true"
-                                  />
-                                </a>
-                              </RadioGroup.Label>
-                              <RadioGroup.Description
-                                as="p"
-                                className="mt-1 text-sm text-gray-500"
-                              >
-                                {post?.lot?.name}
-                              </RadioGroup.Description>
-                              <div
-                                className={classNames(
-                                  checked
-                                    ? 'border-transparent'
-                                    : 'border-transparent',
-                                  'absolute -inset-px rounded-lg pointer-events-none'
-                                )}
-                                aria-hidden="true"
-                              />
-                            </>
-                          )}
-                        </RadioGroup.Option>
-                        <RadioGroup.Option
-                          as="div"
-                          key={post?.date}
-                          value={post?.date}
-                          style={{ paddingRight: '80px' }}
-                          className={({ active }) =>
-                            classNames(
-                              active ? 'ring-2 ring-lime' : '',
-                              'relative block border border-gray-300 rounded-lg p-4 px-[30] min-w-full cursor-pointer focus:outline-none'
-                            )
-                          }
-                        >
-                          {({ active, checked }) => (
-                            <>
-                              <RadioGroup.Label
-                                as="p"
-                                className="text-base font-medium text-gray-900"
-                              >
-                                Inspection Date
-                                <a
-                                  href="#"
-                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                >
-                                  <QuestionMarkCircleIcon
-                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                    aria-hidden="true"
-                                  />
-                                </a>
-                              </RadioGroup.Label>
-                              <RadioGroup.Description
-                                as="p"
-                                className="mt-1 text-sm text-gray-500"
-                              >
-                                {post?.date
-                                  ? new Date(post?.date).toLocaleDateString(
-                                      'en-US',
-                                      {
-                                        month: '2-digit',
-                                        day: '2-digit',
-                                        year: 'numeric',
-                                      }
-                                    )
-                                  : 'xxxxxxx'}
-                                <span></span>
-                              </RadioGroup.Description>
-                              <div
-                                className={classNames(
-                                  checked
-                                    ? 'border-transparent'
-                                    : 'border-transparent',
-                                  'absolute -inset-px rounded-lg pointer-events-none'
-                                )}
-                                aria-hidden="true"
-                              />
-                            </>
-                          )}
-                        </RadioGroup.Option>
-                        <RadioGroup.Option
-                          as="div"
-                          key={post?.brix}
-                          value={post?.brix}
-                          className={({ active }) =>
-                            classNames(
-                              active ? 'ring-2 ring-lime' : '',
-                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
-                            )
-                          }
-                        >
-                          {({ active, checked }) => (
-                            <>
-                              <RadioGroup.Label
-                                as="p"
-                                className="text-base font-medium text-gray-900"
-                              >
-                                Brix
-                                <a
-                                  href="#"
-                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                >
-                                  <QuestionMarkCircleIcon
-                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                    aria-hidden="true"
-                                  />
-                                </a>
-                              </RadioGroup.Label>
-                              <RadioGroup.Description
-                                as="p"
-                                className="mt-1 text-sm text-gray-500"
-                              >
-                                {post?.brix}
-                              </RadioGroup.Description>
-                              <div
-                                className={classNames(
-                                  checked
-                                    ? 'border-transparent'
-                                    : 'border-transparent',
-                                  'absolute -inset-px rounded-lg pointer-events-none'
-                                )}
-                                aria-hidden="true"
-                              />
-                            </>
-                          )}
-                        </RadioGroup.Option>
-                        <RadioGroup.Option
-                          as="div"
-                          key={post?.sizeMin}
-                          value={post?.sizeMin}
-                          className={({ active }) =>
-                            classNames(
-                              active ? 'ring-2 ring-indigo-500' : '',
-                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
-                            )
-                          }
-                        >
-                          {({ active, checked }) => (
-                            <>
-                              <RadioGroup.Label
-                                as="p"
-                                className="text-base font-medium text-gray-900"
-                              >
-                                Size
-                                <a
-                                  href="#"
-                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                >
-                                  <QuestionMarkCircleIcon
-                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                    aria-hidden="true"
-                                  />
-                                </a>
-                              </RadioGroup.Label>
-                              <RadioGroup.Description
-                                as="p"
-                                className="mt-1 text-sm text-gray-500"
-                              >
-                                {post?.sizeMin}
-                                {' mm - '}
-                                {post?.sizeMax}
-                                {' mm'}
-                              </RadioGroup.Description>
-                              <div
-                                className={classNames(
-                                  checked
-                                    ? 'border-transparent'
-                                    : 'border-transparent',
-                                  'absolute -inset-px rounded-lg pointer-events-none'
-                                )}
-                                aria-hidden="true"
-                              />
-                            </>
-                          )}
-                        </RadioGroup.Option>
-                        <RadioGroup.Option
-                          as="div"
-                          key={post?.variety.name}
-                          value={post?.variety.name}
-                          className={({ active }) =>
-                            classNames(
-                              active ? 'ring-2 ring-indigo-500' : '',
-                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
-                            )
-                          }
-                        >
-                          {({ active, checked }) => (
-                            <>
-                              <RadioGroup.Label
-                                as="p"
-                                className="text-base font-medium text-gray-900"
-                              >
-                                Type
-                                <a
-                                  href="#"
-                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                >
-                                  <QuestionMarkCircleIcon
-                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                    aria-hidden="true"
-                                  />
-                                </a>
-                              </RadioGroup.Label>
-                              <RadioGroup.Description
-                                as="p"
-                                className="mt-1 text-sm text-gray-500"
-                              >
-                                {post?.label.name}
-                                {' - '}
-                                {post?.variety.name}
-                                {' - '}
-                                {post?.lot.name}
-                              </RadioGroup.Description>
-                              <div
-                                className={classNames(
-                                  checked
-                                    ? 'border-transparent'
-                                    : 'border-transparent',
-                                  'absolute -inset-px rounded-lg pointer-events-none'
-                                )}
-                                aria-hidden="true"
-                              />
-                            </>
-                          )}
-                        </RadioGroup.Option>
-                        <RadioGroup.Option
-                          as="div"
-                          key={post?.appearance.name}
-                          value={post?.appearance.name}
-                          className={({ active }) =>
-                            classNames(
-                              active ? 'ring-2 ring-indigo-500' : '',
-                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
-                            )
-                          }
-                        >
-                          {({ active, checked }) => (
-                            <>
-                              <RadioGroup.Label
-                                as="p"
-                                className="text-base font-medium text-gray-900"
-                              >
-                                Appearance
-                                <a
-                                  href="#"
-                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                >
-                                  <QuestionMarkCircleIcon
-                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                    aria-hidden="true"
-                                  />
-                                </a>
-                              </RadioGroup.Label>
-                              <RadioGroup.Description
-                                as="p"
-                                className="mt-1 text-sm text-gray-500"
-                              >
-                                {post?.appearance.name}
-                              </RadioGroup.Description>
-                              <div
-                                className={classNames(
-                                  checked
-                                    ? 'border-transparent'
-                                    : 'border-transparent',
-                                  'absolute -inset-px rounded-lg pointer-events-none'
-                                )}
-                                aria-hidden="true"
-                              />
-                            </>
-                          )}
-                        </RadioGroup.Option>
-                        <RadioGroup.Option
-                          as="div"
-                          key={post?.flavor.name}
-                          value={post?.flavor.name}
-                          className={({ active }) =>
-                            classNames(
-                              active ? 'ring-2 ring-indigo-500' : '',
-                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
-                            )
-                          }
-                        >
-                          {({ active, checked }) => (
-                            <>
-                              <RadioGroup.Label
-                                as="p"
-                                className="text-base font-medium text-gray-900"
-                              >
-                                Flavor
-                                <a
-                                  href="#"
-                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                >
-                                  <QuestionMarkCircleIcon
-                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                    aria-hidden="true"
-                                  />
-                                </a>
-                              </RadioGroup.Label>
-                              <RadioGroup.Description
-                                as="p"
-                                className="mt-1 text-sm text-gray-500"
-                              >
-                                {post?.flavor.name}
-                              </RadioGroup.Description>
-                              <div
-                                className={classNames(
-                                  checked
-                                    ? 'border-transparent'
-                                    : 'border-transparent',
-                                  'absolute -inset-px rounded-lg pointer-events-none'
-                                )}
-                                aria-hidden="true"
-                              />
-                            </>
-                          )}
-                        </RadioGroup.Option>
-                        <RadioGroup.Option
-                          as="div"
-                          key={post?.firmness.name}
-                          value={post?.firmness.name}
-                          className={({ active }) =>
-                            classNames(
-                              active ? 'ring-2 ring-indigo-500' : '',
-                              'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
-                            )
-                          }
-                        >
-                          {({ active, checked }) => (
-                            <>
-                              <RadioGroup.Label
-                                as="p"
-                                className="text-base font-medium text-gray-900"
-                              >
-                                Firmness
-                                <a
-                                  href="#"
-                                  className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                >
-                                  <QuestionMarkCircleIcon
-                                    className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                    aria-hidden="true"
-                                  />
-                                </a>
-                              </RadioGroup.Label>
-                              <RadioGroup.Description
-                                as="p"
-                                className="mt-1 text-sm text-gray-500"
-                              >
-                                {post?.appearance.name}
-                              </RadioGroup.Description>
-                              <div
-                                className={classNames(
-                                  checked
-                                    ? 'border-transparent'
-                                    : 'border-transparent',
-                                  'absolute -inset-px rounded-lg pointer-events-none'
-                                )}
-                                aria-hidden="true"
-                              />
-                            </>
-                          )}
-                        </RadioGroup.Option>
-                      </div>
-                    </RadioGroup>
-                  </div>
-                  <div className="mt-10">
-                    <a
-                      href={`mailto:info@keiproduce.com?subject=Request%20Info%20for%20${encodeURIComponent(
-                        post.slug
-                      )}&body=Hello%20KEI%20Staff%2C%20%0A%0AI%20would%20more%20info%20for%20the%20following%20report%3A%0A${window.location.href.replace(
-                        '?#',
-                        ''
-                      )}%0A%0A%0AHere%20is%20my%20info%20below%3A%0A%0AName%3A%0AEmail%3A%20%0ACompany%3A%20%0APhone%20Number%3A`}
-                      className="w-full bg-lime border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-                    >
-                      Contact Team
-                    </a>
-                  </div>
-                </form>
-              </section>
-            </div>
-
-            {/* Product image */}
-            <div className="mt-10 lg:mt-0 lg:col-start-2 lg:row-span-2 lg:self-center">
-              <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
-                <img
-                  src={imageBuilder(post?.variety?.image)
-                    .width(592)
-                    .height(592)
-                    .url()}
-                  alt={post?.variety?.name}
-                  className="w-full h-full object-center object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Product form */}
-            <div className="mt-10 lg:max-w-lg lg:col-start-1 lg:row-start-2 lg:self-start">
-              <section aria-labelledby="options-heading">
-                <h2 id="options-heading" className="sr-only">
-                  Product options
-                </h2>
-              </section>
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-2xl mx-auto px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
-          {/* Details section */}
-          <section aria-labelledby="details-heading">
-            <div className="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-8">
-              {post?.images.map((image) => (
-                <div key={image.asset._ref}>
-                  <div className="w-full aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
-                    <img
-                      src={imageBuilder(image).width(592).height(395).url()}
-                      alt="image.asset._ref"
-                      className="w-full h-full object-center object-cover"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Policies section */}
-        </div>
-      </main>
-
-      <footer aria-labelledby="footer-heading" className="bg-white">
-        <h2 id="footer-heading" className="sr-only">
-          Footer
-        </h2>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="border-t border-gray-200 py-20">
-            <div className="grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-8 md:gap-y-16 md:auto-rows-min">
-              {/* Image section */}
-              <div className="col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1">
-                <img
-                  className="pt-[10px]"
-                  src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
-                  alt=""
-                  style={{ height: '65px' }}
-                />
-              </div>
-
-              {/* Sitemap sections */}
-              <div className="mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6">
-                <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-900">
-                      Reports
-                    </h3>
-                    <ul role="list" className="mt-6 space-y-6">
-                      {footerNavigation.reports.map((item) => (
-                        <li key={item.name} className="text-sm">
-                          <a
-                            href={item.href}
-                            className="text-gray-500 hover:text-gray-600"
-                          >
-                            {item.name}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
+                              {item.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-medium text-gray-900">
+                        Company
+                      </h3>
+                      <ul role="list" className="mt-6 space-y-6">
+                        {footerNavigation.company.map((item) => (
+                          <li key={item.name} className="text-sm">
+                            <a
+                              href={item.href}
+                              className="text-gray-500 hover:text-gray-600"
+                            >
+                              {item.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                   <div>
                     <h3 className="text-sm font-medium text-gray-900">
-                      Company
+                      Produce Info
                     </h3>
                     <ul role="list" className="mt-6 space-y-6">
-                      {footerNavigation.company.map((item) => (
+                      {footerNavigation.produceInfo.map((item) => (
                         <li key={item.name} className="text-sm">
                           <a
                             href={item.href}
@@ -1109,27 +1152,9 @@ export default function Example({ post, morePosts, preview }) {
                     </ul>
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-sm font-medium text-gray-900">
-                    Produce Info
-                  </h3>
-                  <ul role="list" className="mt-6 space-y-6">
-                    {footerNavigation.produceInfo.map((item) => (
-                      <li key={item.name} className="text-sm">
-                        <a
-                          href={item.href}
-                          className="text-gray-500 hover:text-gray-600"
-                        >
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
 
-              {/* Newsletter section */}
-              {/* <div className="mt-12 md:mt-0 md:row-start-2 md:col-start-3 md:col-span-8 lg:row-start-1 lg:col-start-9 lg:col-span-4">
+                {/* Newsletter section */}
+                {/* <div className="mt-12 md:mt-0 md:row-start-2 md:col-start-3 md:col-span-8 lg:row-start-1 lg:col-start-9 lg:col-span-4">
                 <h3 className="text-sm font-medium text-gray-900">
                   Sign up for our newsletter
                 </h3>
@@ -1157,18 +1182,19 @@ export default function Example({ post, morePosts, preview }) {
                   </div>
                 </form>
               </div> */}
+              </div>
+            </div>
+
+            <div className="border-t border-gray-100 py-10 text-center">
+              <p className="text-sm text-gray-500">
+                &copy; {new Date().getFullYear()} Kirschenman Enterprises, Inc.
+                All rights reserved.
+              </p>
             </div>
           </div>
-
-          <div className="border-t border-gray-100 py-10 text-center">
-            <p className="text-sm text-gray-500">
-              &copy; {new Date().getFullYear()} Kirschenman Enterprises, Inc.
-              All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </Track>
   );
 }
 

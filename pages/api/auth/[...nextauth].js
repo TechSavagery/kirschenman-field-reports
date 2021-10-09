@@ -12,6 +12,9 @@ const options = {
     jwt: true,
   },
   adapter: SanityAdapter(client),
+  pages: {
+    error: '/login-failed', // Error code passed in query string as ?error=
+  }
 };
 
 export default (req, res) => NextAuth(req, res, options);

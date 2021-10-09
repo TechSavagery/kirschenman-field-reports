@@ -320,7 +320,7 @@ export default function PasswordProtect({ allPosts, preview }) {
                       </a>
                       <a
                         className="block w-full py-3 lg:px-20 sm:px-5 text-center bg-white border border-transparent rounded-md shadow-md text-base font-medium text-gray-700 hover:bg-gray-50 sm:inline-block sm:w-auto"
-                        href="mailto:someone@example.com?Subject=Hello%20again"
+                        href="mailto:info@keiproduce.com?subject=Request%20for%20KEI%20Field%20Report%20Access&body=Hello%20KEI%20Staff%2C%0A%0AI%20would%20like%20access%20to%20the%20KEI%20Field%20Report%20Data.%20Here%20is%20my%20info%20below%3A%0A%0AName%3A%20%0ACompany%3A%0AEmail%3A%0APhone%3A%0A"
                       >
                         Join
                       </a>
