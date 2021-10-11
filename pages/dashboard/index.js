@@ -34,6 +34,7 @@ import ReportCard from '../../components/report-card';
 import { getAllPostsForHome } from '../../lib/api';
 import { useSession } from 'next-auth/client';
 import PasswordProtect from '../../components/password-protect';
+import Head from 'next/head';
 const navigation = {
   categories: [
     {
@@ -196,11 +197,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Example({allPosts, preview}) {
+export default function Example({ allPosts, preview }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [session, loading] = useSession();
-  const allReports = allPosts.slice(0,12);
+  const allReports = allPosts.slice(0, 12);
 
   if (typeof window !== 'undefined' && loading) return null;
 
@@ -210,6 +211,13 @@ export default function Example({allPosts, preview}) {
   }
   return (
     <div className="bg-white">
+      <Head>
+        <meta
+          name="description"
+          content={`Field Report Data from Kirschenman Enterprises Inc.`}
+        />
+        <title>Kirschenman Field Reports - Dashboard</title>
+      </Head>
       <div>
         {/* Mobile menu */}
         <Transition.Root show={mobileMenuOpen} as={Fragment}>
@@ -558,32 +566,32 @@ export default function Example({allPosts, preview}) {
             </h3>
             <div className="mt-3 sm:mt-0 sm:ml-4">
               <a href="/dashboard/grapes">
-              <button
-              href="/dashboard/grapes"
-                type="button"
-                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime"
-              >
-                View All 
-              </button>
+                <button
+                  href="/dashboard/grapes"
+                  type="button"
+                  className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime"
+                >
+                  View All
+                </button>
               </a>
-            </div>         
+            </div>
           </div>
           <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
-                {allReports.map((report) => (
-                  <ReportCard
-                    label={report.label}
-                    variety={report.variety}
-                    lot={report.lot}
-                    week={report.week}
-                    inspectionDate={report.date}
-                    mainImage={report.coverImage}
-                    slug={report.slug}
-                    reporter={report.reporter}
-                    content={report.body}
-                    reporter={report.reporter}
-                  />
-                ))}
-              </div>
+            {allReports.map((report) => (
+              <ReportCard
+                label={report.label}
+                variety={report.variety}
+                lot={report.lot}
+                week={report.week}
+                inspectionDate={report.date}
+                mainImage={report.coverImage}
+                slug={report.slug}
+                reporter={report.reporter}
+                content={report.body}
+                reporter={report.reporter}
+              />
+            ))}
+          </div>
           <div className="py-[20px] border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               Potato Reports
@@ -593,7 +601,7 @@ export default function Example({allPosts, preview}) {
                 type="button"
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime"
               >
-                View All 
+                View All
               </button>
             </div>
           </div>
@@ -606,55 +614,73 @@ export default function Example({allPosts, preview}) {
                 type="button"
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-lime hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime"
               >
-                View All 
+                View All
               </button>
             </div>
           </div>
         </main>
 
         <footer aria-labelledby="footer-heading" className="bg-white">
-        <h2 id="footer-heading" className="sr-only">
-          Footer
-        </h2>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="border-t border-gray-200 py-20">
-            <div className="grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-8 md:gap-y-16 md:auto-rows-min">
-              {/* Image section */}
-              <div className="col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1">
-                <img
-                  className="pt-[10px]"
-                  src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
-                  alt=""
-                  style={{ height: '65px' }}
-                />
-              </div>
+          <h2 id="footer-heading" className="sr-only">
+            Footer
+          </h2>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="border-t border-gray-200 py-20">
+              <div className="grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-8 md:gap-y-16 md:auto-rows-min">
+                {/* Image section */}
+                <div className="col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1">
+                  <img
+                    className="pt-[10px]"
+                    src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
+                    alt=""
+                    style={{ height: '65px' }}
+                  />
+                </div>
 
-              {/* Sitemap sections */}
-              <div className="mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6">
-                <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-900">
-                      Reports
-                    </h3>
-                    <ul role="list" className="mt-6 space-y-6">
-                      {footerNavigation.reports.map((item) => (
-                        <li key={item.name} className="text-sm">
-                          <a
-                            href={item.href}
-                            className="text-gray-500 hover:text-gray-600"
-                          >
-                            {item.name}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
+                {/* Sitemap sections */}
+                <div className="mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6">
+                  <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
+                    <div>
+                      <h3 className="text-sm font-medium text-gray-900">
+                        Reports
+                      </h3>
+                      <ul role="list" className="mt-6 space-y-6">
+                        {footerNavigation.reports.map((item) => (
+                          <li key={item.name} className="text-sm">
+                            <a
+                              href={item.href}
+                              className="text-gray-500 hover:text-gray-600"
+                            >
+                              {item.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-medium text-gray-900">
+                        Company
+                      </h3>
+                      <ul role="list" className="mt-6 space-y-6">
+                        {footerNavigation.company.map((item) => (
+                          <li key={item.name} className="text-sm">
+                            <a
+                              href={item.href}
+                              className="text-gray-500 hover:text-gray-600"
+                            >
+                              {item.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                   <div>
                     <h3 className="text-sm font-medium text-gray-900">
-                      Company
+                      Produce Info
                     </h3>
                     <ul role="list" className="mt-6 space-y-6">
-                      {footerNavigation.company.map((item) => (
+                      {footerNavigation.produceInfo.map((item) => (
                         <li key={item.name} className="text-sm">
                           <a
                             href={item.href}
@@ -667,27 +693,9 @@ export default function Example({allPosts, preview}) {
                     </ul>
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-sm font-medium text-gray-900">
-                    Produce Info
-                  </h3>
-                  <ul role="list" className="mt-6 space-y-6">
-                    {footerNavigation.produceInfo.map((item) => (
-                      <li key={item.name} className="text-sm">
-                        <a
-                          href={item.href}
-                          className="text-gray-500 hover:text-gray-600"
-                        >
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
 
-              {/* Newsletter section */}
-              {/* <div className="mt-12 md:mt-0 md:row-start-2 md:col-start-3 md:col-span-8 lg:row-start-1 lg:col-start-9 lg:col-span-4">
+                {/* Newsletter section */}
+                {/* <div className="mt-12 md:mt-0 md:row-start-2 md:col-start-3 md:col-span-8 lg:row-start-1 lg:col-start-9 lg:col-span-4">
                 <h3 className="text-sm font-medium text-gray-900">
                   Sign up for our newsletter
                 </h3>
@@ -715,26 +723,26 @@ export default function Example({allPosts, preview}) {
                   </div>
                 </form>
               </div> */}
+              </div>
+            </div>
+
+            <div className="border-t border-gray-100 py-10 text-center">
+              <p className="text-sm text-gray-500">
+                &copy; {new Date().getFullYear()} Kirschenman Enterprises, Inc.
+                All rights reserved.
+              </p>
             </div>
           </div>
-
-          <div className="border-t border-gray-100 py-10 text-center">
-            <p className="text-sm text-gray-500">
-              &copy; {new Date().getFullYear()} Kirschenman Enterprises, Inc.
-              All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+        </footer>
       </div>
     </div>
   );
 }
 
 export async function getStaticProps({ preview = false }) {
-    const allPosts = await getAllPostsForHome(preview);
-    return {
-      props: { allPosts, preview },
-      revalidate: 1,
-    };
-  }
+  const allPosts = await getAllPostsForHome(preview);
+  return {
+    props: { allPosts, preview },
+    revalidate: 1,
+  };
+}

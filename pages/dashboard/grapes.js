@@ -34,6 +34,7 @@ import ReportCard from '../../components/report-card';
 import { getAllPostsForHome } from '../../lib/api';
 import { useSession } from 'next-auth/client';
 import PasswordProtect from '../../components/password-protect';
+import Head from 'next/head'
 
 const navigation = {
   categories: [
@@ -296,6 +297,13 @@ export default function Example({ allPosts, preview }) {
 
   return (
     <div className="bg-white">
+      <Head>
+        <meta
+          name="description"
+          content={`Grape Field Report Data from Kirschenman Enterprises Inc.`}
+        />
+        <title>Kirschenman Field Reports - Grapes</title>
+      </Head>
       <div>
         {/* Mobile menu */}
         <Transition.Root show={mobileMenuOpen} as={Fragment}>
@@ -664,223 +672,245 @@ export default function Example({ allPosts, preview }) {
                   type="button"
                   className="inline-flex items-center ml-4 mr-4 pl-1 w-24 py-2 my-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime"
                 >
-                   Clear Filters
+                  Clear Filters
                 </button>
 
                 {/* mobile Filters */}
                 <form className="mt-4">
-                  {filters.filter((filter) => {return filter.id === "week"}).map((section) => (
-                    <Disclosure
-                      as="div"
-                      key={section.name}
-                      className="border-t border-gray-200 pt-4 pb-4"
-                    >
-                      {({ open }) => (
-                        <fieldset>
-                          <legend className="w-full px-2">
-                            <Disclosure.Button className="w-full p-2 flex items-center justify-between text-gray-400 hover:text-gray-500">
-                              <span className="text-sm font-medium text-gray-900">
-                                {section.name}
-                              </span>
-                              <span className="ml-6 h-7 flex items-center">
-                                <ChevronDownIcon
-                                  className={classNames(
-                                    open ? '-rotate-180' : 'rotate-0',
-                                    'h-5 w-5 transform'
-                                  )}
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </Disclosure.Button>
-                          </legend>
-                          <Disclosure.Panel className="pt-4 pb-2 px-4">
-                            <div className="space-y-6">
-                              {section.options.map((option, optionIdx) => (
-                                <div
-                                  key={option.value}
-                                  className="flex items-center"
-                                >
-                                  <input
-                                    id={`${section.id}-${optionIdx}-mobile`}
-                                    name={`${section.id}[]`}
-                                    onClick={() => setWeekFilter(option.value)}
-                                    defaultValue={option.value}
-                                    type="radio"
-                                    className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                  {filters
+                    .filter((filter) => {
+                      return filter.id === 'week';
+                    })
+                    .map((section) => (
+                      <Disclosure
+                        as="div"
+                        key={section.name}
+                        className="border-t border-gray-200 pt-4 pb-4"
+                      >
+                        {({ open }) => (
+                          <fieldset>
+                            <legend className="w-full px-2">
+                              <Disclosure.Button className="w-full p-2 flex items-center justify-between text-gray-400 hover:text-gray-500">
+                                <span className="text-sm font-medium text-gray-900">
+                                  {section.name}
+                                </span>
+                                <span className="ml-6 h-7 flex items-center">
+                                  <ChevronDownIcon
+                                    className={classNames(
+                                      open ? '-rotate-180' : 'rotate-0',
+                                      'h-5 w-5 transform'
+                                    )}
+                                    aria-hidden="true"
                                   />
-                                  <label
-                                    htmlFor={`${section.id}-${optionIdx}-mobile`}
-                                    className="ml-3 text-sm text-gray-500"
+                                </span>
+                              </Disclosure.Button>
+                            </legend>
+                            <Disclosure.Panel className="pt-4 pb-2 px-4">
+                              <div className="space-y-6">
+                                {section.options.map((option, optionIdx) => (
+                                  <div
+                                    key={option.value}
+                                    className="flex items-center"
                                   >
-                                    {option.label}
-                                  </label>
-                                </div>
-                              ))}
-                            </div>
-                          </Disclosure.Panel>
-                        </fieldset>
-                      )}
-                    </Disclosure>
-                  ))}
-                    {filters.filter((filter) => {return filter.id === "variety"}).map((section) => (
-                    <Disclosure
-                      as="div"
-                      key={section.name}
-                      className="border-t border-gray-200 pt-4 pb-4"
-                    >
-                      {({ open }) => (
-                        <fieldset>
-                          <legend className="w-full px-2">
-                            <Disclosure.Button className="w-full p-2 flex items-center justify-between text-gray-400 hover:text-gray-500">
-                              <span className="text-sm font-medium text-gray-900">
-                                {section.name}
-                              </span>
-                              <span className="ml-6 h-7 flex items-center">
-                                <ChevronDownIcon
-                                  className={classNames(
-                                    open ? '-rotate-180' : 'rotate-0',
-                                    'h-5 w-5 transform'
-                                  )}
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </Disclosure.Button>
-                          </legend>
-                          <Disclosure.Panel className="pt-4 pb-2 px-4">
-                            <div className="space-y-6">
-                              {section.options.map((option, optionIdx) => (
-                                <div
-                                  key={option.value}
-                                  className="flex items-center"
-                                >
-                                  <input
-                                    id={`${section.id}-${optionIdx}-mobile`}
-                                    name={`${section.id}[]`}
-                                    onClick={() => setVarietyFilter(option.value)}
-                                    defaultValue={option.value}
-                                    type="radio"
-                                    className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                    <input
+                                      id={`${section.id}-${optionIdx}-mobile`}
+                                      name={`${section.id}[]`}
+                                      onClick={() =>
+                                        setWeekFilter(option.value)
+                                      }
+                                      defaultValue={option.value}
+                                      type="radio"
+                                      className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                    />
+                                    <label
+                                      htmlFor={`${section.id}-${optionIdx}-mobile`}
+                                      className="ml-3 text-sm text-gray-500"
+                                    >
+                                      {option.label}
+                                    </label>
+                                  </div>
+                                ))}
+                              </div>
+                            </Disclosure.Panel>
+                          </fieldset>
+                        )}
+                      </Disclosure>
+                    ))}
+                  {filters
+                    .filter((filter) => {
+                      return filter.id === 'variety';
+                    })
+                    .map((section) => (
+                      <Disclosure
+                        as="div"
+                        key={section.name}
+                        className="border-t border-gray-200 pt-4 pb-4"
+                      >
+                        {({ open }) => (
+                          <fieldset>
+                            <legend className="w-full px-2">
+                              <Disclosure.Button className="w-full p-2 flex items-center justify-between text-gray-400 hover:text-gray-500">
+                                <span className="text-sm font-medium text-gray-900">
+                                  {section.name}
+                                </span>
+                                <span className="ml-6 h-7 flex items-center">
+                                  <ChevronDownIcon
+                                    className={classNames(
+                                      open ? '-rotate-180' : 'rotate-0',
+                                      'h-5 w-5 transform'
+                                    )}
+                                    aria-hidden="true"
                                   />
-                                  <label
-                                    htmlFor={`${section.id}-${optionIdx}-mobile`}
-                                    className="ml-3 text-sm text-gray-500"
+                                </span>
+                              </Disclosure.Button>
+                            </legend>
+                            <Disclosure.Panel className="pt-4 pb-2 px-4">
+                              <div className="space-y-6">
+                                {section.options.map((option, optionIdx) => (
+                                  <div
+                                    key={option.value}
+                                    className="flex items-center"
                                   >
-                                    {option.label}
-                                  </label>
-                                </div>
-                              ))}
-                            </div>
-                          </Disclosure.Panel>
-                        </fieldset>
-                      )}
-                    </Disclosure>
-                  ))}
-                  {filters.filter((filter) => {return filter.id === "label"}).map((section) => (
-                    <Disclosure
-                      as="div"
-                      key={section.name}
-                      className="border-t border-gray-200 pt-4 pb-4"
-                    >
-                      {({ open }) => (
-                        <fieldset>
-                          <legend className="w-full px-2">
-                            <Disclosure.Button className="w-full p-2 flex items-center justify-between text-gray-400 hover:text-gray-500">
-                              <span className="text-sm font-medium text-gray-900">
-                                {section.name}
-                              </span>
-                              <span className="ml-6 h-7 flex items-center">
-                                <ChevronDownIcon
-                                  className={classNames(
-                                    open ? '-rotate-180' : 'rotate-0',
-                                    'h-5 w-5 transform'
-                                  )}
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </Disclosure.Button>
-                          </legend>
-                          <Disclosure.Panel className="pt-4 pb-2 px-4">
-                            <div className="space-y-6">
-                              {section.options.map((option, optionIdx) => (
-                                <div
-                                  key={option.value}
-                                  className="flex items-center"
-                                >
-                                  <input
-                                    id={`${section.id}-${optionIdx}-mobile`}
-                                    name={`${section.id}[]`}
-                                    onClick={() => setLabelFilter(option.value)}
-                                    defaultValue={option.value}
-                                    type="radio"
-                                    className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                    <input
+                                      id={`${section.id}-${optionIdx}-mobile`}
+                                      name={`${section.id}[]`}
+                                      onClick={() =>
+                                        setVarietyFilter(option.value)
+                                      }
+                                      defaultValue={option.value}
+                                      type="radio"
+                                      className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                    />
+                                    <label
+                                      htmlFor={`${section.id}-${optionIdx}-mobile`}
+                                      className="ml-3 text-sm text-gray-500"
+                                    >
+                                      {option.label}
+                                    </label>
+                                  </div>
+                                ))}
+                              </div>
+                            </Disclosure.Panel>
+                          </fieldset>
+                        )}
+                      </Disclosure>
+                    ))}
+                  {filters
+                    .filter((filter) => {
+                      return filter.id === 'label';
+                    })
+                    .map((section) => (
+                      <Disclosure
+                        as="div"
+                        key={section.name}
+                        className="border-t border-gray-200 pt-4 pb-4"
+                      >
+                        {({ open }) => (
+                          <fieldset>
+                            <legend className="w-full px-2">
+                              <Disclosure.Button className="w-full p-2 flex items-center justify-between text-gray-400 hover:text-gray-500">
+                                <span className="text-sm font-medium text-gray-900">
+                                  {section.name}
+                                </span>
+                                <span className="ml-6 h-7 flex items-center">
+                                  <ChevronDownIcon
+                                    className={classNames(
+                                      open ? '-rotate-180' : 'rotate-0',
+                                      'h-5 w-5 transform'
+                                    )}
+                                    aria-hidden="true"
                                   />
-                                  <label
-                                    htmlFor={`${section.id}-${optionIdx}-mobile`}
-                                    className="ml-3 text-sm text-gray-500"
+                                </span>
+                              </Disclosure.Button>
+                            </legend>
+                            <Disclosure.Panel className="pt-4 pb-2 px-4">
+                              <div className="space-y-6">
+                                {section.options.map((option, optionIdx) => (
+                                  <div
+                                    key={option.value}
+                                    className="flex items-center"
                                   >
-                                    {option.label}
-                                  </label>
-                                </div>
-                              ))}
-                            </div>
-                          </Disclosure.Panel>
-                        </fieldset>
-                      )}
-                    </Disclosure>
-                  ))}
-                    {filters.filter((filter) => {return filter.id === "lot"}).map((section) => (
-                    <Disclosure
-                      as="div"
-                      key={section.name}
-                      className="border-t border-gray-200 pt-4 pb-4"
-                    >
-                      {({ open }) => (
-                        <fieldset>
-                          <legend className="w-full px-2">
-                            <Disclosure.Button className="w-full p-2 flex items-center justify-between text-gray-400 hover:text-gray-500">
-                              <span className="text-sm font-medium text-gray-900">
-                                {section.name}
-                              </span>
-                              <span className="ml-6 h-7 flex items-center">
-                                <ChevronDownIcon
-                                  className={classNames(
-                                    open ? '-rotate-180' : 'rotate-0',
-                                    'h-5 w-5 transform'
-                                  )}
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </Disclosure.Button>
-                          </legend>
-                          <Disclosure.Panel className="pt-4 pb-2 px-4">
-                            <div className="space-y-6">
-                              {section.options.map((option, optionIdx) => (
-                                <div
-                                  key={option.value}
-                                  className="flex items-center"
-                                >
-                                  <input
-                                    id={`${section.id}-${optionIdx}-mobile`}
-                                    name={`${section.id}[]`}
-                                    onClick={() => setLotFilter(option.value)}
-                                    defaultValue={option.value}
-                                    type="radio"
-                                    className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                    <input
+                                      id={`${section.id}-${optionIdx}-mobile`}
+                                      name={`${section.id}[]`}
+                                      onClick={() =>
+                                        setLabelFilter(option.value)
+                                      }
+                                      defaultValue={option.value}
+                                      type="radio"
+                                      className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                    />
+                                    <label
+                                      htmlFor={`${section.id}-${optionIdx}-mobile`}
+                                      className="ml-3 text-sm text-gray-500"
+                                    >
+                                      {option.label}
+                                    </label>
+                                  </div>
+                                ))}
+                              </div>
+                            </Disclosure.Panel>
+                          </fieldset>
+                        )}
+                      </Disclosure>
+                    ))}
+                  {filters
+                    .filter((filter) => {
+                      return filter.id === 'lot';
+                    })
+                    .map((section) => (
+                      <Disclosure
+                        as="div"
+                        key={section.name}
+                        className="border-t border-gray-200 pt-4 pb-4"
+                      >
+                        {({ open }) => (
+                          <fieldset>
+                            <legend className="w-full px-2">
+                              <Disclosure.Button className="w-full p-2 flex items-center justify-between text-gray-400 hover:text-gray-500">
+                                <span className="text-sm font-medium text-gray-900">
+                                  {section.name}
+                                </span>
+                                <span className="ml-6 h-7 flex items-center">
+                                  <ChevronDownIcon
+                                    className={classNames(
+                                      open ? '-rotate-180' : 'rotate-0',
+                                      'h-5 w-5 transform'
+                                    )}
+                                    aria-hidden="true"
                                   />
-                                  <label
-                                    htmlFor={`${section.id}-${optionIdx}-mobile`}
-                                    className="ml-3 text-sm text-gray-500"
+                                </span>
+                              </Disclosure.Button>
+                            </legend>
+                            <Disclosure.Panel className="pt-4 pb-2 px-4">
+                              <div className="space-y-6">
+                                {section.options.map((option, optionIdx) => (
+                                  <div
+                                    key={option.value}
+                                    className="flex items-center"
                                   >
-                                    {option.label}
-                                  </label>
-                                </div>
-                              ))}
-                            </div>
-                          </Disclosure.Panel>
-                        </fieldset>
-                      )}
-                    </Disclosure>
-                  ))}
+                                    <input
+                                      id={`${section.id}-${optionIdx}-mobile`}
+                                      name={`${section.id}[]`}
+                                      onClick={() => setLotFilter(option.value)}
+                                      defaultValue={option.value}
+                                      type="radio"
+                                      className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                    />
+                                    <label
+                                      htmlFor={`${section.id}-${optionIdx}-mobile`}
+                                      className="ml-3 text-sm text-gray-500"
+                                    >
+                                      {option.label}
+                                    </label>
+                                  </div>
+                                ))}
+                              </div>
+                            </Disclosure.Panel>
+                          </fieldset>
+                        )}
+                      </Disclosure>
+                    ))}
                 </form>
               </div>
             </Transition.Child>

@@ -7,19 +7,19 @@ export default function Meta() {
       <link
         rel="apple-touch-icon"
         sizes="180x180"
-        href="/favicon/apple-touch-icon.png"
+        href="/kei-reports-favicon.png"
       />
       <link
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href="/favicon/favicon-32x32.png"
+        href="/kei-reports-favicon.png"
       />
       <link
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href="/favicon/favicon-16x16.png"
+        href="/kei-reports-favicon.png"
       />
       <link rel="manifest" href="/favicon/site.webmanifest" />
       <link
@@ -32,6 +32,7 @@ export default function Meta() {
       <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
       <meta name="theme-color" content="#000" />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+      <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
       <meta
         name="description"
         content={`Field Report Data from Kirschenman Enterprises Inc.`}

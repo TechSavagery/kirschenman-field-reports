@@ -44,6 +44,7 @@ import { imageBuilder } from '../lib/sanity';
 import BlockContent from '@sanity/block-content-to-react';
 import markdownStyles from '../components/markdown-styles.module.css';
 import FAQ from '../components/faq';
+import Head from 'next/head';
 
 const navigation = [
   { name: 'Features', href: '#features' },
@@ -205,6 +206,14 @@ export default function Example({ allPosts, preview }) {
   const posts = allPosts.slice(0, 3);
   return (
     <div className="bg-white">
+      <Head>
+        <meta
+          name="description"
+          content={`Field Report Data from Kirschenman Enterprises Inc.`}
+        />
+        <title>Kirschenman Field Reports</title>
+      </Head>
+
       <div className="relative overflow-hidden">
         <Popover as="header" className="relative">
           <div className="bg-gray-900 pt-6">

@@ -46,6 +46,7 @@ import ReactToPrint from 'react-to-print';
 import { useSession } from 'next-auth/client';
 import PasswordProtect from '../../components/password-protect';
 import track, { useTracking } from 'react-tracking';
+import Head from 'next/head';
 
 const navigation = {
   categories: [
@@ -232,12 +233,19 @@ export default function Example({ post, morePosts, preview }) {
   const [session, loading] = useSession();
   const [sesh, setSesh] = useState(session);
   const { Track, trackEvent } = useTracking({ page: `report page example` });
-  useEffect((session) => {
-    console.log({
-      event: `${post.brix}`,
-      client: `fgdhfgh`,
-      url: `${window.location.href.replace('#', '')}`,
-    });
+  const [openDesc, setOpenDesc] = useState(false);
+  useEffect(() => {
+    var user;
+    fetch(`${window.location.origin}/api/auth/session`)
+      .then((response) => response.json())
+      .then((data) => (user = data.user))
+      .then(() => {
+        console.log({
+          event: `report-view`,
+          client: `${user.email}`,
+          url: `${window.location.href.replace('#', '')}`,
+        });
+      });
   }, []);
 
   function copy() {
@@ -250,6 +258,7 @@ export default function Example({ post, morePosts, preview }) {
     console.log({
       event: `report-copied`,
       client: `${session.user.email}`,
+      url: `${window.location.href.replace('#', '')}`,
     });
     setCopied(true);
     setTimeout(function () {
@@ -265,6 +274,28 @@ export default function Example({ post, morePosts, preview }) {
   return (
     <Track>
       <div className="bg-gray-50">
+        <Head>
+          <meta
+            name="description"
+            content={`${(
+              <BlockContent
+                blocks={post?.body}
+                projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
+                dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
+                className={markdownStyles.markdown}
+              />
+            )}`}
+          />
+          <title>
+            KEI Reports: {post?.lot.name}
+            {' - '}
+            {post?.variety.name}
+            {' - '}{' '}
+            {post?.week ? post?.week.toUpperCase().replace('EEK-', '') : 'N/A'}
+            {'-'}
+            {new Date(post?.date).getFullYear()}
+          </title>
+        </Head>
         {/* Mobile menu */}
         <Transition.Root show={open} as={Fragment}>
           <Dialog
@@ -530,6 +561,7 @@ export default function Example({ post, morePosts, preview }) {
                         console.log({
                           event: `report-emailed`,
                           client: `${session.user.email}`,
+                          url: `${window.location.href.replace('#', '')}`,
                         });
                       }}
                       href={`mailto:?subject=KEI%20Report%3A%20${encodeURIComponent(
@@ -651,7 +683,81 @@ export default function Example({ post, morePosts, preview }) {
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
+                                      onClick={() => setOpenDesc(true)}
                                     />
+                                    <Transition.Root
+                                      show={openDesc}
+                                      as={Fragment}
+                                    >
+                                      <Dialog
+                                        as="div"
+                                        className="fixed z-10 inset-0 overflow-y-auto"
+                                        onClose={setOpenDesc}
+                                      >
+                                        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                          <Transition.Child
+                                            as={Fragment}
+                                            enter="ease-out duration-300"
+                                            enterFrom="opacity-0"
+                                            enterTo="opacity-100"
+                                            leave="ease-in duration-200"
+                                            leaveFrom="opacity-100"
+                                            leaveTo="opacity-0"
+                                          >
+                                            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                                          </Transition.Child>
+
+                                          {/* This element is to trick the browser into centering the modal contents. */}
+                                          <span
+                                            className="hidden sm:inline-block sm:align-middle sm:h-screen"
+                                            aria-hidden="true"
+                                          >
+                                            &#8203;
+                                          </span>
+                                          <Transition.Child
+                                            as={Fragment}
+                                            enter="ease-out duration-300"
+                                            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                            enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                            leave="ease-in duration-200"
+                                            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                          >
+                                            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                                              <div>
+                                                <div className="mt-3 text-center sm:mt-5">
+                                                  <Dialog.Title
+                                                    as="h3"
+                                                    className="text-lg leading-6 font-medium text-gray-900"
+                                                  >
+                                                    {post.lot.name}
+                                                  </Dialog.Title>
+                                                  <div className="mt-2">
+                                                    <p className="text-sm text-gray-500">
+                                                      Lorem ipsum dolor sit amet
+                                                      consectetur adipisicing
+                                                      elit. Consequatur amet
+                                                      labore.
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div className="mt-5 sm:mt-6">
+                                                <button
+                                                  type="button"
+                                                  className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-2 py-2 bg-lime text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime sm:text-sm"
+                                                  onClick={() =>
+                                                    setOpenDesc(false)
+                                                  }
+                                                >
+                                                  Close
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </Transition.Child>
+                                        </div>
+                                      </Dialog>
+                                    </Transition.Root>
                                   </a>
                                 </RadioGroup.Label>
                                 <RadioGroup.Description
