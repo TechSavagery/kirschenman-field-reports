@@ -84,21 +84,70 @@ const filters = [
     name: 'Label',
     options: [
       { value: 'new-yorker', label: 'New Yorker', checked: false },
+      { value: 'mr.-kk', label: 'Mr. KK', checked: false },
+      { value: 'grapery', label: 'Grapery', checked: false },
+      { value: 'marilyn', label: 'Marilyn', checked: false },
+      { value: 'king-top', label: 'King Top', checked: false },
+      { value: 'showtime', label: 'Showtime', checked: false },
+      { value: 'joseph', label: 'Joseph', checked: false },
+      { value: 'candy-store', label: 'Candy Store', checked: false },
+      { value: 'shalom', label: 'Shalom', checked: false },
+      { value: 'kings-crown', label: 'Kings Crown', checked: false },
+      { value: 'dj-forry', label: 'DJ Forry', checked: false },
+      { value: 'big-b-#2', label: 'Big B #2', checked: false },
+      { value: 'kenny-jr.', label: 'Kenny Jr.', checked: false },
+      { value: 'sun-diamonds', label: 'Sun Diamonds', checked: false },
+      { value: 'golden-ox', label: 'Golden Ox', checked: false },
+      { value: 'top-brass', label: 'Top Brass', checked: false },
+      { value: 'illume', label: 'Illume', checked: false },
+      { value: 'mc', label: 'MC', checked: false },
+      { value: 'pandol', label: 'Pandol', checked: false },
+      { value: 'sun-grape', label: 'Sun Grape', checked: false },
+      { value: 'sundale', label: 'Sun Dale', checked: false },
+      { value: 'columbine', label: 'Columbine', checked: false },
+      { value: 'platinum-pack', label: 'Platinum Pack', checked: false },
+      { value: 'pristine', label: 'Pristine', checked: false },
+      { value: 'big-city', label: 'Big City', checked: false },
+      { value: 'air-chief', label: 'Air Chief', checked: false },
+      { value: 'big-b', label: 'Big B', checked: false },
+      { value: 'patricia', label: 'Patricia', checked: false },
       { value: 'ultimate', label: 'Ultimate', checked: false },
-      { value: 'sun-power', label: 'SunPower', checked: true },
+      { value: 'sunpower', label: 'SunPower', checked: true },
+      { value: 'supergrape', label: 'Supergrape', checked: false },
       { value: 'marvin-boy', label: 'Marvin Boy', checked: false },
       { value: 'roosters-pride', label: 'Roosters Pride', checked: false },
-      { value: 'flying-tiger', label: 'Purple', checked: false },
+      { value: 'flying-tiger', label: 'Flying Tiger', checked: false },
     ],
   },
   {
     id: 'variety',
     name: 'Variety',
     options: [
-      { value: 'candy-sanp', label: 'Candy Snap', checked: false },
+      { value: 'candy-snap', label: 'Candy Snap', checked: false },
+      { value: 'timco', label: 'Timco', checked: false },
+      { value: 'milano', label: 'Milano', checked: false },
+      { value: 'red-globe', label: 'Red Globe', checked: false },
+      { value: 'sweet-globe', label: 'Sweet Globe', checked: false },
+      { value: 'pristine', label: 'Pristine', checked: false },
+      { value: 'sweet-sapphire', label: 'Sweet Sapphire', checked: false },
+      { value: 'candy-hearts', label: 'Candy Hearts', checked: false },
+      { value: 'autumn-crisp', label: 'Autumn Crisp', checked: false },
+      { value: 'sugar-crunch', label: 'Sugar Crunch', checked: false },
+      { value: 'flame', label: 'Flame', checked: false },
+      { value: 'krissy', label: 'Krissy', checked: false },
+      { value: 'allison', label: 'Allison', checked: false },
+      { value: 'adora', label: 'Adora', checked: false },
+      { value: 'ivory', label: 'Ivory', checked: false },
+      { value: 'summer-royal', label: 'Summer Royal', checked: false },
+      { value: 'autumn-royal', label: 'Autumn Royal', checked: false },
+      { value: 'sugraone', label: 'Sugraone', checked: false },
+      { value: 'luisco', label: 'Luisco', checked: false },
+      { value: 'candy-drop', label: 'Candy Drop', checked: false },
+      { value: 'jack-salute', label: 'Jack Salute', checked: false },
+      { value: 'candy-snap', label: 'Candy Snap', checked: false },
+      { value: 'scarlet-royal', label: 'Scarlet Royal', checked: false },
       { value: 'autumn-king', label: 'Autumn King', checked: false },
       { value: 'sweet-celebration', label: 'Sweet Celebration', checked: true },
-      { value: 'milano', label: 'Milano', checked: false },
       { value: 'great-green', label: 'Great Green', checked: false },
     ],
   },
@@ -106,24 +155,50 @@ const filters = [
     id: 'lot',
     name: 'Lot',
     options: [
-      { value: '2l', label: 'Delis', checked: false },
-      { value: '6l', label: 'Edison', checked: false },
-      { value: '12l', label: 'Kosakeff', checked: false },
-      { value: '18l', label: 'REDR', checked: false },
-      { value: '20l', label: 'Peck', checked: false },
-      { value: '40l', label: 'SEC11', checked: true },
+      { value: 'murray', label: 'Murray', checked: false },
+      { value: 'sp-green', label: 'SP Green', checked: false },
+      { value: 'laut', label: 'Laut', checked: false },
+      { value: 'bridge', label: 'Bridge', checked: false },
+      { value: 'wheatland', label: 'Wheatland', checked: false },
+      { value: 'clarkson', label: 'Clarkson', checked: false },
+      { value: 'fdr', label: 'FDR', checked: false },
+      { value: 'alfonso', label: 'Alfonso', checked: false },
+      { value: 'py', label: 'PY', checked: false },
+      { value: 'redr', label: 'REDR', checked: false },
+      { value: 'ave-64', label: 'Ave 64', checked: false },
+      { value: 'blake', label: 'Blake', checked: false },
+      { value: 'sp-black', label: 'SP Black', checked: false },
+      { value: 'wbr', label: 'WBR', checked: false },
+      { value: 'hill', label: 'Hill', checked: false },
+      { value: '370', label: '370', checked: false },
+      { value: 'valos', label: 'Valos', checked: false },
+      { value: 'frontier', label: 'Frontier', checked: false },
+      { value: 'sp-gold', label: 'SP Gold', checked: false },
+      { value: 'berry', label: 'Berry', checked: false },
+      { value: 'blue-liner', label: 'Blue Liner', checked: false },
+      { value: 'brown', label: 'Brown', checked: false },
+      { value: 'sec11', label: 'SEC11', checked: false },
+      { value: 'edison', label: 'Edison', checked: false },
+      { value: 'harter', label: 'Harter', checked: false },
+      { value: 'kosakeff', label: 'Kosakeff', checked: false },
+      { value: 'delis', label: 'Delis', checked: false },
+      { value: 'fth', label: 'Peck', checked: false },
+      { value: '109828', label: '109828', checked: false },
+      { value: 'blanc', label: 'Blanc', checked: false },
+      { value: 'dryer', label: 'Dryer', checked: false },
+      { value: 'sun-grape', label: 'Sun Grape', checked: false },
     ],
   },
   {
     id: 'week',
     name: 'Week',
     options: [
+      { value: 'week-36', label: 'Week 36', checked: false },
+      { value: 'week-37', label: 'Week 37', checked: false },
       { value: 'week-38', label: 'Week 38', checked: false },
       { value: 'week-39', label: 'Week 39', checked: false },
       { value: 'week-40', label: 'Week 40', checked: false },
       { value: 'week-41', label: 'Week 41', checked: false },
-      { value: 'week-42', label: 'Week 42', checked: false },
-      { value: 'week-43', label: 'Week 43', checked: false },
     ],
   },
 ];
@@ -201,6 +276,15 @@ export default function Example({ allPosts, preview }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [session, loading] = useSession();
+  const [weekFilter, setWeekFilter] = useState('');
+  const [labelFilter, setLabelFilter] = useState('');
+  const [lotFilter, setLotFilter] = useState('');
+  const [varietyFilter, setVarietyFilter] = useState('');
+
+  function setFilter(filter) {
+    setWeekFilter(filter);
+  }
+
   const allReports = allPosts;
 
   if (typeof window !== 'undefined' && loading) return null;
@@ -550,10 +634,42 @@ export default function Example({ allPosts, preview }) {
                     <XIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
+                <button
+                  onClick={() => {
+                    if (weekFilter) {
+                      document.querySelector(
+                        'input[name="week[]"]:checked'
+                      ).checked = false;
+                      setWeekFilter('');
+                    }
+                    if (lotFilter) {
+                      document.querySelector(
+                        'input[name="lot[]"]:checked'
+                      ).checked = false;
+                      setLotFilter('');
+                    }
+                    if (varietyFilter) {
+                      document.querySelector(
+                        'input[name="variety[]"]:checked'
+                      ).checked = false;
+                      setVarietyFilter('');
+                    }
+                    if (labelFilter) {
+                      document.querySelector(
+                        'input[name="label[]"]:checked'
+                      ).checked = false;
+                      setLabelFilter('');
+                    }
+                  }}
+                  type="button"
+                  className="inline-flex items-center ml-4 mr-4 pl-1 w-24 py-2 my-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime"
+                >
+                   Clear Filters
+                </button>
 
-                {/* Filters */}
+                {/* mobile Filters */}
                 <form className="mt-4">
-                  {filters.map((section) => (
+                  {filters.filter((filter) => {return filter.id === "week"}).map((section) => (
                     <Disclosure
                       as="div"
                       key={section.name}
@@ -587,8 +703,168 @@ export default function Example({ allPosts, preview }) {
                                   <input
                                     id={`${section.id}-${optionIdx}-mobile`}
                                     name={`${section.id}[]`}
+                                    onClick={() => setWeekFilter(option.value)}
                                     defaultValue={option.value}
-                                    type="checkbox"
+                                    type="radio"
+                                    className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                  />
+                                  <label
+                                    htmlFor={`${section.id}-${optionIdx}-mobile`}
+                                    className="ml-3 text-sm text-gray-500"
+                                  >
+                                    {option.label}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </Disclosure.Panel>
+                        </fieldset>
+                      )}
+                    </Disclosure>
+                  ))}
+                    {filters.filter((filter) => {return filter.id === "variety"}).map((section) => (
+                    <Disclosure
+                      as="div"
+                      key={section.name}
+                      className="border-t border-gray-200 pt-4 pb-4"
+                    >
+                      {({ open }) => (
+                        <fieldset>
+                          <legend className="w-full px-2">
+                            <Disclosure.Button className="w-full p-2 flex items-center justify-between text-gray-400 hover:text-gray-500">
+                              <span className="text-sm font-medium text-gray-900">
+                                {section.name}
+                              </span>
+                              <span className="ml-6 h-7 flex items-center">
+                                <ChevronDownIcon
+                                  className={classNames(
+                                    open ? '-rotate-180' : 'rotate-0',
+                                    'h-5 w-5 transform'
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              </span>
+                            </Disclosure.Button>
+                          </legend>
+                          <Disclosure.Panel className="pt-4 pb-2 px-4">
+                            <div className="space-y-6">
+                              {section.options.map((option, optionIdx) => (
+                                <div
+                                  key={option.value}
+                                  className="flex items-center"
+                                >
+                                  <input
+                                    id={`${section.id}-${optionIdx}-mobile`}
+                                    name={`${section.id}[]`}
+                                    onClick={() => setVarietyFilter(option.value)}
+                                    defaultValue={option.value}
+                                    type="radio"
+                                    className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                  />
+                                  <label
+                                    htmlFor={`${section.id}-${optionIdx}-mobile`}
+                                    className="ml-3 text-sm text-gray-500"
+                                  >
+                                    {option.label}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </Disclosure.Panel>
+                        </fieldset>
+                      )}
+                    </Disclosure>
+                  ))}
+                  {filters.filter((filter) => {return filter.id === "label"}).map((section) => (
+                    <Disclosure
+                      as="div"
+                      key={section.name}
+                      className="border-t border-gray-200 pt-4 pb-4"
+                    >
+                      {({ open }) => (
+                        <fieldset>
+                          <legend className="w-full px-2">
+                            <Disclosure.Button className="w-full p-2 flex items-center justify-between text-gray-400 hover:text-gray-500">
+                              <span className="text-sm font-medium text-gray-900">
+                                {section.name}
+                              </span>
+                              <span className="ml-6 h-7 flex items-center">
+                                <ChevronDownIcon
+                                  className={classNames(
+                                    open ? '-rotate-180' : 'rotate-0',
+                                    'h-5 w-5 transform'
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              </span>
+                            </Disclosure.Button>
+                          </legend>
+                          <Disclosure.Panel className="pt-4 pb-2 px-4">
+                            <div className="space-y-6">
+                              {section.options.map((option, optionIdx) => (
+                                <div
+                                  key={option.value}
+                                  className="flex items-center"
+                                >
+                                  <input
+                                    id={`${section.id}-${optionIdx}-mobile`}
+                                    name={`${section.id}[]`}
+                                    onClick={() => setLabelFilter(option.value)}
+                                    defaultValue={option.value}
+                                    type="radio"
+                                    className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                  />
+                                  <label
+                                    htmlFor={`${section.id}-${optionIdx}-mobile`}
+                                    className="ml-3 text-sm text-gray-500"
+                                  >
+                                    {option.label}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </Disclosure.Panel>
+                        </fieldset>
+                      )}
+                    </Disclosure>
+                  ))}
+                    {filters.filter((filter) => {return filter.id === "lot"}).map((section) => (
+                    <Disclosure
+                      as="div"
+                      key={section.name}
+                      className="border-t border-gray-200 pt-4 pb-4"
+                    >
+                      {({ open }) => (
+                        <fieldset>
+                          <legend className="w-full px-2">
+                            <Disclosure.Button className="w-full p-2 flex items-center justify-between text-gray-400 hover:text-gray-500">
+                              <span className="text-sm font-medium text-gray-900">
+                                {section.name}
+                              </span>
+                              <span className="ml-6 h-7 flex items-center">
+                                <ChevronDownIcon
+                                  className={classNames(
+                                    open ? '-rotate-180' : 'rotate-0',
+                                    'h-5 w-5 transform'
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              </span>
+                            </Disclosure.Button>
+                          </legend>
+                          <Disclosure.Panel className="pt-4 pb-2 px-4">
+                            <div className="space-y-6">
+                              {section.options.map((option, optionIdx) => (
+                                <div
+                                  key={option.value}
+                                  className="flex items-center"
+                                >
+                                  <input
+                                    id={`${section.id}-${optionIdx}-mobile`}
+                                    name={`${section.id}[]`}
+                                    onClick={() => setLotFilter(option.value)}
+                                    defaultValue={option.value}
+                                    type="radio"
                                     className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
                                   />
                                   <label
@@ -680,43 +956,205 @@ export default function Example({ allPosts, preview }) {
                   aria-hidden="true"
                 />
               </button>
-
+              {/* Desktop Filters */}
               <div className="hidden lg:block">
+                <button
+                  onClick={() => {
+                    if (weekFilter) {
+                      document.querySelector(
+                        'input[name="week[]"]:checked'
+                      ).checked = false;
+                      setWeekFilter('');
+                    }
+                    if (lotFilter) {
+                      document.querySelector(
+                        'input[name="lot[]"]:checked'
+                      ).checked = false;
+                      setLotFilter('');
+                    }
+                    if (varietyFilter) {
+                      document.querySelector(
+                        'input[name="variety[]"]:checked'
+                      ).checked = false;
+                      setVarietyFilter('');
+                    }
+                    if (labelFilter) {
+                      document.querySelector(
+                        'input[name="label[]"]:checked'
+                      ).checked = false;
+                      setLabelFilter('');
+                    }
+                  }}
+                  type="button"
+                  className="inline-flex items-center px-6 py-2 my-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime"
+                >
+                  Clear Filters
+                </button>
                 <form className="divide-y divide-gray-200 space-y-10">
-                  {filters.map((section, sectionIdx) => (
-                    <div
-                      key={section.name}
-                      className={sectionIdx === 0 ? null : 'pt-10'}
-                    >
-                      <fieldset>
-                        <legend className="block text-sm font-medium text-gray-900">
-                          {section.name}
-                        </legend>
-                        <div className="pt-6 space-y-3">
-                          {section.options.map((option, optionIdx) => (
-                            <div
-                              key={option.value}
-                              className="flex items-center"
-                            >
-                              <input
-                                id={`${section.id}-${optionIdx}`}
-                                name={`${section.id}[]`}
-                                defaultValue={option.value}
-                                type="checkbox"
-                                className="h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
-                              />
-                              <label
-                                htmlFor={`${section.id}-${optionIdx}`}
-                                className="ml-3 text-sm text-gray-600"
+                  {/* Week Filters */}
+                  {filters
+                    .filter((filter) => {
+                      return filter.id === 'week';
+                    })
+                    .map((section, sectionIdx) => (
+                      <div
+                        key={section.name}
+                        className={sectionIdx === 0 ? null : 'pt-10'}
+                      >
+                        <fieldset>
+                          <legend className="block text-sm font-medium text-gray-900">
+                            {section.name}
+                          </legend>
+                          <div className="pt-6 space-y-3">
+                            {section.options.map((option, optionIdx) => (
+                              <div
+                                key={option.value}
+                                className="flex items-center"
                               >
-                                {option.label}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      </fieldset>
-                    </div>
-                  ))}
+                                <input
+                                  onClick={() => setWeekFilter(option.value)}
+                                  id={`${section.id}-${optionIdx}`}
+                                  name={`${section.id}[]`}
+                                  defaultValue={option.value}
+                                  type="radio"
+                                  cla
+                                  className="week-filters h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                />
+                                <label
+                                  htmlFor={`${section.id}-${optionIdx}`}
+                                  className="ml-3 text-sm text-gray-600"
+                                >
+                                  {option.label}
+                                </label>
+                              </div>
+                            ))}
+                          </div>
+                        </fieldset>
+                      </div>
+                    ))}
+                  {/* Label Filters */}
+                  {filters
+                    .filter((filter) => {
+                      return filter.id === 'label';
+                    })
+                    .map((section, sectionIdx) => (
+                      <div
+                        key={section.name}
+                        className={sectionIdx === 0 ? null : 'pt-10'}
+                      >
+                        <fieldset>
+                          <legend className="block text-sm font-medium text-gray-900">
+                            {section.name}
+                          </legend>
+                          <div className="pt-6 space-y-3">
+                            {section.options.map((option, optionIdx) => (
+                              <div
+                                key={option.value}
+                                className="flex items-center"
+                              >
+                                <input
+                                  onClick={() => setLabelFilter(option.value)}
+                                  id={`${section.id}-${optionIdx}`}
+                                  name={`${section.id}[]`}
+                                  defaultValue={option.value}
+                                  type="radio"
+                                  cla
+                                  className="week-filters h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                />
+                                <label
+                                  htmlFor={`${section.id}-${optionIdx}`}
+                                  className="ml-3 text-sm text-gray-600"
+                                >
+                                  {option.label}
+                                </label>
+                              </div>
+                            ))}
+                          </div>
+                        </fieldset>
+                      </div>
+                    ))}
+                  {/* Variety Filters */}
+                  {filters
+                    .filter((filter) => {
+                      return filter.id === 'variety';
+                    })
+                    .map((section, sectionIdx) => (
+                      <div
+                        key={section.name}
+                        className={sectionIdx === 0 ? null : 'pt-10'}
+                      >
+                        <fieldset>
+                          <legend className="block text-sm font-medium text-gray-900">
+                            {section.name}
+                          </legend>
+                          <div className="pt-6 space-y-3">
+                            {section.options.map((option, optionIdx) => (
+                              <div
+                                key={option.value}
+                                className="flex items-center"
+                              >
+                                <input
+                                  onClick={() => setVarietyFilter(option.value)}
+                                  id={`${section.id}-${optionIdx}`}
+                                  name={`${section.id}[]`}
+                                  defaultValue={option.value}
+                                  type="radio"
+                                  cla
+                                  className="week-filters h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                />
+                                <label
+                                  htmlFor={`${section.id}-${optionIdx}`}
+                                  className="ml-3 text-sm text-gray-600"
+                                >
+                                  {option.label}
+                                </label>
+                              </div>
+                            ))}
+                          </div>
+                        </fieldset>
+                      </div>
+                    ))}
+                  {/* Lot Filters */}
+                  {filters
+                    .filter((filter) => {
+                      return filter.id === 'lot';
+                    })
+                    .map((section, sectionIdx) => (
+                      <div
+                        key={section.name}
+                        className={sectionIdx === 0 ? null : 'pt-10'}
+                      >
+                        <fieldset>
+                          <legend className="block text-sm font-medium text-gray-900">
+                            {section.name}
+                          </legend>
+                          <div className="pt-6 space-y-3">
+                            {section.options.map((option, optionIdx) => (
+                              <div
+                                key={option.value}
+                                className="flex items-center"
+                              >
+                                <input
+                                  onClick={() => setLotFilter(option.value)}
+                                  id={`${section.id}-${optionIdx}`}
+                                  name={`${section.id}[]`}
+                                  defaultValue={option.value}
+                                  type="radio"
+                                  cla
+                                  className="week-filters h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                />
+                                <label
+                                  htmlFor={`${section.id}-${optionIdx}`}
+                                  className="ml-3 text-sm text-gray-600"
+                                >
+                                  {option.label}
+                                </label>
+                              </div>
+                            ))}
+                          </div>
+                        </fieldset>
+                      </div>
+                    ))}
                 </form>
               </div>
             </aside>
@@ -730,67 +1168,108 @@ export default function Example({ allPosts, preview }) {
               </h2>
 
               <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
-                {allReports.map((report) => (
-                  <ReportCard
-                    label={report.label}
-                    variety={report.variety}
-                    lot={report.lot}
-                    week={report.week}
-                    inspectionDate={report.date}
-                    mainImage={report.coverImage}
-                    slug={report.slug}
-                    content={report.body}
-                    reporter={report.reporter}
-                  />
-                ))}
+                {allReports
+                  .filter((report) =>
+                    weekFilter ? report.week === weekFilter : true
+                  )
+                  .filter((report) =>
+                    lotFilter
+                      ? report.lot.name.replace(/\s+/g, '-').toLowerCase() ===
+                        lotFilter
+                      : true
+                  )
+                  .filter((report) =>
+                    varietyFilter
+                      ? report.variety.name
+                          .replace(/\s+/g, '-')
+                          .toLowerCase() === varietyFilter
+                      : true
+                  )
+                  .filter((report) =>
+                    labelFilter
+                      ? report.label.name.replace(/\s+/g, '-').toLowerCase() ===
+                        labelFilter
+                      : true
+                  )
+                  .map((report) => (
+                    <ReportCard
+                      label={report.label}
+                      variety={report.variety}
+                      lot={report.lot}
+                      week={report.week}
+                      inspectionDate={report.date}
+                      mainImage={report.coverImage}
+                      slug={report.slug}
+                      content={report.body}
+                      reporter={report.reporter}
+                    />
+                  ))}
               </div>
             </section>
           </div>
         </main>
 
         <footer aria-labelledby="footer-heading" className="bg-white">
-        <h2 id="footer-heading" className="sr-only">
-          Footer
-        </h2>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="border-t border-gray-200 py-20">
-            <div className="grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-8 md:gap-y-16 md:auto-rows-min">
-              {/* Image section */}
-              <div className="col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1">
-                <img
-                  className="pt-[10px]"
-                  src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
-                  alt=""
-                  style={{ height: '65px' }}
-                />
-              </div>
+          <h2 id="footer-heading" className="sr-only">
+            Footer
+          </h2>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="border-t border-gray-200 py-20">
+              <div className="grid grid-cols-1 md:grid-cols-12 md:grid-flow-col md:gap-x-8 md:gap-y-16 md:auto-rows-min">
+                {/* Image section */}
+                <div className="col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1">
+                  <img
+                    className="pt-[10px]"
+                    src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
+                    alt=""
+                    style={{ height: '65px' }}
+                  />
+                </div>
 
-              {/* Sitemap sections */}
-              <div className="mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6">
-                <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-900">
-                      Reports
-                    </h3>
-                    <ul role="list" className="mt-6 space-y-6">
-                      {footerNavigation.reports.map((item) => (
-                        <li key={item.name} className="text-sm">
-                          <a
-                            href={item.href}
-                            className="text-gray-500 hover:text-gray-600"
-                          >
-                            {item.name}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
+                {/* Sitemap sections */}
+                <div className="mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6">
+                  <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
+                    <div>
+                      <h3 className="text-sm font-medium text-gray-900">
+                        Reports
+                      </h3>
+                      <ul role="list" className="mt-6 space-y-6">
+                        {footerNavigation.reports.map((item) => (
+                          <li key={item.name} className="text-sm">
+                            <a
+                              href={item.href}
+                              className="text-gray-500 hover:text-gray-600"
+                            >
+                              {item.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-medium text-gray-900">
+                        Company
+                      </h3>
+                      <ul role="list" className="mt-6 space-y-6">
+                        {footerNavigation.company.map((item) => (
+                          <li key={item.name} className="text-sm">
+                            <a
+                              href={item.href}
+                              className="text-gray-500 hover:text-gray-600"
+                            >
+                              {item.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                   <div>
                     <h3 className="text-sm font-medium text-gray-900">
-                      Company
+                      Produce Info
                     </h3>
                     <ul role="list" className="mt-6 space-y-6">
-                      {footerNavigation.company.map((item) => (
+                      {footerNavigation.produceInfo.map((item) => (
                         <li key={item.name} className="text-sm">
                           <a
                             href={item.href}
@@ -803,27 +1282,9 @@ export default function Example({ allPosts, preview }) {
                     </ul>
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-sm font-medium text-gray-900">
-                    Produce Info
-                  </h3>
-                  <ul role="list" className="mt-6 space-y-6">
-                    {footerNavigation.produceInfo.map((item) => (
-                      <li key={item.name} className="text-sm">
-                        <a
-                          href={item.href}
-                          className="text-gray-500 hover:text-gray-600"
-                        >
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
 
-              {/* Newsletter section */}
-              {/* <div className="mt-12 md:mt-0 md:row-start-2 md:col-start-3 md:col-span-8 lg:row-start-1 lg:col-start-9 lg:col-span-4">
+                {/* Newsletter section */}
+                {/* <div className="mt-12 md:mt-0 md:row-start-2 md:col-start-3 md:col-span-8 lg:row-start-1 lg:col-start-9 lg:col-span-4">
                 <h3 className="text-sm font-medium text-gray-900">
                   Sign up for our newsletter
                 </h3>
@@ -851,17 +1312,17 @@ export default function Example({ allPosts, preview }) {
                   </div>
                 </form>
               </div> */}
+              </div>
+            </div>
+
+            <div className="border-t border-gray-100 py-10 text-center">
+              <p className="text-sm text-gray-500">
+                &copy; {new Date().getFullYear()} Kirschenman Enterprises, Inc.
+                All rights reserved.
+              </p>
             </div>
           </div>
-
-          <div className="border-t border-gray-100 py-10 text-center">
-            <p className="text-sm text-gray-500">
-              &copy; {new Date().getFullYear()} Kirschenman Enterprises, Inc.
-              All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+        </footer>
       </div>
     </div>
   );

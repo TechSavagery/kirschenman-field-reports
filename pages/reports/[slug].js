@@ -153,8 +153,8 @@ const product = {
   imageAlt:
     'Light green canvas bag with black straps, handle, front zipper pouch, and drawstring top.',
   breadcrumbs: [
-    { id: 1, name: 'Reports', href: '#' },
-    { id: 2, name: 'Grapes', href: '#' },
+    { id: 1, name: 'Reports', href: '/dashboard' },
+    { id: 2, name: 'Grapes', href: '/dashboard/grapes' },
   ],
   sizes: [
     { name: 'Lot', description: '' },

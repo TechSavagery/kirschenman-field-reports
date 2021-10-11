@@ -387,11 +387,13 @@ export default function Example({ allPosts, preview }) {
                 </div>
                 <div className="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative">
                   <div className="mt-12 -mb-10 sm:-mb-24 lg:-mb-80">
-                    <img
-                      className="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5"
-                      src="https://www.kirschenman.com/wp-content/uploads/2021/10/kei-reports-desktop.png"
-                      alt=""
-                    />
+                    <a href={`/reports/${posts[0].slug}`}>
+                      <img
+                        className="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5"
+                        src="/kei-reports-desktop.png"
+                        alt=""
+                      />
+                    </a>
                   </div>
                 </div>
               </div>
