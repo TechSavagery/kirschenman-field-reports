@@ -396,7 +396,7 @@ export default function Example({ allPosts, preview }) {
                 </div>
                 <div className="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative">
                   <div className="mt-12 -mb-10 sm:-mb-24 lg:-mb-80">
-                    <a href={`/reports/${posts[0].slug}`}>
+                    <a id="desktop-screenshot" href={`/reports/${posts[0].slug}`}>
                       <img
                         className="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5"
                         src="/kei-reports-desktop.png"

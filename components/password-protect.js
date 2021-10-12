@@ -309,7 +309,8 @@ export default function PasswordProtect({ allPosts, preview }) {
                     <div class="flex space-x-4">
                       {' '}
                       <a
-                      href="#"
+                        id="login-button"
+                        href="#"
                         className="block w-full py-3 lg:px-20 sm:px-5 text-center bg-white border border-transparent rounded-md shadow-md text-base font-medium text-gray-700 hover:bg-gray-50 sm:inline-block sm:w-auto"
                         onClick={(e) => {
                           e.preventDefault();

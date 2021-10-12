@@ -1,0 +1,7 @@
+{
+  "experimentalStudio": true,
+  "screenshotsFolder": "public/screenshots",
+  "env": {
+    "baseUrl": "http://localhost:3000/"
+  }
+}
