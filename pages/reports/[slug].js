@@ -47,6 +47,7 @@ import { useSession } from 'next-auth/client';
 import PasswordProtect from '../../components/password-protect';
 import track, { useTracking } from 'react-tracking';
 import Head from 'next/head';
+import * as ga from '../../lib/ga'
 
 const navigation = {
   categories: [
@@ -245,6 +246,13 @@ export default function Example({ post, morePosts, preview }) {
           client: `${user.email}`,
           url: `${window.location.href.replace('#', '')}`,
         });
+        ga.event({
+          action: "report-viewed",
+          params : {
+            client: `${user.email}`,
+            url: `${window.location.href.replace('#', '')}`,
+          }
+        })
       });
   }, []);
 
@@ -260,6 +268,13 @@ export default function Example({ post, morePosts, preview }) {
       client: `${session.user.email}`,
       url: `${window.location.href.replace('#', '')}`,
     });
+    ga.event({
+      action: "report-copied",
+      params : {
+        client: `${session.user.email}`,
+        url: `${window.location.href.replace('#', '')}`,
+      }
+    })
     setCopied(true);
     setTimeout(function () {
       setCopied(false);
@@ -563,6 +578,13 @@ export default function Example({ post, morePosts, preview }) {
                           client: `${session.user.email}`,
                           url: `${window.location.href.replace('#', '')}`,
                         });
+                        ga.event({
+                          action: "report-emailed",
+                          params : {
+                            client: `${session.user.email}`,
+                            url: `${window.location.href.replace('#', '')}`,
+                          }
+                        })
                       }}
                       href={`mailto:?subject=KEI%20Report%3A%20${encodeURIComponent(
                         post.slug
