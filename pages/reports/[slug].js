@@ -235,6 +235,12 @@ export default function Example({ post, morePosts, preview }) {
   const [sesh, setSesh] = useState(session);
   const { Track, trackEvent } = useTracking({ page: `report page example` });
   const [openDesc, setOpenDesc] = useState(false);
+  const [openBrixDesc, setOpenBrixDesc] = useState(false);
+  const [openTypeDesc, setOpenTypeDesc] = useState(false);
+  const [openAppearanceDesc, setOpenAppearanceDesc] = useState(false);
+  const [openFlavorDesc, setOpenFlavorDesc] = useState(false);
+  const [openFirmnessDesc, setOpenFirmnessDesc] = useState(false);
+
   useEffect(() => {}, []);
 
   function copy() {
@@ -623,15 +629,21 @@ export default function Example({ post, morePosts, preview }) {
 
                 <div className="mt-4">
                   <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    {post?.lot.name}
-                    {' - '}
-                    {post?.variety.name}
-                    {' - '}{' '}
-                    {post?.week
-                      ? post?.week.toUpperCase().replace('EEK-', '')
-                      : 'N/A'}
-                    {'-'}
-                    {new Date(post?.date).getFullYear()}
+                    <span>
+                      {' '}
+                      {post?.lot.name}
+                      {' - '}
+                      {post?.variety.name}
+                    </span>
+                    <br />
+                    <span>
+                      {' '}
+                      {post?.week
+                        ? post?.week.toUpperCase().replace('EEK-', '')
+                        : 'N/A'}
+                      {'-'}
+                      {new Date(post?.date).getFullYear()}
+                    </span>
                   </h1>
                 </div>
 
@@ -737,10 +749,7 @@ export default function Example({ post, morePosts, preview }) {
                                                   </Dialog.Title>
                                                   <div className="mt-2">
                                                     <p className="text-sm text-gray-500">
-                                                      Lorem ipsum dolor sit amet
-                                                      consectetur adipisicing
-                                                      elit. Consequatur amet
-                                                      labore.
+                                                      {post.lot.description}
                                                     </p>
                                                   </div>
                                                 </div>
@@ -863,7 +872,90 @@ export default function Example({ post, morePosts, preview }) {
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
+                                      onClick={() => setOpenBrixDesc(true)}
                                     />
+                                    <Transition.Root
+                                      show={openBrixDesc}
+                                      as={Fragment}
+                                    >
+                                      <Dialog
+                                        as="div"
+                                        className="fixed z-10 inset-0 overflow-y-auto"
+                                        onClose={setOpenBrixDesc}
+                                      >
+                                        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                          <Transition.Child
+                                            as={Fragment}
+                                            enter="ease-out duration-300"
+                                            enterFrom="opacity-0"
+                                            enterTo="opacity-100"
+                                            leave="ease-in duration-200"
+                                            leaveFrom="opacity-100"
+                                            leaveTo="opacity-0"
+                                          >
+                                            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                                          </Transition.Child>
+
+                                          {/* This element is to trick the browser into centering the modal contents. */}
+                                          <span
+                                            className="hidden sm:inline-block sm:align-middle sm:h-screen"
+                                            aria-hidden="true"
+                                          >
+                                            &#8203;
+                                          </span>
+                                          <Transition.Child
+                                            as={Fragment}
+                                            enter="ease-out duration-300"
+                                            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                            enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                            leave="ease-in duration-200"
+                                            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                          >
+                                            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                                              <div>
+                                                <div className="mt-3 text-center sm:mt-5">
+                                                  <Dialog.Title
+                                                    as="h3"
+                                                    className="text-lg leading-6 font-medium text-gray-900"
+                                                  >
+                                                    Brix
+                                                  </Dialog.Title>
+                                                  <div className="mt-2">
+                                                    <p className="text-sm text-gray-500">
+                                                      The term Brix (also called
+                                                      Balling) is the name of
+                                                      the system for measuring
+                                                      sugar content in grapes,
+                                                      fermenting grape juices
+                                                      (musts) or finished wines
+                                                      developed by Adolph Brix
+                                                      in the early 1800s. Brix
+                                                      is credited with adding
+                                                      precision to the
+                                                      measurement of sugar
+                                                      content on a density scale
+                                                      known as Balling.
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div className="mt-5 sm:mt-6">
+                                                <button
+                                                  type="button"
+                                                  className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-2 py-2 bg-lime text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime sm:text-sm"
+                                                  onClick={() =>
+                                                    setOpenBrixDesc(false)
+                                                  }
+                                                >
+                                                  Close
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </Transition.Child>
+                                        </div>
+                                      </Dialog>
+                                    </Transition.Root>
                                   </a>
                                 </RadioGroup.Label>
                                 <RadioGroup.Description
@@ -890,7 +982,7 @@ export default function Example({ post, morePosts, preview }) {
                             value={post?.sizeMin}
                             className={({ active }) =>
                               classNames(
-                                active ? 'ring-2 ring-indigo-500' : '',
+                                active ? 'ring-2 ring-lime' : '',
                                 'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
                               )
                             }
@@ -939,7 +1031,7 @@ export default function Example({ post, morePosts, preview }) {
                             value={post?.variety.name}
                             className={({ active }) =>
                               classNames(
-                                active ? 'ring-2 ring-indigo-500' : '',
+                                active ? 'ring-2 ring-lime' : '',
                                 'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
                               )
                             }
@@ -958,7 +1050,78 @@ export default function Example({ post, morePosts, preview }) {
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
+                                      onClick={() => setOpenTypeDesc(true)}
                                     />
+                                    <Transition.Root
+                                      show={openTypeDesc}
+                                      as={Fragment}
+                                    >
+                                      <Dialog
+                                        as="div"
+                                        className="fixed z-10 inset-0 overflow-y-auto"
+                                        onClose={setOpenTypeDesc}
+                                      >
+                                        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                          <Transition.Child
+                                            as={Fragment}
+                                            enter="ease-out duration-300"
+                                            enterFrom="opacity-0"
+                                            enterTo="opacity-100"
+                                            leave="ease-in duration-200"
+                                            leaveFrom="opacity-100"
+                                            leaveTo="opacity-0"
+                                          >
+                                            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                                          </Transition.Child>
+
+                                          {/* This element is to trick the browser into centering the modal contents. */}
+                                          <span
+                                            className="hidden sm:inline-block sm:align-middle sm:h-screen"
+                                            aria-hidden="true"
+                                          >
+                                            &#8203;
+                                          </span>
+                                          <Transition.Child
+                                            as={Fragment}
+                                            enter="ease-out duration-300"
+                                            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                            enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                            leave="ease-in duration-200"
+                                            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                          >
+                                            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                                              <div>
+                                                <div className="mt-3 text-center sm:mt-5">
+                                                  <Dialog.Title
+                                                    as="h3"
+                                                    className="text-lg leading-6 font-medium text-gray-900"
+                                                  >
+                                                    {post.variety.name}
+                                                  </Dialog.Title>
+                                                  <div className="mt-2">
+                                                    <p className="text-sm text-gray-500">
+                                                      {post.variety.description}
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div className="mt-5 sm:mt-6">
+                                                <button
+                                                  type="button"
+                                                  className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-2 py-2 bg-lime text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime sm:text-sm"
+                                                  onClick={() =>
+                                                    setOpenTypeDesc(false)
+                                                  }
+                                                >
+                                                  Close
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </Transition.Child>
+                                        </div>
+                                      </Dialog>
+                                    </Transition.Root>
                                   </a>
                                 </RadioGroup.Label>
                                 <RadioGroup.Description
@@ -989,7 +1152,7 @@ export default function Example({ post, morePosts, preview }) {
                             value={post?.appearance.name}
                             className={({ active }) =>
                               classNames(
-                                active ? 'ring-2 ring-indigo-500' : '',
+                                active ? 'ring-2 ring-lime' : '',
                                 'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
                               )
                             }
@@ -1008,7 +1171,84 @@ export default function Example({ post, morePosts, preview }) {
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
+                                      onClick={() =>
+                                        setOpenAppearanceDesc(true)
+                                      }
                                     />
+                                    <Transition.Root
+                                      show={openAppearanceDesc}
+                                      as={Fragment}
+                                    >
+                                      <Dialog
+                                        as="div"
+                                        className="fixed z-10 inset-0 overflow-y-auto"
+                                        onClose={setOpenAppearanceDesc}
+                                      >
+                                        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                          <Transition.Child
+                                            as={Fragment}
+                                            enter="ease-out duration-300"
+                                            enterFrom="opacity-0"
+                                            enterTo="opacity-100"
+                                            leave="ease-in duration-200"
+                                            leaveFrom="opacity-100"
+                                            leaveTo="opacity-0"
+                                          >
+                                            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                                          </Transition.Child>
+
+                                          {/* This element is to trick the browser into centering the modal contents. */}
+                                          <span
+                                            className="hidden sm:inline-block sm:align-middle sm:h-screen"
+                                            aria-hidden="true"
+                                          >
+                                            &#8203;
+                                          </span>
+                                          <Transition.Child
+                                            as={Fragment}
+                                            enter="ease-out duration-300"
+                                            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                            enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                            leave="ease-in duration-200"
+                                            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                          >
+                                            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                                              <div>
+                                                <div className="mt-3 text-center sm:mt-5">
+                                                  <Dialog.Title
+                                                    as="h3"
+                                                    className="text-lg leading-6 font-medium text-gray-900"
+                                                  >
+                                                    Appearance:{' '}
+                                                    {post.appearance.name}
+                                                  </Dialog.Title>
+                                                  <div className="mt-2">
+                                                    <p className="text-sm text-gray-500">
+                                                      {
+                                                        post.appearance
+                                                          .description
+                                                      }
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div className="mt-5 sm:mt-6">
+                                                <button
+                                                  type="button"
+                                                  className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-2 py-2 bg-lime text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime sm:text-sm"
+                                                  onClick={() =>
+                                                    setOpenAppearanceDesc(false)
+                                                  }
+                                                >
+                                                  Close
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </Transition.Child>
+                                        </div>
+                                      </Dialog>
+                                    </Transition.Root>
                                   </a>
                                 </RadioGroup.Label>
                                 <RadioGroup.Description
@@ -1035,7 +1275,7 @@ export default function Example({ post, morePosts, preview }) {
                             value={post?.flavor.name}
                             className={({ active }) =>
                               classNames(
-                                active ? 'ring-2 ring-indigo-500' : '',
+                                active ? 'ring-2 ring-lime' : '',
                                 'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
                               )
                             }
@@ -1054,7 +1294,84 @@ export default function Example({ post, morePosts, preview }) {
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
+                                      onClick={() =>
+                                        setOpenFlavorDesc(true)
+                                      }
                                     />
+                                    <Transition.Root
+                                      show={openFlavorDesc}
+                                      as={Fragment}
+                                    >
+                                      <Dialog
+                                        as="div"
+                                        className="fixed z-10 inset-0 overflow-y-auto"
+                                        onClose={setOpenFlavorDesc}
+                                      >
+                                        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                          <Transition.Child
+                                            as={Fragment}
+                                            enter="ease-out duration-300"
+                                            enterFrom="opacity-0"
+                                            enterTo="opacity-100"
+                                            leave="ease-in duration-200"
+                                            leaveFrom="opacity-100"
+                                            leaveTo="opacity-0"
+                                          >
+                                            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                                          </Transition.Child>
+
+                                          {/* This element is to trick the browser into centering the modal contents. */}
+                                          <span
+                                            className="hidden sm:inline-block sm:align-middle sm:h-screen"
+                                            aria-hidden="true"
+                                          >
+                                            &#8203;
+                                          </span>
+                                          <Transition.Child
+                                            as={Fragment}
+                                            enter="ease-out duration-300"
+                                            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                            enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                            leave="ease-in duration-200"
+                                            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                          >
+                                            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                                              <div>
+                                                <div className="mt-3 text-center sm:mt-5">
+                                                  <Dialog.Title
+                                                    as="h3"
+                                                    className="text-lg leading-6 font-medium text-gray-900"
+                                                  >
+                                                    Flavor:{' '}
+                                                    {post.flavor.name}
+                                                  </Dialog.Title>
+                                                  <div className="mt-2">
+                                                    <p className="text-sm text-gray-500">
+                                                      {
+                                                        post.flavor
+                                                          .description
+                                                      }
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div className="mt-5 sm:mt-6">
+                                                <button
+                                                  type="button"
+                                                  className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-2 py-2 bg-lime text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime sm:text-sm"
+                                                  onClick={() =>
+                                                    setOpenFlavorDesc(false)
+                                                  }
+                                                >
+                                                  Close
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </Transition.Child>
+                                        </div>
+                                      </Dialog>
+                                    </Transition.Root>
                                   </a>
                                 </RadioGroup.Label>
                                 <RadioGroup.Description
@@ -1081,7 +1398,7 @@ export default function Example({ post, morePosts, preview }) {
                             value={post?.firmness.name}
                             className={({ active }) =>
                               classNames(
-                                active ? 'ring-2 ring-indigo-500' : '',
+                                active ? 'ring-2 ring-lime' : '',
                                 'relative block border border-gray-300 rounded-lg p-4 px-[30] cursor-pointer focus:outline-none'
                               )
                             }
@@ -1100,14 +1417,91 @@ export default function Example({ post, morePosts, preview }) {
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
+                                      onClick={() =>
+                                        setOpenFirmnessDesc(true)
+                                      }
                                     />
+                                    <Transition.Root
+                                      show={openFirmnessDesc}
+                                      as={Fragment}
+                                    >
+                                      <Dialog
+                                        as="div"
+                                        className="fixed z-10 inset-0 overflow-y-auto"
+                                        onClose={setOpenFirmnessDesc}
+                                      >
+                                        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                          <Transition.Child
+                                            as={Fragment}
+                                            enter="ease-out duration-300"
+                                            enterFrom="opacity-0"
+                                            enterTo="opacity-100"
+                                            leave="ease-in duration-200"
+                                            leaveFrom="opacity-100"
+                                            leaveTo="opacity-0"
+                                          >
+                                            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                                          </Transition.Child>
+
+                                          {/* This element is to trick the browser into centering the modal contents. */}
+                                          <span
+                                            className="hidden sm:inline-block sm:align-middle sm:h-screen"
+                                            aria-hidden="true"
+                                          >
+                                            &#8203;
+                                          </span>
+                                          <Transition.Child
+                                            as={Fragment}
+                                            enter="ease-out duration-300"
+                                            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                            enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                            leave="ease-in duration-200"
+                                            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                          >
+                                            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                                              <div>
+                                                <div className="mt-3 text-center sm:mt-5">
+                                                  <Dialog.Title
+                                                    as="h3"
+                                                    className="text-lg leading-6 font-medium text-gray-900"
+                                                  >
+                                                    Firmness:{' '}
+                                                    {post.firmness.name}
+                                                  </Dialog.Title>
+                                                  <div className="mt-2">
+                                                    <p className="text-sm text-gray-500">
+                                                      {
+                                                        post.firmness
+                                                          .description
+                                                      }
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div className="mt-5 sm:mt-6">
+                                                <button
+                                                  type="button"
+                                                  className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-2 py-2 bg-lime text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime sm:text-sm"
+                                                  onClick={() =>
+                                                    setOpenFirmnessDesc(false)
+                                                  }
+                                                >
+                                                  Close
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </Transition.Child>
+                                        </div>
+                                      </Dialog>
+                                    </Transition.Root>
                                   </a>
                                 </RadioGroup.Label>
                                 <RadioGroup.Description
                                   as="p"
                                   className="mt-1 text-sm text-gray-500"
                                 >
-                                  {post?.appearance.name}
+                                  {post?.firmness.name}
                                 </RadioGroup.Description>
                                 <div
                                   className={classNames(
@@ -1132,7 +1526,7 @@ export default function Example({ post, morePosts, preview }) {
                           '?#',
                           ''
                         )}%0A%0A%0AHere%20is%20my%20info%20below%3A%0A%0AName%3A%0AEmail%3A%20%0ACompany%3A%20%0APhone%20Number%3A`}
-                        className="w-full bg-lime border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                        className="w-full bg-lime border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-lime"
                       >
                         Contact Team
                       </a>
@@ -1170,6 +1564,18 @@ export default function Example({ post, morePosts, preview }) {
             {/* Details section */}
             <section aria-labelledby="details-heading">
               <div className="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-8">
+                <div key={`${post.slug}-cover-image`}>
+                  <div className="w-full aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
+                    <img
+                      src={imageBuilder(post.coverImage)
+                        .width(592)
+                        .height(395)
+                        .url()}
+                      alt="image.asset._ref"
+                      className="w-full h-full object-center object-cover"
+                    />
+                  </div>
+                </div>
                 {post?.images.map((image) => (
                   <div key={image.asset._ref}>
                     <div className="w-full aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">

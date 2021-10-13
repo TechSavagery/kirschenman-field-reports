@@ -33,6 +33,7 @@ import { ChevronDownIcon, PlusSmIcon } from '@heroicons/react/solid';
 import ReportCard from '../components/report-card';
 import { getAllPostsForHome } from '../lib/api';
 import FAQ from '../components/faq';
+import Head from 'next/head'
 
 const navigation = {
   categories: [
@@ -126,6 +127,13 @@ export default function FaqPage({ allPosts, preview }) {
   return (
     <div className="bg-white">
       <div>
+      <Head>
+        <meta
+          name="description"
+          content={`Frequently asked questions about Field Report Data from Kirschenman Enterprises Inc.`}
+        />
+        <title>Kirschenman Field Reports - FAQ</title>
+      </Head>
         {/* Mobile menu */}
         <Transition.Root show={mobileMenuOpen} as={Fragment}>
           <Dialog

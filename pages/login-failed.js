@@ -2,6 +2,7 @@
 import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import Head from 'next/head'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -49,6 +50,13 @@ const footerNavigation = {
 export default function Example() {
   return (
     <div className="min-h-screen flex flex-col">
+      <Head>
+        <meta
+          name="description"
+          content={`Field Report Data from Kirschenman Enterprises Inc.`}
+        />
+        <title>Kirschenman Field Reports - Login Failed</title>
+      </Head>
       <Popover className="relative bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
