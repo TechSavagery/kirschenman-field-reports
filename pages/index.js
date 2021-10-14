@@ -257,15 +257,6 @@ export default function Example({ allPosts, preview }) {
                 <a
                   href="mailto:info@keiproduce.com"
                   className="text-base font-medium text-white hover:text-gray-300"
-                  onClick={() => {
-                    ga.event({
-                      action: 'report-copied',
-                      params: {
-                        client: `${session.user.email}`,
-                        url: `${window.location.href.replace('#', '')}`,
-                      },
-                    });
-                  }}
                 >
                   Contact Us
                 </a>
