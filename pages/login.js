@@ -1,23 +1,27 @@
 import { LockClosedIcon } from '@heroicons/react/solid';
-import { providers, signIn, getSession, csrfToken, useSession } from "next-auth/client";
+import {
+  providers,
+  signIn,
+  getSession,
+  csrfToken,
+  useSession,
+} from 'next-auth/client';
 import { useState, useRouter } from 'react';
 
 export default function Login() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [isLoginStarted, setIsLoginStarted] = useState(false)
-  const [loginError, setLoginError] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoginStarted, setIsLoginStarted] = useState(false);
+  const [loginError, setLoginError] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  signIn("credentials", {
-      redirect: true, 
+    signIn('credentials', {
       email,
       password,
-      callbackUrl: `${encodeURIComponent(window.location.origin + '/dashboard')}`
     })
-    .then((error) => console.log(error))
-    .catch((error) => console.log(error));
+      .then((error) => console.log(error))
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -49,7 +53,7 @@ export default function Login() {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-lime focus:border-lime focus:z-10 sm:text-sm"
                 placeholder="Username"
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -65,7 +69,7 @@ export default function Login() {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-lime focus:border-lime focus:z-10 sm:text-sm"
                 placeholder="Password"
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
@@ -93,10 +97,11 @@ export default function Login() {
 export async function getServerSideProps(context) {
   const { req } = context;
   const session = await getSession({ req });
+  
 
   if (session) {
     return {
-      redirect: { destination: "/dashboard" },
+      redirect: { destination: '/dashboard' },
     };
   }
 
