@@ -13,6 +13,24 @@ export default function ReportCard({
   content,
   reporter,
 }) {
+  function toPlainText(blocks = []) {
+    return (
+      blocks
+        // loop through each block
+        .map((block) => {
+          // if it's not a text block with children,
+          // return nothing
+          if (block._type !== 'block' || !block.children) {
+            return '';
+          }
+          // loop through the children spans, and join the
+          // text strings
+          return block.children.map((child) => child.text).join('');
+        })
+        // join the paragraphs leaving split by two linebreaks
+        .join('\n\n')
+    );
+  }
   return (
     <div
       key={slug}
@@ -40,20 +58,14 @@ export default function ReportCard({
               {lot ? lot.name : 'N/A'}
               {' - '}
               {variety ? variety.name : 'N/A'}
-              {' - '}
+<br/>
               {week ? week.toUpperCase().replace('EEK-', '') : 'N/A'}
               {' - '}
               {new Date(inspectionDate).getFullYear()}
             </p>
 
             <p className="mt-3 text-md text-gray-500 sm:mt-4">
-              <BlockContent
-                href={`/reports/${slug}`}
-                blocks={content}
-                projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
-                dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
-                className={markdownStyles.markdown}
-              />{' '}
+              {toPlainText(content).substr(0, 105) + "\u2026"}
             </p>
           </a>
         </div>

@@ -46,6 +46,7 @@ import markdownStyles from '../components/markdown-styles.module.css';
 import FAQ from '../components/faq';
 import Head from 'next/head';
 import NewsletterForm from '../components/newsletter-form';
+import * as ga from '../lib/ga';
 
 const navigation = [
   { name: 'Features', href: '#features' },
@@ -256,6 +257,15 @@ export default function Example({ allPosts, preview }) {
                 <a
                   href="mailto:info@keiproduce.com"
                   className="text-base font-medium text-white hover:text-gray-300"
+                  onClick={() => {
+                    ga.event({
+                      action: 'report-copied',
+                      params: {
+                        client: `${session.user.email}`,
+                        url: `${window.location.href.replace('#', '')}`,
+                      },
+                    });
+                  }}
                 >
                   Contact Us
                 </a>
@@ -357,13 +367,16 @@ export default function Example({ allPosts, preview }) {
                       keep you up to date with our current offerings.
                     </p>
                     <div className="mt-10 sm:mt-12">
-                     <NewsletterForm/>
+                      <NewsletterForm />
                     </div>
                   </div>
                 </div>
                 <div className="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative">
                   <div className="mt-12 -mb-10 sm:-mb-24 lg:-mb-80">
-                    <a id="desktop-screenshot" href={`/reports/${posts[0].slug}`}>
+                    <a
+                      id="desktop-screenshot"
+                      href={`/reports/${posts[0].slug}`}
+                    >
                       <img
                         className="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5"
                         src="/kei-reports-desktop.png"

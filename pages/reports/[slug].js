@@ -255,13 +255,15 @@ export default function Example({ post, morePosts, preview }) {
       client: `${session.user.email}`,
       url: `${window.location.href.replace('#', '')}`,
     });
-    ga.event({
-      action: 'report-copied',
-      params: {
-        client: `${session.user.email}`,
-        url: `${window.location.href.replace('#', '')}`,
-      },
-    });
+    if (process.env.NEXT_PUBLIC_HOST === 'production') {
+      ga.event({
+        action: 'report-copied',
+        params: {
+          client: `${session.user.email}`,
+          url: `${window.location.href.replace('#', '')}`,
+        },
+      });
+    }
     setCopied(true);
     setTimeout(function () {
       setCopied(false);
@@ -565,13 +567,17 @@ export default function Example({ post, morePosts, preview }) {
                           client: `${session.user.email}`,
                           url: `${window.location.href.replace('#', '')}`,
                         });
-                        ga.event({
-                          action: 'report-emailed',
-                          params: {
-                            client: `${session.user.email}`,
-                            url: `${window.location.href.replace('#', '')}`,
-                          },
-                        });
+                        if (
+                          process.env.NEXT_PUBLIC_HOST === 'production'
+                        ) {
+                          ga.event({
+                            action: 'report-emailed',
+                            params: {
+                              client: `${session.user.email}`,
+                              url: `${window.location.href.replace('#', '')}`,
+                            },
+                          });
+                        }
                       }}
                       href={`mailto:?subject=KEI%20Report%3A%20${encodeURIComponent(
                         post.slug
@@ -738,7 +744,7 @@ export default function Example({ post, morePosts, preview }) {
                                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                                           >
-                                            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                                            <div className="inline-block align-top bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-top sm:max-w-sm sm:w-full sm:p-6">
                                               <div>
                                                 <div className="mt-3 text-center sm:mt-5">
                                                   <Dialog.Title
@@ -898,7 +904,7 @@ export default function Example({ post, morePosts, preview }) {
 
                                           {/* This element is to trick the browser into centering the modal contents. */}
                                           <span
-                                            className="hidden sm:inline-block sm:align-middle sm:h-screen"
+                                            className="hidden sm:inline-block sm:align-top sm:h-screen"
                                             aria-hidden="true"
                                           >
                                             &#8203;
@@ -1294,9 +1300,7 @@ export default function Example({ post, morePosts, preview }) {
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
-                                      onClick={() =>
-                                        setOpenFlavorDesc(true)
-                                      }
+                                      onClick={() => setOpenFlavorDesc(true)}
                                     />
                                     <Transition.Root
                                       show={openFlavorDesc}
@@ -1343,15 +1347,11 @@ export default function Example({ post, morePosts, preview }) {
                                                     as="h3"
                                                     className="text-lg leading-6 font-medium text-gray-900"
                                                   >
-                                                    Flavor:{' '}
-                                                    {post.flavor.name}
+                                                    Flavor: {post.flavor.name}
                                                   </Dialog.Title>
                                                   <div className="mt-2">
                                                     <p className="text-sm text-gray-500">
-                                                      {
-                                                        post.flavor
-                                                          .description
-                                                      }
+                                                      {post.flavor.description}
                                                     </p>
                                                   </div>
                                                 </div>
@@ -1417,9 +1417,7 @@ export default function Example({ post, morePosts, preview }) {
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
-                                      onClick={() =>
-                                        setOpenFirmnessDesc(true)
-                                      }
+                                      onClick={() => setOpenFirmnessDesc(true)}
                                     />
                                     <Transition.Root
                                       show={openFirmnessDesc}
@@ -1520,6 +1518,19 @@ export default function Example({ post, morePosts, preview }) {
                     </div>
                     <div className="mt-10">
                       <a
+                        onClick={() => {
+                          if (
+                            process.env.NEXT_PUBLIC_HOST === 'production'
+                          ) {
+                            ga.event({
+                              action: 'report-inbound-info-request',
+                              params: {
+                                client: `${session.user.email}`,
+                                url: `${window.location.href.replace('#', '')}`,
+                              },
+                            });
+                          }
+                        }}
                         href={`mailto:info@keiproduce.com?subject=Request%20Info%20for%20${encodeURIComponent(
                           post.slug
                         )}&body=Hello%20KEI%20Staff%2C%20%0A%0AI%20would%20like%20more%20info%20for%20the%20following%20report%3A%0A${window.location.href.replace(
