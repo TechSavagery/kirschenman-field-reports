@@ -12,6 +12,7 @@ import {
   PhoneIcon,
 } from '@heroicons/react/outline';
 import { signIn } from 'next-auth/client';
+import * as ga from '../lib/ga';
 
 const navigation = [
   { name: 'Features', href: '#features' },
@@ -320,6 +321,14 @@ export default function PasswordProtect({ allPosts, preview }) {
                         Login
                       </a>
                       <a
+                        onClick={() => {
+                          if (process.env.NEXT_PUBLIC_HOST === 'production') {
+                            ga.event({
+                              action: 'join-request',
+                              params: {},
+                            });
+                          }
+                        }}
                         className="block w-full py-3 lg:px-20 sm:px-5 text-center bg-white border border-transparent rounded-md shadow-md text-base font-medium text-gray-700 hover:bg-gray-50 sm:inline-block sm:w-auto"
                         href="mailto:info@keiproduce.com?subject=Request%20for%20KEI%20Field%20Report%20Access&body=Hello%20KEI%20Staff%2C%0A%0AI%20would%20like%20access%20to%20the%20KEI%20Field%20Report%20Data.%20Here%20is%20my%20info%20below%3A%0A%0AName%3A%20%0ACompany%3A%0AEmail%3A%0APhone%3A%0A"
                       >

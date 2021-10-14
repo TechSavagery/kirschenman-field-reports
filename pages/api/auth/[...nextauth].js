@@ -14,6 +14,7 @@ const options = {
   adapter: SanityAdapter(client),
   pages: {
     error: '/login-failed', // Error code passed in query string as ?error=
+    signIn: '/login',
   }
 };
 
