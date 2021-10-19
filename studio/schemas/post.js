@@ -390,7 +390,7 @@ export default {
       'slug': slug.current,
     `,
         reduceQueryResult: (resultOfQuery) => {
-          return `https://reports.kirschenman.com/report/${resultOfQuery.slug}?preview=true`;
+          return `https://reports.kirschenman.com/reports/${resultOfQuery.slug}?preview=true`;
         },
       },
     },
