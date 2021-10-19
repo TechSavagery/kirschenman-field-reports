@@ -1,5 +1,7 @@
 import ComputedField from 'sanity-plugin-computed-field';
 
+const url = process.env.SANITY_STUDIO_PREVIEW_URL; 
+
 export default {
   name: 'post',
   title: 'Grape Report',
@@ -254,6 +256,13 @@ export default {
       type: 'reference',
       validation: (Rule) => Rule.required(),
       to: [{ type: 'label' }],
+      orderings: [
+        {
+          title: 'Name Asc',
+          name: 'nameAsc',
+          by: [{ field: 'label', direction: 'asc' }],
+        },
+      ],
     },
     {
       name: 'variety',
@@ -318,15 +327,15 @@ export default {
       },
     },
     {
-      name: 'body',
-      title: 'Notes',
-      type: 'blockContent',
-    },
-    {
       name: 'images',
       title: 'Images',
       type: 'array',
       of: [{ type: 'image' }],
+    },
+    {
+      name: 'body',
+      title: 'Notes',
+      type: 'blockContent',
     },
     {
       name: 'title',
@@ -338,10 +347,23 @@ export default {
         editable: true,
         buttonText: 'Regenerate',
         documentQuerySelection: `
-      slug
+      _id,
+      'label': label->{name},
+      'variety': variety->{name},
+      'lot': lot->{name},
+      blockNumber,
+      week,
+      publishedAt
     `,
         reduceQueryResult: (resultOfQuery) => {
-          return `${process.env.NEXTAUTH_URL}${resultOfQuery}?preview=true`;
+          var publishedDate = new Date(resultOfQuery.publishedAt);
+          var weekLabel = resultOfQuery.week.toUpperCase();
+          return `${resultOfQuery.label.name} - ${
+            resultOfQuery.variety.name
+          } - ${resultOfQuery.lot.name} - ${weekLabel.replace(
+            'EEK-',
+            ''
+          )}-${publishedDate.getFullYear()} Report`;
         },
       },
     },
@@ -353,6 +375,23 @@ export default {
       options: {
         source: 'title',
         maxLength: 96,
+      },
+    },
+    {
+      name: 'previewLink',
+      title: 'Preview Link',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+      inputComponent: ComputedField,
+      options: {
+        editable: true,
+        buttonText: 'Create Preview Link',
+        documentQuerySelection: `
+      'slug': slug.current,
+    `,
+        reduceQueryResult: (resultOfQuery) => {
+          return `https://reports.kirschenman.com/report/${resultOfQuery.slug}?preview=true`;
+        },
       },
     },
   ],

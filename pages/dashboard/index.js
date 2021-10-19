@@ -38,35 +38,88 @@ import Head from 'next/head';
 const navigation = {
   categories: [
     {
-      id: 'data',
-      name: 'Data',
-      featured: [
-        {
-          name: '',
-          href: '#',
-          imageSrc:
-            'https://images.pexels.com/photos/974314/pexels-photo-974314.jpeg',
-          imageAlt:
-            'Models sitting back to back, wearing Basic Tee in black and bone.',
-        },
-        {
-          name: '',
-          href: '#',
-          imageSrc:
-            'https://images.pexels.com/photos/39351/purple-grapes-vineyard-napa-valley-napa-vineyard-39351.jpeg',
-          imageAlt:
-            'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-        },
-      ],
+      id: 'reports',
+      name: 'Reports',
       sections: [
         {
-          id: 'reports',
-          name: 'Reports',
+          id: 'produce',
+          name: 'Produce',
           items: [
-            { name: 'Grape', href: '#' },
-            { name: 'Potato', href: '#' },
+            { name: 'Grapes', href: '/dashboard/grapes' },
+            { name: 'Potato', href: '' },
             { name: 'Watermelon', href: '#' },
-            { name: 'Stone Fruit', href: '#' },
+            { name: 'Stone Fruits', href: '#' },
+          ],
+        },
+        {
+          id: 'lots',
+          name: 'Lots (coming soon)',
+          items: [
+            { name: 'Grape Lots', href: '#' },
+            { name: 'Potato Lots', href: '#' },
+            { name: 'Watermelon Lots', href: '#' },
+            { name: 'Stone Fruite Lots', href: '#' },
+          ],
+        },
+        {
+          id: 'brands',
+          name: 'Brands (coming soon)',
+          items: [
+            { name: 'Grape Brands', href: '#' },
+            { name: 'Potato Brands', href: '#' },
+            { name: 'Watermelon Brands', href: '#' },
+            { name: 'Stone Fruit Brands', href: '#' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'info',
+      name: 'Info',
+      sections: [
+        {
+          id: 'company',
+          name: 'Company',
+          items: [
+            { name: 'About Us', href: 'https://www.kirschenman.com/about' },
+            { name: 'Locations', href: 'https://www.kirschenman.com/contact/' },
+            {
+              name: 'Blog',
+              href: 'https://www.kirschenman.com/category/current-trends/',
+            },
+          ],
+        },
+        {
+          id: 'contact',
+          name: 'Contact',
+          items: [
+            {
+              name: 'Email: info@keiproduce.com',
+              href: 'mailto:info@keiproduce.com',
+            },
+            { name: 'Phone: (661)201-7744', href: 'tel:661-201-7744' },
+          ],
+        },
+        {
+          id: 'produce-info',
+          name: 'Produce Info',
+          items: [
+            {
+              name: 'Grapes',
+              href: 'https://www.kirschenman.com/products/grapes/',
+            },
+            {
+              name: 'Stone Fruits',
+              href: 'https://www.kirschenman.com/products/stone-fruits/',
+            },
+            {
+              name: 'Watermelon',
+              href: 'https://www.kirschenman.com/products/watermelons/',
+            },
+            {
+              name: 'Potato',
+              href: 'https://www.kirschenman.com/products/potatoes/',
+            },
           ],
         },
       ],
@@ -286,32 +339,6 @@ export default function Example({ allPosts, preview }) {
                         key={category.name}
                         className="pt-10 pb-8 px-4 space-y-10"
                       >
-                        <div className="grid grid-cols-2 gap-x-4">
-                          {category.featured.map((item) => (
-                            <div
-                              key={item.name}
-                              className="group relative text-sm"
-                            >
-                              <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
-                                <img
-                                  src={item.imageSrc}
-                                  alt={item.imageAlt}
-                                  className="object-center object-cover"
-                                />
-                              </div>
-                              <a
-                                href={item.href}
-                                className="mt-6 block font-medium text-gray-900"
-                              >
-                                <span
-                                  className="absolute z-10 inset-0"
-                                  aria-hidden="true"
-                                />
-                                {item.name}
-                              </a>
-                            </div>
-                          ))}
-                        </div>
                         {category.sections.map((section) => (
                           <div key={section.name}>
                             <p
@@ -430,34 +457,8 @@ export default function Example({ allPosts, preview }) {
                                 />
 
                                 <div className="relative bg-white">
-                                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                  <div className="max-w-7xl mx-auto px-8">
                                     <div className="grid grid-cols-2 gap-y-10 gap-x-8 py-16">
-                                      <div className="col-start-2 grid grid-cols-2 gap-x-8">
-                                        {category.featured.map((item) => (
-                                          <div
-                                            key={item.name}
-                                            className="group relative text-base sm:text-sm"
-                                          >
-                                            <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
-                                              <img
-                                                src={item.imageSrc}
-                                                alt={item.imageAlt}
-                                                className="object-center object-cover"
-                                              />
-                                            </div>
-                                            <a
-                                              href={item.href}
-                                              className="mt-6 block font-medium text-gray-900"
-                                            >
-                                              <span
-                                                className="absolute z-10 inset-0"
-                                                aria-hidden="true"
-                                              />
-                                              {item.name}
-                                            </a>
-                                          </div>
-                                        ))}
-                                      </div>
                                       <div className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 text-sm">
                                         {category.sections.map((section) => (
                                           <div key={section.name}>

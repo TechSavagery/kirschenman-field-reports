@@ -20,4 +20,11 @@ export default {
       to: [{ type: 'produce' }],
     },
   ],
+  orderings: [
+    {
+      title: 'Name Asc',
+      name: 'nameAsc',
+      by: [{ field: 'name', direction: 'asc' }],
+    },
+  ],
 };

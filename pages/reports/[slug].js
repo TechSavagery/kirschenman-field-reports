@@ -48,6 +48,7 @@ import PasswordProtect from '../../components/password-protect';
 import track, { useTracking } from 'react-tracking';
 import Head from 'next/head';
 import * as ga from '../../lib/ga';
+import { useRouter } from 'next/router';
 
 const navigation = {
   categories: [
@@ -240,6 +241,7 @@ export default function Example({ post, morePosts, preview }) {
   const [openAppearanceDesc, setOpenAppearanceDesc] = useState(false);
   const [openFlavorDesc, setOpenFlavorDesc] = useState(false);
   const [openFirmnessDesc, setOpenFirmnessDesc] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {}, []);
 
@@ -272,7 +274,7 @@ export default function Example({ post, morePosts, preview }) {
   if (typeof window !== 'undefined' && loading) return null;
 
   // If no session exists, display access denied message
-  if (!session) {
+  if (!session && router.query.preview == null) {
     return <PasswordProtect />;
   }
   return (
@@ -416,9 +418,15 @@ export default function Example({ post, morePosts, preview }) {
         </Transition.Root>
 
         <header className="relative bg-white">
-          <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
-            Grape Field Data is now Live!
-          </p>
+          {post._id.includes('draft') ? (
+            <p className="bg-yellow-300 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
+              Preview: Pending KEI Staff Approval 
+            </p>
+          ) : (
+            <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
+              Grape Field Data is now Live!
+            </p>
+          )}
 
           <nav
             aria-label="Top"
@@ -567,9 +575,7 @@ export default function Example({ post, morePosts, preview }) {
                           client: `${session.user.email}`,
                           url: `${window.location.href.replace('#', '')}`,
                         });
-                        if (
-                          process.env.NEXT_PUBLIC_HOST === 'production'
-                        ) {
+                        if (process.env.NEXT_PUBLIC_HOST === 'production') {
                           ga.event({
                             action: 'report-emailed',
                             params: {
@@ -1519,9 +1525,7 @@ export default function Example({ post, morePosts, preview }) {
                     <div className="mt-10">
                       <a
                         onClick={() => {
-                          if (
-                            process.env.NEXT_PUBLIC_HOST === 'production'
-                          ) {
+                          if (process.env.NEXT_PUBLIC_HOST === 'production') {
                             ga.event({
                               action: 'report-inbound-info-request',
                               params: {
@@ -1724,7 +1728,7 @@ export default function Example({ post, morePosts, preview }) {
   );
 }
 
-export async function getStaticProps({ params, preview = false }) {
+export async function getStaticProps({ params, preview = true }) {
   const data = await getPostAndMorePosts(params.slug, preview);
   return {
     props: {
