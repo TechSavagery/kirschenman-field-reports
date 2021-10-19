@@ -1,4 +1,5 @@
 import { LockClosedIcon } from '@heroicons/react/solid';
+import { ca } from 'date-fns/locale';
 import {
   providers,
   signIn,
@@ -6,7 +7,7 @@ import {
   csrfToken,
   useSession,
 } from 'next-auth/client';
-import { useState, useRouter } from 'react';
+import { useState } from 'react';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    signIn('credentials', {
+    signIn('sanity-login', {
       email,
       password,
     })
@@ -97,11 +98,10 @@ export default function Login() {
 export async function getServerSideProps(context) {
   const { req } = context;
   const session = await getSession({ req });
-  
 
   if (session) {
     return {
-      redirect: { destination: '/dashboard' },
+      redirect: { destination: `/dashboard` },
     };
   }
 

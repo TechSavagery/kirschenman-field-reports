@@ -338,23 +338,10 @@ export default {
         editable: true,
         buttonText: 'Regenerate',
         documentQuerySelection: `
-      _id,
-      'label': label->{name},
-      'variety': variety->{name},
-      'lot': lot->{name},
-      blockNumber,
-      week,
-      publishedAt
+      slug
     `,
         reduceQueryResult: (resultOfQuery) => {
-          var publishedDate = new Date(resultOfQuery.publishedAt);
-          var weekLabel = resultOfQuery.week.toUpperCase();
-          return `${resultOfQuery.label.name} - ${
-            resultOfQuery.variety.name
-          } - ${resultOfQuery.lot.name} - ${weekLabel.replace(
-            'EEK-',
-            ''
-          )}-${publishedDate.getFullYear()} Report`;
+          return `${process.env.NEXTAUTH_URL}${resultOfQuery}?preview=true`;
         },
       },
     },
@@ -376,7 +363,7 @@ export default {
       reporter: 'reporter.name',
       media: 'mainImage',
       date: 'publishedAt',
-      published: '_id'
+      published: '_id',
     },
     prepare(selection) {
       const { reporter, date, published } = selection;

@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/": "pages/index.js",
-  "/reports/[slug]": "pages/reports/[slug].js"
+  "/reports/[slug]": "pages/reports/[slug].js",
+  "/dashboard/grapes": "pages/dashboard/grapes.js"
 }
