@@ -377,23 +377,6 @@ export default {
         maxLength: 96,
       },
     },
-    {
-      name: 'previewLink',
-      title: 'Preview Link',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-      inputComponent: ComputedField,
-      options: {
-        editable: true,
-        buttonText: 'Create Preview Link',
-        documentQuerySelection: `
-      'slug': slug.current,
-    `,
-        reduceQueryResult: (resultOfQuery) => {
-          return `https://reports.kirschenman.com/reports/${resultOfQuery.slug}?preview=true`;
-        },
-      },
-    },
   ],
 
   preview: {
