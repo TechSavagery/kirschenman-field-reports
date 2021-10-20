@@ -1580,11 +1580,9 @@ export default function Example({ post, morePosts, preview }) {
             <section aria-labelledby="details-heading">
               <div className="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-8">
                 <div key={`${post.slug}-cover-image`}>
-                  <div className="w-full aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
+                  <div className="w-full aspect-w-3 aspect-h-4 rounded-lg overflow-hidden">
                     <img
                       src={imageBuilder(post.coverImage)
-                        .width(592)
-                        .height(395)
                         .url()}
                       alt="image.asset._ref"
                       className="w-full h-full object-center object-cover"
@@ -1593,9 +1591,9 @@ export default function Example({ post, morePosts, preview }) {
                 </div>
                 {post?.images.map((image) => (
                   <div key={image.asset._ref}>
-                    <div className="w-full aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
+                    <div className="w-full aspect-w-3 aspect-h-4 rounded-lg overflow-hidden">
                       <img
-                        src={imageBuilder(image).width(592).height(395).url()}
+                        src={imageBuilder(image).url()}
                         alt="image.asset._ref"
                         className="w-full h-full object-center object-cover"
                       />
