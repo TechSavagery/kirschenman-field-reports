@@ -6,7 +6,7 @@
   },
   "project": {
     "name": "Kirschenman Field Reports",
-    "basePath": "/studio"
+    "basePath": "/admin"
   },
   "plugins": [
     "@sanity/base",
@@ -36,6 +36,14 @@
     { 
       "implements": "part:@sanity/base/document-actions/resolver", 
       "path": "resolveDocumentActions.js" 
-    } 
+    },
+    {
+      "implements": "part:@sanity/base/brand-logo",
+      "path": "./logo/logo.js"
+    },
+    {
+      "implements": "part:@sanity/base/theme/variables/override-style",
+      "path": "./styles/variables.css"
+    }
   ]
 }

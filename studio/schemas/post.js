@@ -4,7 +4,7 @@ const url = process.env.SANITY_STUDIO_PREVIEW_URL;
 
 export default {
   name: 'post',
-  title: 'Grape Report',
+  title: 'Grape Reports',
   type: 'document',
   fields: [
     {

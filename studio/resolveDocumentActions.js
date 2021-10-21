@@ -1,6 +1,9 @@
-import defaultResolve from 'part:@sanity/base/document-actions'
-import {GenerateUrlsAction} from './GenerateUrlsAction'
+import defaultResolve from 'part:@sanity/base/document-actions';
+import { GenerateUrlsAction } from './GenerateUrlsAction';
 
 export default function resolveDocumentActions(props) {
-  return [...defaultResolve(props), GenerateUrlsAction]
+  if (props.type !== 'post' || props.draft == null) {
+    return defaultResolve(props);
+  }
+  return [...defaultResolve(props), GenerateUrlsAction];
 }

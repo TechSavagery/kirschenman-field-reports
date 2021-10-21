@@ -419,8 +419,36 @@ export default function Example({ post, morePosts, preview }) {
 
         <header className="relative bg-white">
           {post._id.includes('draft') ? (
-            <p className="bg-yellow-300 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
-              Preview: Pending KEI Staff Approval 
+            <div className="bg-yellow-400">
+              <div className="max-w-7xl mx-auto py-3 lg:py-2 px-3 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between flex-wrap">
+                  <div className="w-0 flex-1 flex items-center">
+                    <p className="ml-3 font-medium text-white truncate">
+                      <span className="md:hidden">
+                        We announced a new product!
+                      </span>
+                      <span className="hidden md:inline">
+                        Draft: Pending KEI Approval
+                      </span>
+                    </p>
+                  </div>
+                  <div className="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
+                    <a
+                      href={`https://reports.kirschenman.com/studio/desk/post;${post._id.replace(
+                        'drafts.',
+                        ''
+                      )}`}
+                      className="flex items-center justify-center px-4 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium bg-white "
+                    >
+                      Publish Report
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : router.query.preview && !post._id.includes('draft') ? (
+            <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
+              KEI Staff View
             </p>
           ) : (
             <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
@@ -703,10 +731,7 @@ export default function Example({ post, morePosts, preview }) {
                                   className="text-base font-medium text-gray-900"
                                 >
                                   Lot
-                                  <a
-                                    href="#"
-                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                  >
+                                  <a className="group inline-flex text-sm text-gray-500 hover:text-gray-700">
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
@@ -821,10 +846,7 @@ export default function Example({ post, morePosts, preview }) {
                                   className="text-base font-medium text-gray-900"
                                 >
                                   Inspection Date
-                                  <a
-                                    href="#"
-                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                  >
+                                  <a className="group inline-flex text-sm text-gray-500 hover:text-gray-700">
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
@@ -877,10 +899,7 @@ export default function Example({ post, morePosts, preview }) {
                                   className="text-base font-medium text-gray-900"
                                 >
                                   Brix
-                                  <a
-                                    href="#"
-                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                  >
+                                  <a className="group inline-flex text-sm text-gray-500 hover:text-gray-700">
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
@@ -1006,10 +1025,7 @@ export default function Example({ post, morePosts, preview }) {
                                   className="text-base font-medium text-gray-900"
                                 >
                                   Size
-                                  <a
-                                    href="#"
-                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                  >
+                                  <a className="group inline-flex text-sm text-gray-500 hover:text-gray-700">
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
@@ -1055,10 +1071,7 @@ export default function Example({ post, morePosts, preview }) {
                                   className="text-base font-medium text-gray-900"
                                 >
                                   Type
-                                  <a
-                                    href="#"
-                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                  >
+                                  <a className="group inline-flex text-sm text-gray-500 hover:text-gray-700">
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
@@ -1176,10 +1189,7 @@ export default function Example({ post, morePosts, preview }) {
                                   className="text-base font-medium text-gray-900"
                                 >
                                   Appearance
-                                  <a
-                                    href="#"
-                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                  >
+                                  <a className="group inline-flex text-sm text-gray-500 hover:text-gray-700">
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
@@ -1299,10 +1309,7 @@ export default function Example({ post, morePosts, preview }) {
                                   className="text-base font-medium text-gray-900"
                                 >
                                   Flavor
-                                  <a
-                                    href="#"
-                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                  >
+                                  <a className="group inline-flex text-sm text-gray-500 hover:text-gray-700">
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
@@ -1416,10 +1423,7 @@ export default function Example({ post, morePosts, preview }) {
                                   className="text-base font-medium text-gray-900"
                                 >
                                   Firmness
-                                  <a
-                                    href="#"
-                                    className="group inline-flex text-sm text-gray-500 hover:text-gray-700"
-                                  >
+                                  <a className="group inline-flex text-sm text-gray-500 hover:text-gray-700">
                                     <QuestionMarkCircleIcon
                                       className="flex-shrink-0 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                       aria-hidden="true"
@@ -1563,15 +1567,6 @@ export default function Example({ post, morePosts, preview }) {
                   />
                 </div>
               </div>
-
-              {/* Product form */}
-              <div className="mt-10 lg:max-w-lg lg:col-start-1 lg:row-start-2 lg:self-start">
-                <section aria-labelledby="options-heading">
-                  <h2 id="options-heading" className="sr-only">
-                    Product options
-                  </h2>
-                </section>
-              </div>
             </div>
           </div>
 
@@ -1582,8 +1577,7 @@ export default function Example({ post, morePosts, preview }) {
                 <div key={`${post.slug}-cover-image`}>
                   <div className="w-full aspect-w-3 aspect-h-4 rounded-lg overflow-hidden">
                     <img
-                      src={imageBuilder(post.coverImage)
-                        .url()}
+                      src={imageBuilder(post.coverImage).url()}
                       alt="image.asset._ref"
                       className="w-full h-full object-center object-cover"
                     />
