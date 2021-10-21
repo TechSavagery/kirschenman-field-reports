@@ -434,7 +434,7 @@ export default function Example({ post, morePosts, preview }) {
                   </div>
                   <div className="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
                     <a
-                      href={`https://reports.kirschenman.com/studio/desk/post;${post._id.replace(
+                      href={`https://reports.kirschenman.com/studio/desk/post;${post?._id.replace(
                         'drafts.',
                         ''
                       )}`}
@@ -446,7 +446,7 @@ export default function Example({ post, morePosts, preview }) {
                 </div>
               </div>
             </div>
-          ) : router.query.preview && !post._id.includes('draft') ? (
+          ) : router.query.preview && !post._id?.includes('draft') ? (
             <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
               KEI Staff View
             </p>
