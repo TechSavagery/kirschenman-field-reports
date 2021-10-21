@@ -14,7 +14,7 @@ export function GenerateUrlsAction(props) {
         props.draft.slug.current
       }?preview=true\r\n \r\nPublic Link:\r\nPlease use this link to pass on to potential partners. It is password protected and would require them to have a login provisioned by KEI beforehand.\r\nhttps://reports.kirschenman.com/reports/${
         props.draft.slug.current
-      }\r\n\r\nApproval Link:\r\nNavigating to this link will allow KEI Staff with an admin login to edit report details and publish the report.\r\nhttps://reports.kirschenman.com/admin/desk/post;${props.draft._id.replace(
+      }\r\n\r\nApproval Link:\r\nNavigating to this link will allow KEI Staff with an admin login to edit report details and publish the report.\r\nhttps://reports.kirschenman.com/studio/desk/post;${props.draft._id.replace(
         'drafts.',
         ''
       )}`;

@@ -434,7 +434,7 @@ export default function Example({ post, morePosts, preview }) {
                   </div>
                   <div className="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
                     <a
-                      href={`https://reports.kirschenman.com/admin/desk/post;${post?._id.replace(
+                      href={`https://reports.kirschenman.com/studio/desk/post;${post?._id.replace(
                         'drafts.',
                         ''
                       )}`}
