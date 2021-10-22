@@ -18,6 +18,7 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     signIn('sanity-login', {
+      redirect:true,
       email,
       password,
     })
@@ -96,12 +97,13 @@ export default function Login() {
 }
 
 export async function getServerSideProps(context) {
-  const { req } = context;
+  const { req, query } = context;
   const session = await getSession({ req });
+  const { callbackUrl } = query;
 
   if (session) {
     return {
-      redirect: { destination: `/dashboard` },
+      redirect: { destination: callbackUrl },
     };
   }
 
