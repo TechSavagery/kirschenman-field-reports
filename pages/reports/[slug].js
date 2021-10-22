@@ -49,6 +49,7 @@ import track, { useTracking } from 'react-tracking';
 import Head from 'next/head';
 import * as ga from '../../lib/ga';
 import { useRouter } from 'next/router';
+import blocksToHtml from '@sanity/block-content-to-html';
 
 const navigation = {
   categories: [
@@ -248,6 +249,7 @@ export default function Example({ post, morePosts, preview }) {
   function copy() {
     const el = document.createElement('input');
     el.value = window.location.href.replace('?#', '');
+    el.value = el.value.replace('?preview=true', '');
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');
@@ -271,6 +273,26 @@ export default function Example({ post, morePosts, preview }) {
       setCopied(false);
     }, 1500);
   }
+
+  function toPlainText(blocks = []) {
+    return (
+      blocks
+        // loop through each block
+        .map((block) => {
+          // if it's not a text block with children,
+          // return nothing
+          if (block._type !== 'block' || !block.children) {
+            return '';
+          }
+          // loop through the children spans, and join the
+          // text strings
+          return block.children.map((child) => child.text).join('');
+        })
+        // join the paragraphs leaving split by two linebreaks
+        .join('\n\n')
+    );
+  }
+
   if (typeof window !== 'undefined' && loading) return null;
 
   // If no session exists, display access denied message
@@ -281,26 +303,37 @@ export default function Example({ post, morePosts, preview }) {
     <Track>
       <div className="bg-gray-50">
         <Head>
-          <meta
-            name="description"
-            content={`${(
-              <BlockContent
-                blocks={post?.body}
-                projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
-                dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
-                className={markdownStyles.markdown}
-              />
-            )}`}
-          />
+          <meta name="description" content={toPlainText(post?.body)} />
           <title>
-            KEI Reports: {post?.lot.name}
+            KEI Reports: {post.lot.name}
             {' - '}
-            {post?.variety.name}
+            {post.variety.name}
             {' - '}{' '}
-            {post?.week ? post?.week.toUpperCase().replace('EEK-', '') : 'N/A'}
+            {post.week ? post.week.toUpperCase().replace('EEK-', '') : 'N/A'}
             {'-'}
             {new Date(post?.date).getFullYear()}
           </title>
+          <meta
+            property="og:image"
+            content={imageBuilder(post.coverImage)
+              .quality(75)
+              .auto('format')
+              .url()}
+          />
+          <meta
+            property="og:title"
+            content={
+              'KEI Reports: ' +
+              post?.lot.name +
+              ' - ' +
+              post?.variety.name +
+              ' - ' +
+              post.week.toUpperCase().replace('EEK-', '') +
+              '-' +
+              new Date(post?.date).getFullYear()
+            }
+          />
+          <meta property="og:desciption" content={toPlainText(post?.body)} />
         </Head>
         {/* Mobile menu */}
         <Transition.Root show={open} as={Fragment}>
@@ -422,9 +455,9 @@ export default function Example({ post, morePosts, preview }) {
             <div className="bg-yellow-400">
               <div className="max-w-7xl mx-auto py-3 lg:py-2 px-3 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between flex-wrap">
-                  <div className="w-0 flex-1 flex items-center">
+                  <div className="lg:visible md:visible w-0 flex-1 flex items-center sm:invisible">
                     <p className="ml-3 font-medium text-white truncate">
-                      <span className="md:hidden">
+                      <span className="hidden">
                         We announced a new product!
                       </span>
                       <span className="hidden md:inline">
@@ -432,16 +465,27 @@ export default function Example({ post, morePosts, preview }) {
                       </span>
                     </p>
                   </div>
-                  <div className="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
-                    <a
-                      href={`https://reports.kirschenman.com/studio/desk/post;${post?._id.replace(
-                        'drafts.',
-                        ''
-                      )}`}
-                      className="flex items-center justify-center px-4 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium bg-white "
-                    >
-                      Publish Report
-                    </a>
+                  <div className="flex items-center justify-between flex-wrap">
+                    <div className="md:mx-2 order-3 mt-2 lg:mx-2 flex-shrink-0 w-full sm:order-2 sm:mx-0 sm:mt-0 sm:w-auto">
+                      <a
+                        href=""
+                        onClick={() => copy()}
+                        className="flex items-center justify-center px-4 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium bg-white "
+                      >
+                        Copy Public Link
+                      </a>
+                    </div>
+                    <div className="md:mx-2 sm:mx-0 order-3 mt-2 lg:mx-2 flex-shrink-0 w-full sm:mx-0 sm:order-2 sm:mt-0 sm:w-auto">
+                      <a
+                        href={`https://reports.kirschenman.com/studio/desk/post;${post?._id.replace(
+                          'drafts.',
+                          ''
+                        )}`}
+                        className="flex items-center justify-center px-4 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium bg-white "
+                      >
+                        Publish Report
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>

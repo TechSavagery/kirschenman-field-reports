@@ -1,5 +1,5 @@
-import Head from 'next/head'
-import { CMS_NAME, HOME_OG_IMAGE_URL } from '../lib/constants'
+import Head from 'next/head';
+import { CMS_NAME, HOME_OG_IMAGE_URL } from '../lib/constants';
 
 export default function Meta() {
   return (
@@ -32,12 +32,20 @@ export default function Meta() {
       <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
       <meta name="theme-color" content="#000" />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-      <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
+      <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       <meta
         name="description"
         content={`Field Report Data from Kirschenman Enterprises Inc.`}
       />
       <meta property="og:image" content={HOME_OG_IMAGE_URL} />
+      <meta
+        property="og:title"
+        content="Field Report Data from Kirschenman Enterprises Inc."
+      />
+      <meta
+        property="og:desciption"
+        content="Quality reports that capture the key details of the produce from the team at KEI. Data from field-to-phone to keep you up to date with our current offerings."
+      />
     </Head>
-  )
+  );
 }
