@@ -303,7 +303,15 @@ export default function Example({ post, morePosts, preview }) {
     <Track>
       <div className="bg-gray-50">
         <Head>
-          <meta name="description" content={toPlainText(post?.body)} />
+          <meta
+            name="description"
+            content={
+              toPlainText(post?.body) +
+              `\r\nLot: ${post.lot.name}` +
+              `\r\nVariety: ${post.variety.name}` +
+              `\r\nLabel: ${post.label.name}`
+            }
+          />
           <title>
             KEI Reports: {post.lot.name}
             {' - '}
@@ -333,7 +341,15 @@ export default function Example({ post, morePosts, preview }) {
               new Date(post?.date).getFullYear()
             }
           />
-          <meta property="og:desciption" content={toPlainText(post?.body)} />
+          <meta
+            property="og:desciption"
+            content={
+              toPlainText(post?.body) +
+              `\r\nLot: ${post.lot.name}` +
+              `\r\nVariety: ${post.variety.name}` +
+              `\r\nLabel: ${post.label.name}`
+            }
+          />
         </Head>
         {/* Mobile menu */}
         <Transition.Root show={open} as={Fragment}>
