@@ -4,7 +4,7 @@ export function GenerateUrlsAction(props) {
     label: 'Copy Preview Link ',
     onHandle: () => {
       var textArea = document.createElement('textarea');
-      textArea.value = `Report Date: ${new Date(
+      textArea.value = `${props.draft.title}\r\nReport Date: ${new Date(
         props.draft.publishedAt
       ).toLocaleDateString('en-US', {
         month: '2-digit',
