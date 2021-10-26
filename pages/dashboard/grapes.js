@@ -34,7 +34,7 @@ import ReportCard from '../../components/report-card';
 import { getAllPostsForHome } from '../../lib/api';
 import { useSession } from 'next-auth/client';
 import PasswordProtect from '../../components/password-protect';
-import Head from 'next/head'
+import Head from 'next/head';
 
 const navigation = {
   categories: [
@@ -254,6 +254,8 @@ const filters = [
       { value: 'week-40', label: 'Week 40', checked: false },
       { value: 'week-41', label: 'Week 41', checked: false },
       { value: 'week-42', label: 'Week 42', checked: false },
+      { value: 'week-43', label: 'Week 43', checked: false },
+      { value: 'week-44', label: 'Week 44', checked: false },
     ],
   },
 ];
@@ -684,6 +686,7 @@ export default function Example({ allPosts, preview }) {
                     .filter((filter) => {
                       return filter.id === 'week';
                     })
+                    .sort()
                     .map((section) => (
                       <Disclosure
                         as="div"
@@ -740,6 +743,7 @@ export default function Example({ allPosts, preview }) {
                       </Disclosure>
                     ))}
                   {filters
+                    .sort()
                     .filter((filter) => {
                       return filter.id === 'variety';
                     })
@@ -802,6 +806,7 @@ export default function Example({ allPosts, preview }) {
                     .filter((filter) => {
                       return filter.id === 'label';
                     })
+                    .sort()
                     .map((section) => (
                       <Disclosure
                         as="div"
@@ -861,6 +866,7 @@ export default function Example({ allPosts, preview }) {
                     .filter((filter) => {
                       return filter.id === 'lot';
                     })
+                    .sort()
                     .map((section) => (
                       <Disclosure
                         as="div"
@@ -1080,28 +1086,32 @@ export default function Example({ allPosts, preview }) {
                             {section.name}
                           </legend>
                           <div className="pt-6 space-y-3">
-                            {section.options.map((option, optionIdx) => (
-                              <div
-                                key={option.value}
-                                className="flex items-center"
-                              >
-                                <input
-                                  onClick={() => setLabelFilter(option.value)}
-                                  id={`${section.id}-${optionIdx}`}
-                                  name={`${section.id}[]`}
-                                  defaultValue={option.value}
-                                  type="radio"
-                                  cla
-                                  className="week-filters h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
-                                />
-                                <label
-                                  htmlFor={`${section.id}-${optionIdx}`}
-                                  className="ml-3 text-sm text-gray-600"
+                            {section.options
+                              .sort((a, b) => {
+                                return a.value - b.value;
+                              })
+                              .map((option, optionIdx) => (
+                                <div
+                                  key={option.value}
+                                  className="flex items-center"
                                 >
-                                  {option.label}
-                                </label>
-                              </div>
-                            ))}
+                                  <input
+                                    onClick={() => setLabelFilter(option.value)}
+                                    id={`${section.id}-${optionIdx}`}
+                                    name={`${section.id}[]`}
+                                    defaultValue={option.value}
+                                    type="radio"
+                                    cla
+                                    className="week-filters h-4 w-4 border-gray-300 rounded text-lime focus:ring-lime"
+                                  />
+                                  <label
+                                    htmlFor={`${section.id}-${optionIdx}`}
+                                    className="ml-3 text-sm text-gray-600"
+                                  >
+                                    {option.label}
+                                  </label>
+                                </div>
+                              ))}
                           </div>
                         </fieldset>
                       </div>
@@ -1111,6 +1121,7 @@ export default function Example({ allPosts, preview }) {
                     .filter((filter) => {
                       return filter.id === 'variety';
                     })
+                    .sort()
                     .map((section, sectionIdx) => (
                       <div
                         key={section.name}

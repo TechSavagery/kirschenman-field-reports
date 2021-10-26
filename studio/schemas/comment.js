@@ -2,6 +2,7 @@ export default {
     name: 'comment',
     type: 'document',
     title: 'Comment',
+    __experimental_actions: ['update', 'publish'],
     fields: [
       {
         name: 'name',

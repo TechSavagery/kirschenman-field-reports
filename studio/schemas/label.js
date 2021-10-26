@@ -19,6 +19,11 @@ export default {
       type: 'reference',
       to: [{ type: 'produce' }],
     },
+    {
+      name: 'url',
+      title: 'Url',
+      type: 'string',
+    },
   ],
   orderings: [
     {

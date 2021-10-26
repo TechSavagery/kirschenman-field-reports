@@ -1213,7 +1213,7 @@ export default function Example({ post, morePosts, preview }) {
                                   as="p"
                                   className="mt-1 text-sm text-gray-500"
                                 >
-                                  {post?.label.name}
+                                  {<a href={post.label.url ? post.label.url : "#"}>{post?.label.name}</a>}
                                   {' - '}
                                   {post?.variety.name}
                                   {' - '}

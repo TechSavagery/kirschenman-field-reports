@@ -1209,7 +1209,7 @@ export default function Example({ post, morePosts, preview }) {
                                   as="p"
                                   className="mt-1 text-sm text-gray-500"
                                 >
-                                  {post?.label.name}
+                                  {<a href={post.label.url ? post.label.url : "#"}>post?.label.name</a>}
                                   {' - '}
                                   {post?.variety.name}
                                   {' - '}
@@ -1800,3 +1800,4 @@ export async function getStaticPaths() {
     fallback: true,
   };
 }
+//https://stackoverflow.com/questions/66717038/facebook-debugger-does-not-pick-up-next-js-next-seo-meta-tags
