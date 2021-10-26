@@ -28,7 +28,7 @@ export default function ReportCard({
           return block.children.map((child) => child.text).join('');
         })
         // join the paragraphs leaving split by two linebreaks
-        .join('\n\n')
+        .join('\n')
     );
   }
   return (
@@ -40,7 +40,7 @@ export default function ReportCard({
         <a href={`/reports/${slug}`}>
           {' '}
           <img
-            className="h-48 w-full object-cover"
+            className="h-48 w-full object-bottom"
             src={imageBuilder(mainImage).width(384).height(192).url()}
             alt=""
           />

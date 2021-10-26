@@ -10,7 +10,7 @@ export function GenerateUrlsAction(props) {
         month: '2-digit',
         day: '2-digit',
         year: 'numeric',
-      })}\r\nPreview Link:\r\nhttps://reports.kirschenman.com/reports/${props.draft.slug.current}?preview=true}`;
+      })}\r\nPreview Link:\r\nhttps://reports.kirschenman.com/reports/${props.draft.slug.current}?preview=true`;
       // Avoid scrolling to bottom
       textArea.style.top = '0';
       textArea.style.left = '0';
