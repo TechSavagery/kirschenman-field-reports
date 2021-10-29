@@ -1,7 +1,5 @@
 import ComputedField from 'sanity-plugin-computed-field';
 
-const url = process.env.SANITY_STUDIO_PREVIEW_URL; 
-
 export default {
   name: 'post',
   title: 'Grape Reports',
@@ -377,26 +375,42 @@ export default {
         maxLength: 96,
       },
     },
+    {
+      name: 'approved',
+      type: 'boolean',
+      title: 'Approved',
+      validation: (Rule) => Rule.required(),
+    },
   ],
 
+  initialValue: {
+    approved: false,
+  },
   preview: {
     select: {
+      label: 'label.name',
+      variety: 'variety.name',
+      lot: 'lot.name',
       title: 'title',
       reporter: 'reporter.name',
       media: 'mainImage',
-      date: 'publishedAt',
+      date: '_updatedAt',
       published: '_id',
+      status: 'approved',
     },
     prepare(selection) {
-      const { reporter, date, published } = selection;
+      const { reporter, date, published, status, label, variety, lot } = selection;
       return Object.assign({}, selection, {
+        title: `${label} - ${variety} - ${lot ? lot : 'Lot Not Set'}`,
         subtitle:
           reporter &&
-          `by ${reporter} - ${new Date(date).toLocaleDateString('en-US', {
+          `Updated: ${new Date(date).toLocaleDateString('en-US', {
             month: '2-digit',
             day: '2-digit',
             year: 'numeric',
-          })} - ${published.includes('draft') ? 'Internal' : 'Published'}`,
+          })} - ${status == true ? 'Approved' : 'Not Approved'} ${
+            published.includes('draft') ? '- Pending Changes' : ''
+          }`,
       });
     },
   },

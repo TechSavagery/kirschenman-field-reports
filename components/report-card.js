@@ -39,37 +39,39 @@ export default function ReportCard({
       <div className="flex-shrink-0">
         <a href={`/reports/${slug}`}>
           {' '}
-          <img
-            className="h-48 w-full object-bottom"
-            src={imageBuilder(mainImage).width(384).height(192).url()}
-            alt=""
-          />
+          <div className="h-50 w-full overflow-hidden">
+            <img
+              className="object-contain overflow-hidden"
+              src={imageBuilder(mainImage).url()}
+              alt=""
+            />
+          </div>
         </a>
       </div>
-      <div className="flex-1 bg-white p-6 flex flex-col justify-between">
+      <div className="flex-1 bg-white p-4 flex flex-col justify-between">
         <div className="flex-1">
           <p className="text-sm font-medium text-lime">
             <a href={`/reports/${slug}`} className="hover:underline">
               {label ? label.name : 'N/A'}
             </a>
           </p>
-          <a href={`/reports/${slug}`} className="block mt-2">
+          <a href={`/reports/${slug}`} className="block mt-1">
             <p className="text-md font-semibold text-gray-900">
               {lot ? lot.name : 'N/A'}
               {' - '}
               {variety ? variety.name : 'N/A'}
-<br/>
+              <br />
               {week ? week.toUpperCase().replace('EEK-', '') : 'N/A'}
               {' - '}
               {new Date(inspectionDate).getFullYear()}
             </p>
 
-            <p className="mt-3 text-md text-gray-500 sm:mt-4">
-              {toPlainText(content).substr(0, 105) + "\u2026"}
+            <p className="mt-2 text-md text-gray-500 sm:mt-2">
+              {toPlainText(content).substr(0, 105) + '\u2026'}
             </p>
           </a>
         </div>
-        <div className="mt-6 flex items-center">
+        <div className="mt-2 flex items-center">
           <div className="flex-shrink-0">
             <a href={reporter.name}>
               <img

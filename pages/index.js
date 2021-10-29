@@ -205,7 +205,9 @@ const footerNavigation = {
 };
 
 export default function Example({ allPosts, preview }) {
-  const posts = allPosts.slice(0, 3);
+  const posts = allPosts
+    .filter((post) => post.week.indexOf('draft') == -1)
+    .slice(0, 3);
   return (
     <div className="bg-white">
       <Head>
@@ -520,14 +522,13 @@ export default function Example({ allPosts, preview }) {
                   >
                     <div className="flex-shrink-0">
                       <a href={`/reports/${post.slug}`}>
-                        <img
-                          className="h-48 w-full object-cover"
-                          src={imageBuilder(post.coverImage)
-                            .width(384)
-                            .height(192)
-                            .url()}
-                          alt=""
-                        />
+                        <div className="h-50 w-full overflow-hidden">
+                          <img
+                            className="object-contain overflow-hidden"
+                            src={imageBuilder(post.coverImage).url()}
+                            alt=""
+                          />
+                        </div>
                       </a>
                     </div>
                     <div className="flex-1 bg-white p-6 flex flex-col justify-between">
@@ -548,7 +549,7 @@ export default function Example({ allPosts, preview }) {
                             {post.lot ? post.lot.name : 'N/A'}
                             {' - '}
                             {post.variety ? post.variety.name : 'N/A'}
-                            {' - '}
+                            <br/>
                             {post.week
                               ? post.week.toUpperCase().replace('EEK-', '')
                               : 'N/A'}

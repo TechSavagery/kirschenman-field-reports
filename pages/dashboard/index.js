@@ -25,7 +25,6 @@ import {
 } from '@headlessui/react';
 import {
   MenuIcon,
-  SearchIcon,
   ShoppingBagIcon,
   XIcon,
 } from '@heroicons/react/outline';

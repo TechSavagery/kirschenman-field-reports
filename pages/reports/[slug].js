@@ -50,6 +50,7 @@ import Head from 'next/head';
 import * as ga from '../../lib/ga';
 import { useRouter } from 'next/router';
 import blocksToHtml from '@sanity/block-content-to-html';
+import ReactImageProcess from 'react-image-process';
 
 const navigation = {
   categories: [
@@ -467,15 +468,12 @@ export default function Example({ post, morePosts, preview }) {
         </Transition.Root>
 
         <header className="relative bg-white">
-          {post._id.includes('draft') ? (
+          {post.approved == false ? (
             <div className="bg-yellow-400">
               <div className="max-w-7xl mx-auto py-3 lg:py-2 px-3 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between flex-wrap">
                   <div className="lg:visible md:visible w-0 flex-1 flex items-center sm:invisible">
                     <p className="ml-3 font-medium text-white truncate">
-                      <span className="hidden">
-                        We announced a new product!
-                      </span>
                       <span className="hidden md:inline">
                         Draft: Pending KEI Approval
                       </span>
@@ -1213,7 +1211,15 @@ export default function Example({ post, morePosts, preview }) {
                                   as="p"
                                   className="mt-1 text-sm text-gray-500"
                                 >
-                                  {<a href={post.label.url ? post.label.url : "#"}>{post?.label.name}</a>}
+                                  {
+                                    <a
+                                      href={
+                                        post.label.url ? post.label.url : '#'
+                                      }
+                                    >
+                                      {post?.label.name}
+                                    </a>
+                                  }
                                   {' - '}
                                   {post?.variety.name}
                                   {' - '}
@@ -1617,14 +1623,24 @@ export default function Example({ post, morePosts, preview }) {
               {/* Product image */}
               <div className="mt-10 lg:mt-0 lg:col-start-2 lg:row-span-2 lg:self-center">
                 <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
-                  <img
-                    src={imageBuilder(post?.variety?.image)
-                      .width(592)
-                      .height(592)
-                      .url()}
-                    alt={post?.variety?.name}
-                    className="w-full h-full object-center object-cover"
-                  />
+                  <ReactImageProcess
+                    mode="waterMark"
+                    waterMarkType="image"
+                    waterMark={imageBuilder(post?.label?.logo).url()}
+                    width={115}
+                    height={100}
+                    opacity={0.9}
+                    coordinate={[450, 450]}
+                  >
+                    <img
+                      src={imageBuilder(post?.variety?.image)
+                        .width(592)
+                        .height(592)
+                        .url()}
+                      alt={post?.variety?.name}
+                      className="w-full h-full object-center object-cover"
+                    />
+                  </ReactImageProcess>
                 </div>
               </div>
             </div>

@@ -20,7 +20,7 @@ export default () =>
             ])
         ),
       S.listItem()
-        .title('Reports by Week')
+        .title('Grape Reports')
         .child(() => {
           const type = 'post';
           return client
@@ -44,8 +44,8 @@ export default () =>
                 weeks[week].push(d._id);
               });
               return S.list()
-                .title('Reports By Week')
-                .id('year')
+                .title('Grape Reports By Week')
+                .id('week')
                 .items(
                   Object.keys(weeks).map((week) => {
                     return S.listItem()
@@ -64,8 +64,5 @@ export default () =>
         }),
       ...S.documentTypeListItems().filter((listItem) =>
         ['user'].includes(listItem.getId())
-      ),
-      ...S.documentTypeListItems().filter((listItem) =>
-        ['post'].includes(listItem.getId())
       ),
     ]);
