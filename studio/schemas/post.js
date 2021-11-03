@@ -230,6 +230,12 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'lastPublishedDate',
+      title: 'lastPublishedDate',
+      type: 'datetime',
+      hidden: true,
+    },
+    {
       name: 'reporter',
       title: 'Reporter',
       type: 'reference',
@@ -377,6 +383,7 @@ export default {
     },
     {
       name: 'approved',
+      hidden: true,
       type: 'boolean',
       title: 'Approved',
       validation: (Rule) => Rule.required(),
@@ -399,7 +406,8 @@ export default {
       status: 'approved',
     },
     prepare(selection) {
-      const { reporter, date, published, status, label, variety, lot } = selection;
+      const { reporter, date, published, status, label, variety, lot } =
+        selection;
       return Object.assign({}, selection, {
         title: `${label} - ${variety} - ${lot ? lot : 'Lot Not Set'}`,
         subtitle:
