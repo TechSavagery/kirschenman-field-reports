@@ -504,7 +504,7 @@ export default function Example({ post, morePosts, preview }) {
                 </div>
               </div>
             </div>
-          ) : router.query.preview && !post._id?.includes('draft') ? (
+          ) : router.query.preview && post.approved == true ? (
             <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
               KEI Staff View
             </p>
