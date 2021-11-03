@@ -386,7 +386,6 @@ export default {
       hidden: true,
       type: 'boolean',
       title: 'Approved',
-      validation: (Rule) => Rule.required(),
     },
   ],
 
