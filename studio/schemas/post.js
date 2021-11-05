@@ -251,8 +251,33 @@ export default {
     },
     {
       name: 'bagData',
+      type: 'string',
       title: 'Bunches/Bag',
-      type: 'number',
+      validation: (Rule) => Rule.required(),
+      options: {
+        list: [
+          {
+            title: '1-2',
+            value: '1 - 2',
+          },
+          {
+            title: '2-3',
+            value: '2 - 3',
+          },
+          {
+            title: '3-4',
+            value: '3 - 4',
+          },
+          {
+            title: '4-5',
+            value: '4 - 5',
+          },
+          {
+            title: '5+',
+            value: '5+',
+          },
+        ],
+      },
     },
     {
       name: 'label',
@@ -277,9 +302,37 @@ export default {
     },
     {
       name: 'brix',
+      type: 'string',
       title: 'Brix',
-      type: 'number',
       validation: (Rule) => Rule.required(),
+      options: {
+        list: [
+          {
+            title: '15.5-17.5',
+            value: '15.5 - 17.5',
+          },
+          {
+            title: '17.5-19.5',
+            value: '17.5 - 19.5',
+          },
+          {
+            title: '19.5-21.5',
+            value: '19.5 - 21.5',
+          },
+          {
+            title: '21.5-23.5',
+            value: '21.5 - 23.5',
+          },
+          {
+            title: '23.5-25.5',
+            value: '23.5 - 25.5',
+          },
+          {
+            title: '25.5+',
+            value: '25.5+',
+          },
+        ],
+      },
     },
     {
       name: 'sizeMin',
