@@ -256,6 +256,7 @@ const filters = [
       { value: 'week-42', label: 'Week 42', checked: false },
       { value: 'week-43', label: 'Week 43', checked: false },
       { value: 'week-44', label: 'Week 44', checked: false },
+      { value: 'week-45', label: 'Week 45', checked: false },
     ],
   },
 ];
