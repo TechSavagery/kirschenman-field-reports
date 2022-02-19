@@ -29,7 +29,7 @@ export default function NewsletterForm() {
         });
         console.log(response);
       }
-      console.log(`${data.email} subscribed to mailchimp!`)
+      console.log(`${data.email} subscribed to mailchimp!`);
 
       setIsSubmitting(false);
       setHasSubmitted(true);
@@ -110,7 +110,9 @@ export default function NewsletterForm() {
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Thank you for signing up for our newsletter! You will be the first in line for news and updates from the KEI Reports team! 
+                        Thank you for signing up for our newsletter! You will be
+                        the first in line for news and updates from the KEI
+                        Reports team!
                       </p>
                     </div>
                   </div>
@@ -144,7 +146,7 @@ export default function NewsletterForm() {
           />
           {errors.exampleRequired && <span>This field is required</span>}
         </div>
-        <div className="mt-3 sm:mt-0 sm:ml-3">
+        <div id="newsLetterButton" className="mt-3 sm:mt-0 sm:ml-3">
           <button
             type="submit"
             className="block w-full py-3 px-4 rounded-md shadow bg-lime text-white font-medium hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime focus:ring-offset-gray-900"

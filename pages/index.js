@@ -47,6 +47,7 @@ import FAQ from '../components/faq';
 import Head from 'next/head';
 import NewsletterForm from '../components/newsletter-form';
 import * as ga from '../lib/ga';
+import FloatingBanner from '../components/floating-banner';
 
 const navigation = [
   { name: 'Features', href: '#features' },
@@ -217,6 +218,7 @@ export default function Example({ allPosts, preview }) {
         />
         <title>Kirschenman Field Reports</title>
       </Head>
+      <FloatingBanner />
 
       <div className="relative overflow-hidden">
         <Popover as="header" className="relative">
@@ -356,8 +358,14 @@ export default function Example({ allPosts, preview }) {
                     </h1>
                     <p className="text-base text-gray-300 sm:text-xl lg:text-lg xl:text-xl">
                       Quality reports that capture the key details of the
-                      produce from the team at KEI. Data from field-to-phone to
-                      keep you up to date with our current offerings.
+                      produce from the team at Kirschenman. Data from
+                      field-to-phone to keep you up to date with our current
+                      offerings.
+                    </p>
+                    <br />
+                    <p className="text-base text-gray-300 sm:text-xl lg:text-lg xl:text-xl">
+                      We will highlight our best varieties and options to allow
+                      you to make informed purchasing decisions.
                     </p>
                     <div className="mt-10 sm:mt-12">
                       <NewsletterForm />
@@ -549,7 +557,7 @@ export default function Example({ allPosts, preview }) {
                             {post.lot ? post.lot.name : 'N/A'}
                             {' - '}
                             {post.variety ? post.variety.name : 'N/A'}
-                            <br/>
+                            <br />
                             {post.week
                               ? post.week.toUpperCase().replace('EEK-', '')
                               : 'N/A'}
