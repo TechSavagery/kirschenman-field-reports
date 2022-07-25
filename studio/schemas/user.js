@@ -2,7 +2,6 @@ export default {
     name: 'user',
     title: 'User',
     type: 'document',
-    __experimental_actions: ['update'],
     fields: [
       {
         name: 'name',
@@ -22,13 +21,14 @@ export default {
       {
         name: 'password',
         type: 'string',
-        hidden: true
+        hidden: false
       },
       {
         name: 'metrics',
         title: 'Metrics',
         type: 'array',
         of: [{type: 'metrics'}],
+        hidden: true
       }
     ]
   };

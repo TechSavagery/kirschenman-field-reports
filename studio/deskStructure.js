@@ -25,7 +25,7 @@ export default () =>
           const type = 'post';
           return client
             .fetch(
-              '* [_type == $type] | order(publishedAt desc) {_id, _type, publishedAt, week}',
+              '* [_type == $type] | order(publishedAt desc) {_id, _type, publishedAt, week, _createdAt}',
               {
                 type,
               }
@@ -37,7 +37,7 @@ export default () =>
                 const week =
                   d.week.toUpperCase().replace('EEK-', '') +
                   '-' +
-                  new Date(d.publishedAt).getFullYear();
+                  new Date(d._createdAt).getFullYear();
                 if (!weeks[week]) {
                   weeks[week] = [];
                 }
