@@ -68,7 +68,7 @@ const features = [
     icon: LockClosedIcon,
   },
   {
-    name: 'Daily Reports',
+    name: 'Daily Report',
     description:
       'Our reports will bring you specific data for each produce such as size, taste, appearance, as well as supporting images and reporter comments.',
     icon: RefreshIcon,
