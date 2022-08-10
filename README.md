@@ -13,6 +13,8 @@ npm run start:sanity
 ```
 
 The front-end will be running at `http://localhost:3000`, the Studio will run at `http://localhost:3333`.
+
+Report Filter Page Example
 ```
 /*
   This example requires Tailwind CSS v2.0+ 
