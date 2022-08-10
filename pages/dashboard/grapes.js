@@ -247,16 +247,16 @@ const filters = [
     id: 'week',
     name: 'Week',
     options: [
+      { value: 'week-30', label: 'Week 30', checked: false },
+      { value: 'week-31', label: 'Week 31', checked: false },
+      { value: 'week-32', label: 'Week 32', checked: false },
+      { value: 'week-33', label: 'Week 33', checked: false },
+      { value: 'week-34', label: 'Week 34', checked: false },
+      { value: 'week-35', label: 'Week 35', checked: false },
       { value: 'week-36', label: 'Week 36', checked: false },
       { value: 'week-37', label: 'Week 37', checked: false },
       { value: 'week-38', label: 'Week 38', checked: false },
       { value: 'week-39', label: 'Week 39', checked: false },
-      { value: 'week-40', label: 'Week 40', checked: false },
-      { value: 'week-41', label: 'Week 41', checked: false },
-      { value: 'week-42', label: 'Week 42', checked: false },
-      { value: 'week-43', label: 'Week 43', checked: false },
-      { value: 'week-44', label: 'Week 44', checked: false },
-      { value: 'week-45', label: 'Week 45', checked: false },
     ],
   },
 ];
@@ -346,11 +346,6 @@ export default function Example({ allPosts, preview }) {
   const allReports = allPosts;
 
   if (typeof window !== 'undefined' && loading) return null;
-
-  // If no session exists, display access denied message
-  if (!session) {
-    return <PasswordProtect />;
-  }
 
   return (
     <div className="bg-white">

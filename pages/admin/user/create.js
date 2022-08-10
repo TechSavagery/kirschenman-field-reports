@@ -1,6 +1,7 @@
 import { LockClosedIcon } from '@heroicons/react/solid';
 import { useSession, signIn, signOut } from 'next-auth/client';
 import { useState } from 'react';
+import { signUp } from 'next-auth-sanity/dist/client';
 
 
 export default function CreateUser() {

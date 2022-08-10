@@ -258,14 +258,12 @@ export default function Example({ post, morePosts, preview }) {
     document.body.removeChild(el);
     console.log({
       event: `report-copied`,
-      client: `${session.user.email}`,
       url: `${window.location.href.replace('#', '')}`,
     });
     if (process.env.NEXT_PUBLIC_HOST === 'production') {
       ga.event({
         action: 'report-copied',
         params: {
-          client: `${session.user.email}`,
           url: `${window.location.href.replace('#', '')}`,
         },
       });
@@ -295,12 +293,6 @@ export default function Example({ post, morePosts, preview }) {
     );
   }
 
-  if (typeof window !== 'undefined' && loading) return null;
-
-  // If no session exists, display access denied message
-  if (!session && router.query.preview == null) {
-    return <PasswordProtect />;
-  }
   return (
     <Track>
       <div className="bg-gray-50">
@@ -659,14 +651,12 @@ export default function Example({ post, morePosts, preview }) {
                       onClick={() => {
                         console.log({
                           event: `report-emailed`,
-                          client: `${session.user.email}`,
                           url: `${window.location.href.replace('#', '')}`,
                         });
                         if (process.env.NEXT_PUBLIC_HOST === 'production') {
                           ga.event({
                             action: 'report-emailed',
                             params: {
-                              client: `${session.user.email}`,
                               url: `${window.location.href.replace('#', '')}`,
                             },
                           });
@@ -674,10 +664,9 @@ export default function Example({ post, morePosts, preview }) {
                       }}
                       href={`mailto:?subject=KEI%20Report%3A%20${encodeURIComponent(
                         post.slug
-                      )}&body=Hello%2C%20%0A%0APlease%20review%20the%20following%20report%3A%0A${window.location.href.replace(
-                        '?#',
-                        ''
-                      )}%0A%0A%0AHere%20is%20the%20login%20info%20below%3A%0A%0AUsername%3A%0APassword%3A%20%0A`}
+                      )}&body=Hello%2C%20%0A%0APlease%20review%20the%20following%20report%3A%0A${'https://reports.kirschenman.com/'}${
+                        post.slug
+                      }`}
                       className="group -m-2 p-2 flex items-center"
                     >
                       <MailIcon
@@ -1746,7 +1735,6 @@ export default function Example({ post, morePosts, preview }) {
                             ga.event({
                               action: 'report-inbound-info-request',
                               params: {
-                                client: `${session.user.email}`,
                                 url: `${window.location.href.replace('#', '')}`,
                               },
                             });
@@ -1754,10 +1742,7 @@ export default function Example({ post, morePosts, preview }) {
                         }}
                         href={`mailto:info@keiproduce.com?subject=Request%20Info%20for%20${encodeURIComponent(
                           post.slug
-                        )}&body=Hello%20KEI%20Staff%2C%20%0A%0AI%20would%20like%20more%20info%20for%20the%20following%20report%3A%0A${window.location.href.replace(
-                          '?#',
-                          ''
-                        )}%0A%0A%0AHere%20is%20my%20info%20below%3A%0A%0AName%3A%0AEmail%3A%20%0ACompany%3A%20%0APhone%20Number%3A`}
+                        )}&body=Hello%20KEI%20Staff%2C%20%0A%0AI%20would%20like%20more%20info%20for%20the%20following%20report%3A%0A${'https://reports.kirschenman.com/reports/'}${post.slug}%0A%0A%0AHere%20is%20my%20info%20below%3A%0A%0AName%3A%0AEmail%3A%20%0ACompany%3A%20%0APhone%20Number%3A`}
                         className="w-full bg-lime border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-lime"
                       >
                         Contact Team

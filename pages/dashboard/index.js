@@ -257,10 +257,6 @@ export default function Example({ allPosts, preview }) {
 
   if (typeof window !== 'undefined' && loading) return null;
 
-  // If no session exists, display access denied message
-  if (!session) {
-    return <PasswordProtect />;
-  }
   return (
     <div className="bg-white">
       <Head>
