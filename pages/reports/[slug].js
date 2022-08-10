@@ -301,23 +301,23 @@ export default function Example({ post, morePosts, preview }) {
             name="description"
             content={
               toPlainText(post?.body) +
-              `\r\nLot: ${post.lot.name}` +
-              `\r\nVariety: ${post.variety.name}` +
-              `\r\nLabel: ${post.label.name}`
+              `\r\nLot: ${post?.lot?.name}` +
+              `\r\nVariety: ${post?.variety?.name}` +
+              `\r\nLabel: ${post?.label?.name}`
             }
           />
           <title>
-            KEI Reports: {post.lot.name}
+            KEI Reports: {post?.lot?.name}
             {' - '}
-            {post.variety.name}
+            {post?.variety?.name}
             {' - '}{' '}
-            {post.week ? post.week.toUpperCase().replace('EEK-', '') : 'N/A'}
+            {post?.week ? post?.week?.toUpperCase().replace('EEK-', '') : 'N/A'}
             {'-'}
             {new Date(post?.date).getFullYear()}
           </title>
           <meta
             property="og:image"
-            content={imageBuilder(post.coverImage)
+            content={imageBuilder(post?.coverImage)
               .quality(75)
               .auto('format')
               .url()}
@@ -326,11 +326,11 @@ export default function Example({ post, morePosts, preview }) {
             property="og:title"
             content={
               'KEI Reports: ' +
-              post?.lot.name +
+              post?.lot?.name +
               ' - ' +
-              post?.variety.name +
+              post?.variety?.name +
               ' - ' +
-              post.week.toUpperCase().replace('EEK-', '') +
+              post?.week?.toUpperCase().replace('EEK-', '') +
               '-' +
               new Date(post?.date).getFullYear()
             }
@@ -339,9 +339,9 @@ export default function Example({ post, morePosts, preview }) {
             property="og:desciption"
             content={
               toPlainText(post?.body) +
-              `\r\nLot: ${post.lot.name}` +
-              `\r\nVariety: ${post.variety.name}` +
-              `\r\nLabel: ${post.label.name}`
+              `\r\nLot: ${post?.lot?.name}` +
+              `\r\nVariety: ${post?.variety?.name}` +
+              `\r\nLabel: ${post?.label?.name}`
             }
           />
         </Head>
@@ -461,7 +461,7 @@ export default function Example({ post, morePosts, preview }) {
         </Transition.Root>
 
         <header className="relative bg-white">
-          {post.approved == false ? (
+          {post?.approved == false ? (
             <div className="bg-yellow-400">
               <div className="max-w-7xl mx-auto py-3 lg:py-2 px-3 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between flex-wrap">
@@ -497,7 +497,7 @@ export default function Example({ post, morePosts, preview }) {
                 </div>
               </div>
             </div>
-          ) : router.query.preview && post.approved == true ? (
+          ) : router.query.preview && post?.approved == true ? (
             <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
               KEI Staff View
             </p>
@@ -663,9 +663,9 @@ export default function Example({ post, morePosts, preview }) {
                         }
                       }}
                       href={`mailto:?subject=KEI%20Report%3A%20${encodeURIComponent(
-                        post.slug
+                        post?.slug
                       )}&body=Hello%2C%20%0A%0APlease%20review%20the%20following%20report%3A%0A${'https://reports.kirschenman.com/'}${
-                        post.slug
+                        post?.slug
                       }`}
                       className="group -m-2 p-2 flex items-center"
                     >
@@ -719,15 +719,15 @@ export default function Example({ post, morePosts, preview }) {
                   <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                     <span>
                       {' '}
-                      {post?.lot.name}
+                      {post?.lot?.name}
                       {' - '}
-                      {post?.variety.name}
+                      {post?.variety?.name}
                     </span>
                     <br />
                     <span>
                       {' '}
                       {post?.week
-                        ? post?.week.toUpperCase().replace('EEK-', '')
+                        ? post?.week?.toUpperCase().replace('EEK-', '')
                         : 'N/A'}
                       {'-'}
                       {new Date(post?.date).getFullYear()}
@@ -830,11 +830,11 @@ export default function Example({ post, morePosts, preview }) {
                                                     as="h3"
                                                     className="text-lg leading-6 font-medium text-gray-900"
                                                   >
-                                                    {post.lot.name}
+                                                    {post?.lot?.name}
                                                   </Dialog.Title>
                                                   <div className="mt-2">
                                                     <p className="text-sm text-gray-500">
-                                                      {post.lot.description}
+                                                      {post?.lot?.description}
                                                     </p>
                                                   </div>
                                                 </div>
@@ -945,11 +945,11 @@ export default function Example({ post, morePosts, preview }) {
                                                     as="h3"
                                                     className="text-lg leading-6 font-medium text-gray-900"
                                                   >
-                                                    {post.label.name}
+                                                    {post?.label?.name}
                                                   </Dialog.Title>
                                                   <div className="mt-2">
                                                     <p className="text-sm text-gray-500">
-                                                      {post.label.description}
+                                                      {post?.label?.description}
                                                     </p>
                                                   </div>
                                                 </div>
@@ -1261,8 +1261,8 @@ export default function Example({ post, morePosts, preview }) {
                           </RadioGroup.Option>
                           <RadioGroup.Option
                             as="div"
-                            key={post?.variety.name}
-                            value={post?.variety.name}
+                            key={post?.variety?.name}
+                            value={post?.variety?.name}
                             className={({ active }) =>
                               classNames(
                                 active ? 'ring-2 ring-lime' : '',
@@ -1328,11 +1328,11 @@ export default function Example({ post, morePosts, preview }) {
                                                     as="h3"
                                                     className="text-lg leading-6 font-medium text-gray-900"
                                                   >
-                                                    {post.variety.name}
+                                                    {post?.variety?.name}
                                                   </Dialog.Title>
                                                   <div className="mt-2">
                                                     <p className="text-sm text-gray-500">
-                                                      {post.variety.description}
+                                                      {post?.variety?.description}
                                                     </p>
                                                   </div>
                                                 </div>
@@ -1359,7 +1359,7 @@ export default function Example({ post, morePosts, preview }) {
                                   as="p"
                                   className="mt-1 text-sm text-gray-500"
                                 >
-                                  {post?.variety.name}
+                                  {post?.variety?.name}
                                 </RadioGroup.Description>
                                 <div
                                   className={classNames(
@@ -1375,8 +1375,8 @@ export default function Example({ post, morePosts, preview }) {
                           </RadioGroup.Option>
                           <RadioGroup.Option
                             as="div"
-                            key={post?.appearance.name}
-                            value={post?.appearance.name}
+                            key={post?.appearance?.name}
+                            value={post?.appearance?.name}
                             className={({ active }) =>
                               classNames(
                                 active ? 'ring-2 ring-lime' : '',
@@ -1445,12 +1445,12 @@ export default function Example({ post, morePosts, preview }) {
                                                     className="text-lg leading-6 font-medium text-gray-900"
                                                   >
                                                     Appearance:{' '}
-                                                    {post.appearance.name}
+                                                    {post?.appearance?.name}
                                                   </Dialog.Title>
                                                   <div className="mt-2">
                                                     <p className="text-sm text-gray-500">
                                                       {
-                                                        post.appearance
+                                                        post?.appearance
                                                           .description
                                                       }
                                                     </p>
@@ -1479,7 +1479,7 @@ export default function Example({ post, morePosts, preview }) {
                                   as="p"
                                   className="mt-1 text-sm text-gray-500"
                                 >
-                                  {post?.appearance.name}
+                                  {post?.appearance?.name}
                                 </RadioGroup.Description>
                                 <div
                                   className={classNames(
@@ -1495,8 +1495,8 @@ export default function Example({ post, morePosts, preview }) {
                           </RadioGroup.Option>
                           <RadioGroup.Option
                             as="div"
-                            key={post?.flavor.name}
-                            value={post?.flavor.name}
+                            key={post?.flavor?.name}
+                            value={post?.flavor?.name}
                             className={({ active }) =>
                               classNames(
                                 active ? 'ring-2 ring-lime' : '',
@@ -1562,11 +1562,11 @@ export default function Example({ post, morePosts, preview }) {
                                                     as="h3"
                                                     className="text-lg leading-6 font-medium text-gray-900"
                                                   >
-                                                    Flavor: {post.flavor.name}
+                                                    Flavor: {post?.flavor?.name}
                                                   </Dialog.Title>
                                                   <div className="mt-2">
                                                     <p className="text-sm text-gray-500">
-                                                      {post.flavor.description}
+                                                      {post?.flavor?.description}
                                                     </p>
                                                   </div>
                                                 </div>
@@ -1593,7 +1593,7 @@ export default function Example({ post, morePosts, preview }) {
                                   as="p"
                                   className="mt-1 text-sm text-gray-500"
                                 >
-                                  {post?.flavor.name}
+                                  {post?.flavor?.name}
                                 </RadioGroup.Description>
                                 <div
                                   className={classNames(
@@ -1609,8 +1609,8 @@ export default function Example({ post, morePosts, preview }) {
                           </RadioGroup.Option>
                           <RadioGroup.Option
                             as="div"
-                            key={post?.firmness.name}
-                            value={post?.firmness.name}
+                            key={post?.firmness?.name}
+                            value={post?.firmness?.name}
                             className={({ active }) =>
                               classNames(
                                 active ? 'ring-2 ring-lime' : '',
@@ -1677,12 +1677,12 @@ export default function Example({ post, morePosts, preview }) {
                                                     className="text-lg leading-6 font-medium text-gray-900"
                                                   >
                                                     Firmness:{' '}
-                                                    {post.firmness.name}
+                                                    {post?.firmness?.name}
                                                   </Dialog.Title>
                                                   <div className="mt-2">
                                                     <p className="text-sm text-gray-500">
                                                       {
-                                                        post.firmness
+                                                        post?.firmness
                                                           .description
                                                       }
                                                     </p>
@@ -1711,7 +1711,7 @@ export default function Example({ post, morePosts, preview }) {
                                   as="p"
                                   className="mt-1 text-sm text-gray-500"
                                 >
-                                  {post?.firmness.name}
+                                  {post?.firmness?.name}
                                 </RadioGroup.Description>
                                 <div
                                   className={classNames(
@@ -1741,8 +1741,8 @@ export default function Example({ post, morePosts, preview }) {
                           }
                         }}
                         href={`mailto:info@keiproduce.com?subject=Request%20Info%20for%20${encodeURIComponent(
-                          post.slug
-                        )}&body=Hello%20KEI%20Staff%2C%20%0A%0AI%20would%20like%20more%20info%20for%20the%20following%20report%3A%0A${'https://reports.kirschenman.com/reports/'}${post.slug}%0A%0A%0AHere%20is%20my%20info%20below%3A%0A%0AName%3A%0AEmail%3A%20%0ACompany%3A%20%0APhone%20Number%3A`}
+                          post?.slug
+                        )}&body=Hello%20KEI%20Staff%2C%20%0A%0AI%20would%20like%20more%20info%20for%20the%20following%20report%3A%0A${'https://reports.kirschenman.com/reports/'}${post?.slug}%0A%0A%0AHere%20is%20my%20info%20below%3A%0A%0AName%3A%0AEmail%3A%20%0ACompany%3A%20%0APhone%20Number%3A`}
                         className="w-full bg-lime border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-lime focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-lime"
                       >
                         Contact Team
@@ -1782,10 +1782,10 @@ export default function Example({ post, morePosts, preview }) {
             {/* Details section */}
             <section aria-labelledby="details-heading">
               <div className="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-8">
-                <div key={`${post.slug}-cover-image`}>
+                <div key={`${post?.slug}-cover-image`}>
                   <div className="w-full aspect-w-3 aspect-h-4 rounded-lg overflow-hidden">
                     <img
-                      src={imageBuilder(post.coverImage).url()}
+                      src={imageBuilder(post?.coverImage).url()}
                       alt="image.asset._ref"
                       className="w-full h-full object-center object-cover"
                     />
