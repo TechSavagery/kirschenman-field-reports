@@ -493,11 +493,11 @@ export default function Example({ allPosts, preview }) {
                 </button>
 
                 {/* Logo */}
-                <div className="ml-4 flex lg:ml-0">
+                <div className="z-40 ml-4 flex lg:ml-0">
                   <a href="/dashboard">
                     <span className="sr-only">Workflow</span>
                     <img
-                      className="pt-[10px]"
+                      className="pt-[10px] z-40"
                       src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
                       alt=""
                       style={{ height: '75px', paddingTop: '8px' }}
@@ -922,6 +922,30 @@ export default function Example({ allPosts, preview }) {
           </Dialog>
         </Transition.Root>
 
+        <div className="relative bg-lime">
+          <div className="absolute inset-0">
+            <img
+              className="h-full w-full object-cover"
+              src="https://www.kirschenman.com/wp-content/uploads/2022/06/grapes-phase-4.jpg"
+              alt=""
+            />
+            <div
+              className="absolute inset-0 mix-blend-multiply"
+              aria-hidden="true"
+            />
+          </div>
+          <div className="relative mx-auto max-w-7xl py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+              Grapes
+            </h1>
+            <p className="mt-6 max-w-3xl text-xl text-indigo-100">
+              Checkout out the latest field data of our reward winning grapes!
+              We provide you with a variety of metrics to access to qualtiy of
+              our products before you make a purchase decision.
+            </p>
+          </div>
+        </div>
+
         <div className="border-b border-gray-200">
           <nav
             aria-label="Breadcrumb"
@@ -965,14 +989,6 @@ export default function Example({ allPosts, preview }) {
         </div>
 
         <main className="max-w-2xl mx-auto px-4 lg:max-w-7xl lg:px-8">
-          <div className="border-b border-gray-200 pt-24 pb-10">
-            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
-              Grapes
-            </h1>
-            <p className="mt-4 text-base text-gray-500">
-              Checkout out the latest field data of our reward winning grapes!
-            </p>
-          </div>
 
           <div className="pt-12 pb-24 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
             <aside>

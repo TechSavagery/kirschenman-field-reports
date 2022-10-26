@@ -151,18 +151,18 @@ export default function NewsletterForm() {
             type="submit"
             className="block w-full py-3 px-4 rounded-md shadow bg-lime text-white font-medium hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime focus:ring-offset-gray-900"
           >
-            Join Mailing List
+            Request Pricing Quote
           </button>
         </div>
       </div>
-      <p className="mt-3 text-sm text-gray-300 sm:mt-4">
+      {/* <p className="mt-3 text-sm text-gray-300 sm:mt-4">
         Stay up to date with our latest reporting news and gain access to early
         access features. By providing your email, you agree to our{' '}
         <a href="#" className="font-medium text-white">
           terms or service
         </a>
         .
-      </p>
+      </p> */}
     </form>
   );
 }

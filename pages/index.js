@@ -373,16 +373,23 @@ export default function Example({ allPosts, preview }) {
                   </div>
                 </div>
                 <div className="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative">
-                  <div className="mt-12 -mb-10 sm:-mb-24 lg:-mb-80">
+                  <div className="sm:-mb-24 lg:-mb-80">
                     <a
                       id="desktop-screenshot"
                       href={`/reports/${posts[0].slug}`}
                     >
-                      <img
-                        className="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5"
-                        src="/kei-reports-desktop.png"
-                        alt=""
-                      />
+                      <div className="justify-items-center mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-8">
+                        <img
+                          className="rounded-lg"
+                          src="https://www.kirschenman.com/wp-content/uploads/2021/10/kei-reports-mobile-detail.png"
+                          alt=""
+                        />
+                        <img
+                          className="rounded-lg"
+                          src="https://www.kirschenman.com/wp-content/uploads/2021/10/mobile-report-list.png.png"
+                          alt=""
+                        />
+                      </div>
                     </a>
                   </div>
                 </div>
@@ -391,7 +398,7 @@ export default function Example({ allPosts, preview }) {
           </div>
 
           {/* Feature section with screenshot */}
-          <div className="relative bg-transparent pt-16 sm:pt-24 lg:pt-32">
+          {/* <div className="relative bg-transparent pt-16 sm:pt-24 lg:pt-32">
             <div className="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
               <div>
                 <h2 className="text-base font-semibold tracking-wider text-lime uppercase">
@@ -419,10 +426,10 @@ export default function Example({ allPosts, preview }) {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Feature section with grid */}
-          <div
+          {/* <div
             id="features"
             className="relative bg-white py-16 sm:py-24 lg:py-32"
           >
@@ -454,10 +461,10 @@ export default function Example({ allPosts, preview }) {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Testimonial section */}
-          <div className="pb-16 bg-lime lg:pb-0 lg:z-10 lg:relative">
+          {/* <div className="pb-16 bg-lime lg:pb-0 lg:z-10 lg:relative">
             <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
               <div className="relative lg:-my-8">
                 <div
@@ -504,7 +511,7 @@ export default function Example({ allPosts, preview }) {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Blog section */}
           <div className="relative bg-gray-50 py-16 sm:py-24 lg:py-32">
