@@ -37,10 +37,16 @@ import PasswordProtect from '../../components/password-protect';
 import Head from 'next/head';
 
 const navigation = {
+  pages: [
+    { name: 'HOME', href: 'https://www.kirschenman.com/' },
+    { name: 'PRODUCTS', href: 'https://www.kirschenman.com/products/' },
+    { name: 'ABOUT', href: 'https://www.kirschenman.com/about/' },
+    { name: 'CONTACTS', href: 'https://www.kirschenman.com/contact/' },
+  ],
   categories: [
     {
       id: 'reports',
-      name: 'Reports',
+      name: 'REPORTS',
       sections: [
         {
           id: 'produce',
@@ -76,7 +82,7 @@ const navigation = {
     },
     {
       id: 'info',
-      name: 'Info',
+      name: 'INFO',
       sections: [
         {
           id: 'company',
@@ -125,10 +131,6 @@ const navigation = {
         },
       ],
     },
-  ],
-  pages: [
-    { name: 'Dashboard', href: '/dashboard' },
-    { name: 'FAQ', href: '/faq' },
   ],
 };
 const breadcrumbs = [{ id: 1, name: 'Dashboard', href: '/dashboard' }];
@@ -500,7 +502,7 @@ export default function Example({ allPosts, preview }) {
                       className="pt-[10px] z-40"
                       src="https://kirschenman.com/wp-content/uploads/2020/07/logo_shadowremoved.png"
                       alt=""
-                      style={{ height: '75px', paddingTop: '8px' }}
+                      style={{ height: '135px', paddingTop: '8px' }}
                     />
                   </a>
                 </div>
@@ -508,6 +510,15 @@ export default function Example({ allPosts, preview }) {
                 {/* Flyout menus */}
                 <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
                   <div className="h-full flex space-x-8">
+                    {navigation.pages.map((page) => (
+                      <a
+                        key={page.name}
+                        href={page.href}
+                        className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                      >
+                        {page.name}
+                      </a>
+                    ))}
                     {navigation.categories.map((category) => (
                       <Popover key={category.name} className="flex">
                         {({ open }) => (
@@ -583,16 +594,6 @@ export default function Example({ allPosts, preview }) {
                           </>
                         )}
                       </Popover>
-                    ))}
-
-                    {navigation.pages.map((page) => (
-                      <a
-                        key={page.name}
-                        href={page.href}
-                        className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                      >
-                        {page.name}
-                      </a>
                     ))}
                   </div>
                 </Popover.Group>
@@ -989,7 +990,6 @@ export default function Example({ allPosts, preview }) {
         </div>
 
         <main className="max-w-2xl mx-auto px-4 lg:max-w-7xl lg:px-8">
-
           <div className="pt-12 pb-24 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
             <aside>
               <h2 className="sr-only">Filters</h2>
