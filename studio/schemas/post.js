@@ -243,6 +243,20 @@ export default {
       to: { type: 'reporter' },
     },
     {
+      name: 'type',
+      title: 'Type',
+      type: 'reference',
+      validation: (Rule) => Rule.required(),
+      to: { type: 'type' },
+    },
+    {
+      name: 'farming-method',
+      title: 'Farming Method',
+      type: 'reference',
+      validation: (Rule) => Rule.required(),
+      to: { type: 'method' },
+    },
+    {
       name: 'lot',
       title: 'Lot',
       type: 'reference',
@@ -456,12 +470,25 @@ export default {
       date: '_updatedAt',
       published: '_id',
       status: 'approved',
+      type: 'type.name',
+      method: 'method.name',
     },
     prepare(selection) {
-      const { reporter, date, published, status, label, variety, lot } =
-        selection;
+      const {
+        reporter,
+        date,
+        published,
+        status,
+        label,
+        variety,
+        lot,
+        method,
+        type,
+      } = selection;
       return Object.assign({}, selection, {
-        title: `${label} - ${variety} - ${lot ? lot : 'Lot Not Set'}`,
+        title: `${label} - ${variety} - ${
+          lot ? lot : 'Lot Not Set'
+        } - ${type} ${method}`,
         subtitle:
           reporter &&
           `Updated: ${new Date(date).toLocaleDateString('en-US', {
