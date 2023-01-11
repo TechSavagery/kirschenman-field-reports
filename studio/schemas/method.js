@@ -2,7 +2,6 @@ export default {
     name: 'method',
     title: 'Farming Method',
     type: 'document',
-    __experimental_actions: ['update'],
     fields: [
       {
         name: 'name',
