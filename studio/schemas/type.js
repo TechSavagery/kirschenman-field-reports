@@ -1,6 +1,6 @@
 export default {
-    name: 'variety',
-    title: 'Variety',
+    name: 'type',
+    title: 'Type',
     type: 'document',
     __experimental_actions: ['update'],
     fields: [

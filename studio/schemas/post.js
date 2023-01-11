@@ -250,7 +250,7 @@ export default {
       to: { type: 'type' },
     },
     {
-      name: 'farming-method',
+      name: 'method',
       title: 'Farming Method',
       type: 'reference',
       validation: (Rule) => Rule.required(),
