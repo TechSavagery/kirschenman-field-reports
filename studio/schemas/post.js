@@ -247,7 +247,7 @@ export default {
       title: 'Type',
       type: 'reference',
       validation: (Rule) => Rule.required(),
-      to: { type: 'type' },
+      to: { type: 'grapeType' },
     },
     {
       name: 'method',

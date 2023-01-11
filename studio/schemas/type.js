@@ -1,5 +1,5 @@
 export default {
-    name: 'type',
+    name: 'grapeType',
     title: 'Type',
     type: 'document',
     __experimental_actions: ['update'],
