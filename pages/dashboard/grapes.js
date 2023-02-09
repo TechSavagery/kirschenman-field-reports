@@ -475,7 +475,7 @@ export default function Example({ allPosts, preview }) {
         </Transition.Root>
 
         <header className="relative bg-white">
-          <p className="bg-lime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
+          <p className="bg-keilime h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
             KEI Field Reports Now Available!
           </p>
 
@@ -496,7 +496,7 @@ export default function Example({ allPosts, preview }) {
 
                 {/* Logo */}
                 <div className="z-40 ml-4 flex lg:ml-0">
-                  <a href="/dashboard">
+                  <a href="https://www.kirschenman.com/">
                     <span className="sr-only">Workflow</span>
                     <img
                       className="pt-[10px] z-40"

@@ -17,6 +17,7 @@ module.exports = {
         success: '#0070f3',
         cyan: '#79FFE1',
         lime: colors.lime[500],
+        keilime: '#9cc83e',
         rose: colors.rose,
         teal: colors.teal,
         cyan: colors.cyan,
