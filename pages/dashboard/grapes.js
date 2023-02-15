@@ -940,8 +940,8 @@ export default function Example({ allPosts, preview }) {
               Grapes
             </h1>
             <p className="mt-6 max-w-3xl text-xl text-indigo-100">
-              Checkout out the latest field data of our reward winning grapes!
-              We provide you with a variety of metrics to access to qualtiy of
+              Checkout out the latest field data of our award winning grapes!
+              We provide you with a variety of metrics to access the quality of
               our products before you make a purchase decision.
             </p>
           </div>
@@ -1231,20 +1231,20 @@ export default function Example({ allPosts, preview }) {
                   .filter((report) =>
                     lotFilter
                       ? report.lot.name.replace(/\s+/g, '-').toLowerCase() ===
-                        lotFilter
+                      lotFilter
                       : true
                   )
                   .filter((report) =>
                     varietyFilter
                       ? report.variety.name
-                          .replace(/\s+/g, '-')
-                          .toLowerCase() === varietyFilter
+                        .replace(/\s+/g, '-')
+                        .toLowerCase() === varietyFilter
                       : true
                   )
                   .filter((report) =>
                     labelFilter
                       ? report.label.name.replace(/\s+/g, '-').toLowerCase() ===
-                        labelFilter
+                      labelFilter
                       : true
                   )
                   .map((report) => (
